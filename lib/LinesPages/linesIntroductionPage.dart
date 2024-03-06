@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'linesSectionPage.dart';
 
 void main() {
@@ -18,16 +19,38 @@ class LinesIntroductionPage extends StatelessWidget {
 
 class LinesIntroductionGeometryPage extends StatefulWidget {
   @override
-  _LinesIntroductionGeometryPageState createState() => _LinesIntroductionGeometryPageState();
+  _LinesIntroductionGeometryPageState createState() =>
+      _LinesIntroductionGeometryPageState();
 }
 
-class _LinesIntroductionGeometryPageState extends State<LinesIntroductionGeometryPage> {
+class _LinesIntroductionGeometryPageState
+    extends State<LinesIntroductionGeometryPage> {
   bool _isEnglish = true;
+  FlutterTts flutterTts = FlutterTts();
+  bool _isSpeaking = false;
 
   void _toggleLanguage() {
     setState(() {
       _isEnglish = !_isEnglish;
     });
+  }
+
+  Future<void> _speak(String text) async {
+    if (!_isSpeaking) {
+      setState(() {
+        _isSpeaking = true; // Set speaking state to true
+      });
+      await flutterTts.setLanguage(_isEnglish ? 'en-US' : 'es-ES');
+      await flutterTts.setSpeechRate(0.5);
+      await flutterTts.setPitch(1.0);
+      await flutterTts.speak(text);
+      setState(() {
+        _isSpeaking = false; // Set speaking state to false
+      });
+    } else {
+      print(
+          'Already speaking, please wait.'); // Log message if already speaking
+    }
   }
 
   @override
@@ -39,17 +62,23 @@ class _LinesIntroductionGeometryPageState extends State<LinesIntroductionGeometr
           icon: Icon(Icons.arrow_back), // Add back arrow icon
           onPressed: () {
             Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LinesSectionsPage()), // Navigate back to PAGE2.dart
-                ); // Navigate back when arrow is pressed
-              },
-            ),
-
-        
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      LinesSectionsPage()), // Navigate back to PAGE2.dart
+            ); // Navigate back when arrow is pressed
+          },
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.translate),
             onPressed: _toggleLanguage,
+          ),
+          IconButton(
+            icon: Icon(Icons.record_voice_over),
+            onPressed: () {
+              _speak(_getPageContent());
+            },
           ),
         ],
       ),
@@ -74,6 +103,28 @@ class _LinesIntroductionGeometryPageState extends State<LinesIntroductionGeometr
         ),
       ),
     );
+  }
+
+  String _getPageContent() {
+    var content = "";
+    if (_isEnglish) {
+      content =
+          'A line is a straight path that extends infinitely in both directions.';
+      content += 'Types of Lines:';
+      content += '1. Straight Line. It is a line that has no curves.';
+      content += '2. Ray. A part of a line with one endpoint.';
+      content += '3. Line Segment. A part of a line with two endpoints.';
+    } else {
+      content =
+          'Una línea es una trayectoria recta que se extiende infinitamente en ambas direcciones.';
+      content += 'Tipos de Líneas:';
+      content += '1. Línea Recta. Una línea que no tiene curvas.';
+      content += '2. Rayo. Una parte de una línea con un punto final.';
+      content +=
+          '3. Segmento de Línea. Una parte de una línea con dos puntos finales.';
+    }
+
+    return content;
   }
 
   Widget _buildLineDiagram() {
