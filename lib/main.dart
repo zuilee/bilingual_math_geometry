@@ -1,4 +1,6 @@
+import 'package:bilingual_math_geometry/AnglePages/angleSectionPage.dart';
 import 'package:bilingual_math_geometry/PlanesPages/planesSectionPage.dart';
+import 'package:bilingual_math_geometry/TrianglePages/triangleSectionPage.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_application_1/PlanesPages/planesSectionPage.dart';
 import 'LinesPages/linesSectionPage.dart';
@@ -11,7 +13,7 @@ class BilingualMathGeo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ExploraGeometría - Explore Geometry',
+      title: 'Explora - Geometry',
       theme: ThemeData(
         primaryColor: Color(0xFFFBDAB),
       ),
@@ -29,7 +31,7 @@ class BilingualMathGeoHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('ExploraGeometría - Explore Geometry')),
+        title: Center(child: Text('Explora - Geometry')),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -74,6 +76,20 @@ class BilingualMathGeoHomePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => PlanesSectionsPage()), // Navigate to PAGE2.dart
+                      );
+                  }
+                  else if (_getShapeForLevel(levelNumber) == 'Triangle') {
+                      // Navigate to PAGE2.dart if it's "Planes"
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TriangleSectionsPage()), // Navigate to PAGE2.dart
+                      );
+                  }
+                  else if (_getShapeForLevel(levelNumber) == 'Angles') {
+                      // Navigate to PAGE2.dart if it's "Planes"
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AnglesSectionsPage()), // Navigate to PAGE2.dart
                       );
                   }
                 },
