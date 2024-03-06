@@ -1,5 +1,6 @@
 import 'package:bilingual_math_geometry/AnglePages/angleSectionPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 
 void main() {
@@ -26,12 +27,63 @@ class AnglesIntroductionGeometryPage extends StatefulWidget {
 class _AnglesIntroductionGeometryPageState
     extends State<AnglesIntroductionGeometryPage> {
   bool _isEnglish = true;
+  bool _isSpeaking = false;
+  int _voiceButtonClickCount = 0;
+  String _pageContent = '';
+  FlutterTts flutterTts = FlutterTts();
 
   void _toggleLanguage() {
     setState(() {
       _isEnglish = !_isEnglish;
     });
   }
+
+  Future<void> _speak(String text) async {
+    if (_isSpeaking) {
+      await flutterTts.stop(); // Stop speaking if already speaking
+      setState(() {
+        _isSpeaking = false; // Set speaking state to false
+        _voiceButtonClickCount = 0; // Reset button click count
+      });
+    } else {
+      setState(() {
+        _isSpeaking = true; // Set speaking state to true
+      });
+      await flutterTts.setLanguage(_isEnglish ? 'en-US' : 'es-ES');
+      await flutterTts.setSpeechRate(0.5);
+      await flutterTts.setPitch(1.0);
+      await flutterTts.speak(text);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _updatePageContent();
+  }
+
+  void _updatePageContent() {
+    setState(() {
+      _pageContent = _getPageContent();
+    });
+  }
+
+  String _getPageContent() {
+    var content = _isEnglish ? 'An angle is a figure formed by two rays, called the sides of the angle, sharing a common endpoint, called the vertex of the angle.': 'Un ángulo es una figura formada por dos rayos, llamados los lados del ángulo, que comparten un punto final común, llamado el vértice del ángulo.';
+    content += _isEnglish ? 'Types of Angles:' : 'Tipos de Ángulos:';
+    content += _isEnglish ? '1. Acute Angle' : '1. Ángulo Agudo';
+    content += _isEnglish ? 'An angle less than 90 degrees.' : 'Un ángulo menor de 90 grados.';
+    content += _isEnglish ? '2. Right Angle' : '2. Ángulo Recto';
+    content += _isEnglish ? 'An angle of exactly 90 degrees.' : 'Un ángulo de exactamente 90 grados.';
+    content += _isEnglish ? '3. Obtuse Angle' : '3. Ángulo Obtuso';
+    content += _isEnglish ? 'An angle greater than 90 degrees.' : 'Un ángulo mayor de 90 grados.';
+    content += _isEnglish ? '4. Straight Angle' : '4. Ángulo Rectilíneo';
+    content += _isEnglish ? 'An angle of exactly 180 degrees.' : 'Un ángulo de exactamente 180 grados.';
+    content += _isEnglish ? '5. Reflex Angle' : '5. Ángulo Reflejo';
+    content += _isEnglish ? 'An angle greater than 180 degrees and less than 360 degrees.' : 'Un ángulo mayor de 180 grados y menor de 360 grados.';
+    return content;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +105,20 @@ class _AnglesIntroductionGeometryPageState
           IconButton(
             icon: Icon(Icons.translate),
             onPressed: _toggleLanguage,
+          ),
+          IconButton(
+            icon: Icon(Icons.record_voice_over,
+                color: _isSpeaking ? Colors.blue : null), // Change color when speaking
+            onPressed: () {
+              setState(() {
+                _voiceButtonClickCount++;
+              });
+              if (_voiceButtonClickCount == 1) {
+                _speak(_pageContent);
+              } else if (_voiceButtonClickCount == 2) {
+                _speak('');
+              }
+            },
           ),
         ],
       ),

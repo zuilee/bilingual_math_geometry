@@ -28,6 +28,8 @@ class _PlanesIntroductionGeometryPageState
   bool _isEnglish = true;
   FlutterTts flutterTts = FlutterTts();
   bool _isSpeaking = false;
+  int _voiceButtonClickCount = 0;
+  String _pageContent = '';
 
   void _toggleLanguage() {
     setState(() {
@@ -36,7 +38,13 @@ class _PlanesIntroductionGeometryPageState
   }
 
   Future<void> _speak(String text) async {
-    if (!_isSpeaking) {
+    if (_isSpeaking) {
+      await flutterTts.stop(); // Stop speaking if already speaking
+      setState(() {
+        _isSpeaking = false; // Set speaking state to false
+        _voiceButtonClickCount = 0; // Reset button click count
+      });
+    } else {
       setState(() {
         _isSpeaking = true; // Set speaking state to true
       });
@@ -44,13 +52,19 @@ class _PlanesIntroductionGeometryPageState
       await flutterTts.setSpeechRate(0.5);
       await flutterTts.setPitch(1.0);
       await flutterTts.speak(text);
-      setState(() {
-        _isSpeaking = false; // Set speaking state to false
-      });
-    } else {
-      print(
-          'Already speaking, please wait.'); // Log message if already speaking
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _updatePageContent();
+  }
+
+  void _updatePageContent() {
+    setState(() {
+      _pageContent = _getPageContent();
+    });
   }
 
   @override
@@ -75,9 +89,17 @@ class _PlanesIntroductionGeometryPageState
             onPressed: _toggleLanguage,
           ),
           IconButton(
-            icon: Icon(Icons.record_voice_over),
+            icon: Icon(Icons.record_voice_over,
+                color: _isSpeaking ? Colors.blue : null), // Change color when speaking
             onPressed: () {
-              _speak(_getPageContent());
+              setState(() {
+                _voiceButtonClickCount++;
+              });
+              if (_voiceButtonClickCount == 1) {
+                _speak(_pageContent);
+              } else if (_voiceButtonClickCount == 2) {
+                _speak('');
+              }
             },
           )
         ],
