@@ -43,17 +43,6 @@ class TriangleSectionsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SectionItem(
-            title: 'QUIZ',
-            icon: Icons.question_answer,
-            color: Colors.blue,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => QuizPage()),
-              );
-            },
-          ),
-          SectionItem(
             title: 'LEARN',
             icon: Icons.book,
             color: Colors.green,
@@ -72,6 +61,17 @@ class TriangleSectionsPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => TrianglePracticeQuiz()),
+              );
+            },
+          ),
+          SectionItem(
+            title: 'QUIZ',
+            icon: Icons.question_answer,
+            color: Colors.blue,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => QuizPage()),
               );
             },
           ),

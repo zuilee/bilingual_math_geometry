@@ -1,5 +1,6 @@
 import 'package:bilingual_math_geometry/AnglePages/angleSectionPage.dart';
 import 'package:bilingual_math_geometry/PlanesPages/planesSectionPage.dart';
+import 'package:bilingual_math_geometry/QuadrilateralPages/quadrilateralSectionPage.dart';
 import 'package:bilingual_math_geometry/TrianglePages/triangleSectionPage.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_application_1/PlanesPages/planesSectionPage.dart';
@@ -90,6 +91,13 @@ class BilingualMathGeoHomePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => AnglesSectionsPage()), // Navigate to PAGE2.dart
+                      );
+                  }
+                  else if (_getShapeForLevel(levelNumber) == 'Quadrilateral') {
+                      // Navigate to PAGE2.dart if it's "Planes"
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => QuadrilateralSectionsPage()), // Navigate to PAGE2.dart
                       );
                   }
                 },

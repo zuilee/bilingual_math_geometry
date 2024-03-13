@@ -45,17 +45,6 @@ class LinesSectionsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SectionItem(
-            title: 'QUIZ',
-            icon: Icons.question_answer,
-            color: Colors.blue,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LineFinalQuizApp()),
-              );
-            },
-          ),
-          SectionItem(
             title: 'LEARN',
             icon: Icons.book,
             color: Colors.green,
@@ -74,6 +63,17 @@ class LinesSectionsPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => LinesPracticeQuiz()),
+              );
+            },
+          ),
+          SectionItem(
+            title: 'QUIZ',
+            icon: Icons.question_answer,
+            color: Colors.blue,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LineFinalQuizApp()),
               );
             },
           ),

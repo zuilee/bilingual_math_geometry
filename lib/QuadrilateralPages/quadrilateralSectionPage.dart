@@ -1,15 +1,16 @@
 // ignore_for_file: file_names, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'planesIntroductionPage.dart';
-import 'planesPracticePage.dart';
+import 'quadrilateralIntroductionPage.dart';
+import 'quadrilateralPracticePage.dart';
+import 'quadrilateralQuiz.dart';
 import '../main.dart';
 
 void main() {
-  runApp(PlanesSections());
+  runApp(QuadrilateralSections());
 }
 
-class PlanesSections extends StatelessWidget {
+class QuadrilateralSections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,17 +18,17 @@ class PlanesSections extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PlanesSectionsPage(),
+      home: QuadrilateralSectionsPage(),
     );
   }
 }
 
-class PlanesSectionsPage extends StatelessWidget {
+class QuadrilateralSectionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Planes Sections'),
+        title: Text('Quadrilateral Sections'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back), // Add back arrow icon
           onPressed: () {
@@ -49,7 +50,7 @@ class PlanesSectionsPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlanesIntroductionPage()), // Navigate to PAGE2.dart
+                MaterialPageRoute(builder: (context) => QuadrilateralIntroductionPage()), // Navigate to PAGE2.dart
               );
             },
           ),
@@ -60,7 +61,7 @@ class PlanesSectionsPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlanesPracticeQuiz()),
+                MaterialPageRoute(builder: (context) => QuadrilateralPracticeQuiz()),
               );
             },
           ),
@@ -71,7 +72,7 @@ class PlanesSectionsPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => QuizPage()),
+                MaterialPageRoute(builder: (context) => QuadrilateralQuizApp()),
               );
             },
           ),

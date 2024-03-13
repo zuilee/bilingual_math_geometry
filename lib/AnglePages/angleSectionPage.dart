@@ -44,17 +44,6 @@ class AnglesSectionsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SectionItem(
-            title: 'QUIZ',
-            icon: Icons.question_answer,
-            color: Colors.blue,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => QuizPage()),
-              );
-            },
-          ),
-          SectionItem(
             title: 'LEARN',
             icon: Icons.book,
             color: Colors.green,
@@ -75,6 +64,17 @@ class AnglesSectionsPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => AnglesPracticeQuiz()),
+              );
+            },
+          ),
+          SectionItem(
+            title: 'QUIZ',
+            icon: Icons.question_answer,
+            color: Colors.blue,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => QuizPage()),
               );
             },
           ),
