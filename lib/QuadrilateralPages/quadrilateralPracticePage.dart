@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quadrilateralSectionPage.dart';
+import 'dart:math';
 
 void main() {
   runApp(QuadrilateralPracticeQuiz());
@@ -139,8 +140,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                       ..setEntry(3, 2, 0.001)
                       ..rotateY(_animation.value * 3.14),
                     alignment: Alignment.center,
-                    child:
-                        _isFlipped ? _buildAnswerCard() : _buildQuestionCard(),
+                    child: _buildFlipCard(),
                   );
                 },
               ),
@@ -153,57 +153,79 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildQuestionCard() {
-    return Card(
-      elevation: 8.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
+  Widget _buildFlipCard() {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.8,
+      height: MediaQuery.of(context).size.height * 0.6,
+      child: Card(
+        elevation: 8.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: _isFlipped
+            ? Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()..rotateY(pi),
+                child: _buildAnswerCard(),
+              )
+            : Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()..rotateY(0),
+                child: _buildQuestionCard(),
+              ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
+    );
+  }
+
+  Widget _buildQuestionCard() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Text(
               _questions[_questionIndex]['question'],
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20.0),
-            ...(_questions[_questionIndex]['answers']
-                    as List<Map<String, dynamic>>)
-                .map((answer) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: ElevatedButton(
+          ),
+          SizedBox(height: 20.0),
+          Expanded(
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemCount: _questions[_questionIndex]['answers'].length,
+              separatorBuilder: (context, index) => SizedBox(height: 10.0),
+              itemBuilder: (context, index) {
+                final answer = (_questions[_questionIndex]['answers']
+                    as List<Map<String, dynamic>>)[index];
+                return ElevatedButton(
                   onPressed: () => _answerQuestion(answer['correct']),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 12.0),
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
                   ),
                   child: Text(
                     answer['text'],
-                    style: TextStyle(fontSize: 16.0),
+                    style: TextStyle(fontSize: 18.0),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-              );
-            }).toList(),
-            SizedBox(height: 20.0),
-            ElevatedButton.icon(
-              onPressed: _flipCard,
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 12.0),
-              ),
-              icon: Icon(Icons.flip),
-              label: Text('Flip'),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+          SizedBox(height: 20.0),
+          IconButton(
+            onPressed: _flipCard,
+            icon: Icon(Icons.flip),
+            style: IconButton.styleFrom(
+              shape: CircleBorder(),
+              padding: EdgeInsets.all(16.0),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -214,45 +236,82 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     String correctAnswer =
         answers.firstWhere((answer) => answer['correct'])['text'];
 
-    return Card(
-      elevation: 8.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Correct Answer:',
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              correctAnswer,
-              style: TextStyle(fontSize: 18.0),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _isFlipped = false;
-                  _questionIndex++;
-                });
-                _controller.reverse();
-              },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (_questionIndex == 0)
+                  Image.asset(
+                    'assets/images/quadrilateral/square.png',
+                    width: 200,
+                    height: 200,
+                  ),
+                if (_questionIndex == 1)
+                  Image.asset(
+                    'assets/images/quadrilateral/rectangle.png',
+                    width: 200,
+                    height: 200,
+                  ),
+                if (_questionIndex == 2)
+                  Image.asset(
+                    'assets/images/quadrilateral/parallelogram.png',
+                    width: 200,
+                    height: 200,
+                  ),
+                SizedBox(height: 20.0),
+                Text(
+                  'Correct Answer:',
+                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
-                padding: EdgeInsets.symmetric(vertical: 12.0),
-              ),
-              child: Text('Next'),
+                SizedBox(height: 20.0),
+                Text(
+                  correctAnswer,
+                  style: TextStyle(fontSize: 20.0),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          SizedBox(height: 40.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    _isFlipped = false;
+                  });
+                  _controller.reverse();
+                },
+                icon: Icon(Icons.arrow_back),
+                style: IconButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(16.0),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    _isFlipped = false;
+                    _questionIndex++;
+                  });
+                  _controller.reverse();
+                },
+                icon: Icon(Icons.arrow_forward),
+                style: IconButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(16.0),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
