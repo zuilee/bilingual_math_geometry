@@ -12,6 +12,10 @@ class QuadrilateralIntroductionPage extends StatelessWidget {
     return MaterialApp(
       title: 'Geometry: Quadrilaterals',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: QuadrilateralIntroductionGeometryPage(),
     );
   }
@@ -19,10 +23,12 @@ class QuadrilateralIntroductionPage extends StatelessWidget {
 
 class QuadrilateralIntroductionGeometryPage extends StatefulWidget {
   @override
-  _QuadrilateralIntroductionGeometryPageState createState() => _QuadrilateralIntroductionGeometryPageState();
+  _QuadrilateralIntroductionGeometryPageState createState() =>
+      _QuadrilateralIntroductionGeometryPageState();
 }
 
-class _QuadrilateralIntroductionGeometryPageState extends State<QuadrilateralIntroductionGeometryPage> {
+class _QuadrilateralIntroductionGeometryPageState
+    extends State<QuadrilateralIntroductionGeometryPage> {
   bool _isEnglish = true;
   FlutterTts flutterTts = FlutterTts();
   bool _isSpeaking = false;
@@ -94,6 +100,7 @@ class _QuadrilateralIntroductionGeometryPageState extends State<QuadrilateralInt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.deepPurple.shade200,
       appBar: AppBar(
         title: Text('Geometry: Quadrilateral'),
         leading: IconButton(
@@ -130,44 +137,50 @@ class _QuadrilateralIntroductionGeometryPageState extends State<QuadrilateralInt
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                _isEnglish ? 'Quadrilateral' : 'Cuadriláteros',
-                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20.0),
-              _buildQuadrilateralDiagram(),
-              SizedBox(height: 20.0),
-              _buildQuadrilateralDefinition(_isEnglish),
-              SizedBox(height: 20.0),
-              _buildQuadrilateralTypes(_isEnglish),
-            ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.deepPurple.shade400, Colors.deepPurple.shade600],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  height: 100.0,
+                  child: CustomPaint(
+                    painter: QuadrilateralPainter(),
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                _buildQuadrilateralDefinition(_isEnglish),
+                SizedBox(height: 20.0),
+                _buildQuadrilateralTypes(_isEnglish),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildQuadrilateralDiagram() {
-    return SizedBox(
-      height: 100.0,
-      child: CustomPaint(
-        painter: QuadrilateralPainter(),
-      ),
-    );
-  }
-
   Widget _buildQuadrilateralDefinition(bool isEnglish) {
-    return Text(
-      isEnglish
-          ? 'A quadrilateral is a polygon with four edges (sides) and four vertices (corners).'
-          : 'Un cuadrilátero es un polígono con cuatro lados y cuatro vértices.',
-      style: TextStyle(fontSize: 16.0),
+    return Card(
+      color: Colors.white.withOpacity(0.8),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          isEnglish
+              ? 'A quadrilateral is a polygon with four edges (sides) and four vertices (corners).'
+              : 'Un cuadrilátero es un polígono con cuatro lados y cuatro vértices.',
+          style: TextStyle(fontSize: 16.0),
+        ),
+      ),
     );
   }
 
@@ -177,7 +190,11 @@ class _QuadrilateralIntroductionGeometryPageState extends State<QuadrilateralInt
       children: [
         Text(
           isEnglish ? 'Types of Quadrilaterals:' : 'Tipos de Cuadriláteros:',
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         SizedBox(height: 10.0),
         _buildQuadrilateralTypeItem(
@@ -185,42 +202,91 @@ class _QuadrilateralIntroductionGeometryPageState extends State<QuadrilateralInt
           isEnglish
               ? 'A quadrilateral with all four sides of equal length and all angles equal to 90 degrees.'
               : 'Un cuadrilátero con los cuatro lados de igual longitud y todos los ángulos iguales a 90 grados.',
+          Icons.crop_square,
+          Colors.orange,
         ),
         _buildQuadrilateralTypeItem(
           isEnglish ? '2. Rectangle' : '2. Rectángulo',
           isEnglish
               ? 'A quadrilateral with opposite sides equal in length and all angles equal to 90 degrees.'
               : 'Un cuadrilátero con lados opuestos de igual longitud y todos los ángulos iguales a 90 grados.',
+          Icons.crop_landscape,
+          Colors.green,
         ),
         _buildQuadrilateralTypeItem(
           isEnglish ? '3. Rhombus' : '3. Rombus',
           isEnglish
               ? 'A quadrilateral with all four sides of equal length.'
               : 'Un cuadrilátero con los cuatro lados de igual longitud.',
+          Icons.crop_rotate,
+          Colors.blue,
         ),
         _buildQuadrilateralTypeItem(
           isEnglish ? '4. Trapezoid' : '4. Trapecio',
           isEnglish
               ? 'A quadrilateral with at least one pair of parallel sides.'
               : 'Un cuadrilátero con al menos un par de lados paralelos.',
+          Icons.crop_free,
+          Colors.purple,
         ),
       ],
     );
   }
 
-  Widget _buildQuadrilateralTypeItem(String title, String description) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.bold),
+  Widget _buildQuadrilateralTypeItem(
+      String title, String description, IconData icon, Color color) {
+    return GestureDetector(
+      onTap: () {
+// Handle interaction with the quadrilateral type item
+// Show additional information or properties
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(title),
+              content: Text(description),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Close'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+      child: Card(
+        color: Colors.white.withOpacity(0.8),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Icon(icon, size: 30.0, color: color),
+              SizedBox(width: 16.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    SizedBox(height: 5.0),
+                    Text(
+                      description,
+                      style: TextStyle(fontSize: 14.0),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 5.0),
-          Text(description),
-        ],
+        ),
       ),
     );
   }
@@ -229,16 +295,28 @@ class _QuadrilateralIntroductionGeometryPageState extends State<QuadrilateralInt
 class QuadrilateralPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = Colors.orange
-      ..strokeWidth = 2.0;
+// Border paint
+    final Paint borderPaint = Paint()
+      ..color = Colors.black // Border color
+      ..strokeWidth = 3.0
+      ..style = PaintingStyle.stroke;
 
-    canvas.drawLine(Offset(20, 20), Offset(size.width - 20, 20), paint);
-    canvas.drawLine(Offset(size.width - 20, 20),
-        Offset(size.width - 20, size.height - 20), paint);
-    canvas.drawLine(Offset(size.width - 20, size.height - 20),
-        Offset(20, size.height - 20), paint);
-    canvas.drawLine(Offset(20, size.height - 20), Offset(20, 20), paint);
+    final Paint fillPaint = Paint()
+      ..color = Colors.blue // Fill color
+      ..style = PaintingStyle.fill;
+
+    Path path = Path()
+      ..moveTo(20, 20)
+      ..lineTo(size.width - 20, 20)
+      ..lineTo(size.width - 20, size.height - 20)
+      ..lineTo(20, size.height - 20)
+      ..close();
+
+// Draw border
+    canvas.drawPath(path, borderPaint);
+
+// Fill the shape
+    canvas.drawPath(path, fillPaint);
   }
 
   @override
