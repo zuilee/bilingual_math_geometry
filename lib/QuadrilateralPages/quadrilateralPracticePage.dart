@@ -248,8 +248,8 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                 if (_questionIndex == 0)
                   Image.asset(
                     'assets/images/quadrilateral/square.png',
-                    width: 200,
-                    height: 200,
+                    width: 250,
+                    height: 250,
                   ),
                 if (_questionIndex == 1)
                   Image.asset(

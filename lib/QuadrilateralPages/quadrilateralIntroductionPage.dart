@@ -140,7 +140,7 @@ class _QuadrilateralIntroductionGeometryPageState
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.deepPurple.shade400, Colors.deepPurple.shade600],
+            colors: [Colors.deepPurple.shade200, Colors.deepPurple.shade200],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
