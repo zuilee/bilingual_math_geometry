@@ -100,7 +100,7 @@ class _QuadrilateralIntroductionGeometryPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple.shade200,
+      //backgroundColor: Colors.deepPurple.shade200,
       appBar: AppBar(
         title: Text('Geometry: Quadrilateral'),
         leading: IconButton(
@@ -140,7 +140,7 @@ class _QuadrilateralIntroductionGeometryPageState
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.deepPurple.shade200, Colors.deepPurple.shade200],
+            colors: [Colors.white60, Colors.white70],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -151,11 +151,11 @@ class _QuadrilateralIntroductionGeometryPageState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
-                  height: 100.0,
-                  child: CustomPaint(
-                    painter: QuadrilateralPainter(),
-                  ),
+                Image.asset(
+                  'assets/images/quadrilateral/quadrilateral_image.jpeg', // Update with your asset path
+                  height: 300.0,
+                  width: 250.0,
+                  fit: BoxFit.contain,
                 ),
                 SizedBox(height: 20.0),
                 _buildQuadrilateralDefinition(_isEnglish),
@@ -193,7 +193,7 @@ class _QuadrilateralIntroductionGeometryPageState
           style: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
         SizedBox(height: 10.0),
@@ -292,35 +292,3 @@ class _QuadrilateralIntroductionGeometryPageState
   }
 }
 
-class QuadrilateralPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-// Border paint
-    final Paint borderPaint = Paint()
-      ..color = Colors.black // Border color
-      ..strokeWidth = 3.0
-      ..style = PaintingStyle.stroke;
-
-    final Paint fillPaint = Paint()
-      ..color = Colors.blue // Fill color
-      ..style = PaintingStyle.fill;
-
-    Path path = Path()
-      ..moveTo(20, 20)
-      ..lineTo(size.width - 20, 20)
-      ..lineTo(size.width - 20, size.height - 20)
-      ..lineTo(20, size.height - 20)
-      ..close();
-
-// Draw border
-    canvas.drawPath(path, borderPaint);
-
-// Fill the shape
-    canvas.drawPath(path, fillPaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
-}
