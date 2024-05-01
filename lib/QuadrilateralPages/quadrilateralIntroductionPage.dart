@@ -55,27 +55,35 @@ class _QuadrilateralIntroductionGeometryPageState
 
   String _getPageContent() {
     var content = "";
-    content = _isEnglish
+    content += _isEnglish
         ? 'A quadrilateral is a polygon with four edges (sides) and four vertices (corners).'
         : 'Un cuadrilátero es un polígono con cuatro lados y cuatro vértices.';
-    content =
+    content +=
         _isEnglish ? 'Types of Quadrilaterals:' : 'Tipos de Cuadriláteros:';
-    content = _isEnglish ? '1. Square' : '1. Cuadrado';
-    content = _isEnglish
+    content += _isEnglish ? '1. Square' : '1. Cuadrado';
+    content += _isEnglish
         ? 'A quadrilateral with all four sides of equal length and all angles equal to 90 degrees.'
         : 'Un cuadrilátero con los cuatro lados de igual longitud y todos los ángulos iguales a 90 grados.';
-    content = _isEnglish ? '2. Rectangle' : '2. Rectángulo';
-    content = _isEnglish
+    content += _isEnglish ? '2. Rectangle' : '2. Rectángulo';
+    content += _isEnglish
         ? 'A quadrilateral with opposite sides equal in length and all angles equal to 90 degrees.'
         : 'Un cuadrilátero con lados opuestos de igual longitud y todos los ángulos iguales a 90 grados.';
-    content = _isEnglish ? '3. Rhombus' : '3. Rombus';
-    content = _isEnglish
+    content += _isEnglish ? '3. Rhombus' : '3. Rombus';
+    content += _isEnglish
         ? 'A quadrilateral with all four sides of equal length.'
         : 'Un cuadrilátero con los cuatro lados de igual longitud.';
-    content = _isEnglish ? '4. Trapezoid' : '4. Trapecio';
-    content = _isEnglish
+    content += _isEnglish ? '4. Trapezoid' : '4. Trapecio';
+    content += _isEnglish
         ? 'A quadrilateral with at least one pair of parallel sides.'
         : 'Un cuadrilátero con al menos un par de lados paralelos.';
+    content += _isEnglish ? '5. Parallelogram' : '2. Paralelogramo';
+    content += _isEnglish
+        ? 'A quadrilateral with opposite sides parallel and equal in length.'
+        : 'Un cuadrilátero con lados opuestos paralelos y de igual longitud.';
+    content += _isEnglish ? '6. Kite' : '6. Cometa';
+    content += _isEnglish
+        ? 'A quadrilateral with two distinct pairs of adjacent sides that are equal in length.'
+        : 'Un cuadrilátero con dos pares distintos de lados adyacentes que tienen la misma longitud.';
     return content;
   }
 
@@ -229,6 +237,22 @@ class _QuadrilateralIntroductionGeometryPageState
           Icons.crop_free,
           Colors.purple,
         ),
+        _buildQuadrilateralTypeItem(
+          isEnglish ? '5. Parallelogram' : '5. Paralelogramo',
+          isEnglish
+              ? 'A quadrilateral with opposite sides parallel and equal in length.'
+              : 'Un cuadrilátero con lados opuestos paralelos y de igual longitud.',
+          Icons.crop_square_sharp,
+          Colors.red, // Choose an appropriate color
+      ),
+      _buildQuadrilateralTypeItem(
+          isEnglish ? '6. Kite' : '6. Cometa',
+          isEnglish
+              ? 'A quadrilateral with two distinct pairs of adjacent sides that are equal in length.'
+              : 'Un cuadrilátero con dos pares distintos de lados adyacentes que tienen la misma longitud.',
+          Icons.filter_drama, // Choose an appropriate icon
+          Color.fromARGB(255, 41, 128, 62), // Choose an appropriate color
+      ),
       ],
     );
   }
