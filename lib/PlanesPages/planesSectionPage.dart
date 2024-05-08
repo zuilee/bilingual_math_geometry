@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'planesIntroductionPage.dart';
 import 'planesPracticePage.dart';
+import 'planesQuize.dart';
 import '../main.dart';
 
 void main() {
@@ -71,7 +72,7 @@ class PlanesSectionsPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => QuizPage()),
+                MaterialPageRoute(builder: (context) => PlaneQuizPage()),
               );
             },
           ),
