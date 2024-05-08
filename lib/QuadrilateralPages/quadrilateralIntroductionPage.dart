@@ -160,7 +160,7 @@ class _QuadrilateralIntroductionGeometryPageState
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Image.asset(
-                  'assets/images/quadrilateral/quadrilateral_image.jpeg', // Update with your asset path
+                  'assets/images/quadrilateral/quadrilateral_image.png', // Update with your asset path
                   height: 300.0,
                   width: 250.0,
                   fit: BoxFit.contain,

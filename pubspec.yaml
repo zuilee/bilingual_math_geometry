@@ -59,4 +59,9 @@ flutter:
     - assets/images/quadrilateral/parallelogram.png
     - assets/images/quadrilateral/rectangle.png
     - assets/images/quadrilateral/square.png
-    - assets/images/quadrilateral/quadrilateral_image.jpeg
+    - assets/images/quadrilateral/quadrilateral_image.png
+    - assets/images/plane/inclined_plane.png
+    - assets/images/plane/plane_image.png
+    - assets/images/plane/verticle_plane.png
+    - assets/images/plane/horizontal_plane.png
+    - assets/images/plane/plane.png
