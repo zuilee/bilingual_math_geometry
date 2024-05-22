@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'linesSectionPage.dart';
 
 void main() {
-  runApp(LineFinalQuizApp());
+  runApp(LineQuizApp());
 }
 
-class LineFinalQuizApp extends StatelessWidget {
+class LineQuizApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Line Quiz',
       debugShowCheckedModeBanner: false,
-      home: LineFinalQuizPage(),
+      home: LineQuizPage(),
     );
   }
 }
 
-class LineFinalQuizPage extends StatefulWidget {
+class LineQuizPage extends StatefulWidget {
   @override
-  _LineFinalQuizPageState createState() => _LineFinalQuizPageState();
+  _LineQuizPageState createState() => _LineQuizPageState();
 }
 
-class _LineFinalQuizPageState extends State<LineFinalQuizPage> {
+class _LineQuizPageState extends State<LineQuizPage> {
   final List<String> questions = [
     'What is the definition of a line?',
     'What are the two main characteristics of a line?',
@@ -57,6 +56,7 @@ class _LineFinalQuizPageState extends State<LineFinalQuizPage> {
   int currentQuestionIndex = 0;
   int attemptsLeft = 3;
   String? selectedOption;
+  int score = 0;
 
   void showHint() {
     showDialog(
@@ -80,6 +80,9 @@ class _LineFinalQuizPageState extends State<LineFinalQuizPage> {
 
   void checkAnswer() {
     if (selectedOption != null && selectedOption == answers[currentQuestionIndex]) {
+      setState(() {
+        score += 5;
+      });
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -97,22 +100,19 @@ class _LineFinalQuizPageState extends State<LineFinalQuizPage> {
                       selectedOption = null;
                     });
                   } else {
-                    // Quiz finished
-                    // Display a congratulatory message or navigate to a new page
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('Quiz Finished!'),
-                          content: Text('Congratulations! You completed the quiz.'),
+                          content: Text('Congratulations! You completed the quiz. Your score is $score.'),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
-                                MaterialPageRoute(builder: (context) => LinesSectionsPage());
-                                // Reset quiz or navigate to a new page
+                                Navigator.of(context).pop();
                               },
-                              child: Text('OK'),
+                              child: Text('Back to Home'),
                             ),
                           ],
                         );
@@ -146,21 +146,19 @@ class _LineFinalQuizPageState extends State<LineFinalQuizPage> {
                         selectedOption = null;
                       });
                     } else {
-                      // Quiz finished
-                      // Display a congratulatory message or navigate to a new page
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text('Quiz Finished!'),
-                            content: Text('Congratulations! You completed the quiz.'),
+                            content: Text('Congratulations! You completed the quiz. Your score is $score.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                  // Reset quiz or navigate to a new page
+                                  Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: Text('Back to Home'),
                               ),
                             ],
                           );
@@ -201,6 +199,17 @@ class _LineFinalQuizPageState extends State<LineFinalQuizPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Line Quiz'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Text(
+                'Score: $score',
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

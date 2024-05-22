@@ -73,7 +73,7 @@ class LinesSectionsPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => LineFinalQuizApp()),
+                MaterialPageRoute(builder: (context) => LineQuizApp()),
               );
             },
           ),
