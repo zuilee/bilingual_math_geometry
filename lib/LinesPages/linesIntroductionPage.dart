@@ -153,7 +153,7 @@ class _LinesIntroductionGeometryPageState
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Image.asset(
-                  'assets/images/lines/lines.png', // Replace with your asset path
+                  'assets/images/lines/lines_copy.png', // Replace with your asset path
                   height: 300.0,
                   width: 250.0,
                   fit: BoxFit.contain,

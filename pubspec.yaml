@@ -66,3 +66,7 @@ flutter:
     - assets/images/plane/horizontal_plane.png
     - assets/images/plane/plane.png
     - assets/images/lines/lines.png
+    - assets/images/lines/lines_copy.png
+    - assets/images/lines/line_ans.png
+    - assets/images/lines/ray.png
+    - assets/images/lines/segment.png
