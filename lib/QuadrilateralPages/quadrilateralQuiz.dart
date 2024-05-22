@@ -56,6 +56,7 @@ class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
   int currentQuestionIndex = 0;
   int attemptsLeft = 3;
   String? selectedOption;
+  int score = 0; // Variable to track the score
 
   void showHint() {
     showDialog(
@@ -79,6 +80,9 @@ class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
 
   void checkAnswer() {
     if (selectedOption != null && selectedOption == answers[currentQuestionIndex]) {
+      setState(() {
+        score += 5; // Increment score by 5 points for each correct answer
+      });
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -102,7 +106,7 @@ class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('Quiz Finished!'),
-                          content: Text('Congratulations! You completed the quiz.'),
+                          content: Text('Congratulations! You completed the quiz. Your score is $score.'),
                           actions: [
                             TextButton(
                               onPressed: () {
@@ -149,7 +153,7 @@ class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text('Quiz Finished!'),
-                            content: Text('Congratulations! You completed the quiz.'),
+                            content: Text('Congratulations! You completed the quiz. Your score is $score.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -197,6 +201,17 @@ class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Quadrilateral Quiz'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Text(
+                'Score: $score',
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

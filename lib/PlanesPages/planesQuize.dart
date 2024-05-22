@@ -23,40 +23,32 @@ class PlaneQuizPage extends StatefulWidget {
 class _PlaneQuizPageState extends State<PlaneQuizPage> {
   final List<String> questions = [
     'What are the types of planes?',
-    'What is true about horizontal plane?',
-    'What is a not belong to vertical plane?',
-    'What is an inclined plane?',
-    'All planes in geometry extend infinitely in all directions. True or False ?'
+    'What is true about a horizontal plane?',
+    'What is an inclined plane?'
   ];
 
   final List<List<String>> options = [
     ['Horizontal, vertical, inclined', 'Parallel, perpendicular, oblique', 'Acute, obtuse, right'],
     ['A plane that is parallel to the ground', 'A plane that is perpendicular to the ground', 'A plane that is at an angle to the ground'],
-    ['Bookshelf', 'Door', 'Wall', 'Table top'],
-    ['A plane that is at an angle to the ground', 'A plane that is parallel to the ground', 'A plane that is perpendicular to the ground'],
-    ['True', 'False']
+    ['A plane that is at an angle to the ground', 'A plane that is parallel to the ground', 'A plane that is perpendicular to the ground']
   ];
 
   final List<String> answers = [
     'Horizontal, vertical, inclined',
     'A plane that is parallel to the ground',
-    'A plane that is perpendicular to the ground is a verticle plane',
-    'Think about example of Ramp',
-    'True'
+    'A plane that is at an angle to the ground'
   ];
 
   final List<String> hints = [
     'Think of a sheet of paper.',
-    'The types are based on the orientation of the plane.',
-    'Examples include the surface of a table or the horizon.',
-    'Examples include the walls of a room or a mirror.',
-    'Examples include a ramp or a roof.',
-    'Remember the defination of plane.'
+    'Consider the ground as a reference point.',
+    'Think about a ramp.'
   ];
 
   int currentQuestionIndex = 0;
   int attemptsLeft = 3;
   String? selectedOption;
+  int score = 0; // Variable to track the score
 
   void showHint() {
     showDialog(
@@ -80,6 +72,9 @@ class _PlaneQuizPageState extends State<PlaneQuizPage> {
 
   void checkAnswer() {
     if (selectedOption != null && selectedOption == answers[currentQuestionIndex]) {
+      setState(() {
+        score += 5; // Increment score by 5 points for each correct answer
+      });
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -103,7 +98,7 @@ class _PlaneQuizPageState extends State<PlaneQuizPage> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('Quiz Finished!'),
-                          content: Text('Congratulations! You completed the quiz.'),
+                          content: Text('Congratulations! You completed the quiz. Your score is $score.'),
                           actions: [
                             TextButton(
                               onPressed: () {
@@ -150,7 +145,7 @@ class _PlaneQuizPageState extends State<PlaneQuizPage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text('Quiz Finished!'),
-                            content: Text('Congratulations! You completed the quiz.'),
+                            content: Text('Congratulations! You completed the quiz. Your score is $score.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -198,6 +193,17 @@ class _PlaneQuizPageState extends State<PlaneQuizPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Plane Quiz'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Text(
+                'Score: $score',
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

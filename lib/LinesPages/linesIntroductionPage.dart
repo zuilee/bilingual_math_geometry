@@ -11,7 +11,11 @@ class LinesIntroductionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Geometry: Lines',
-      debugShowCheckedModeBanner: false, // Remove debug banner
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: LinesIntroductionGeometryPage(),
     );
   }
@@ -37,6 +41,48 @@ class _LinesIntroductionGeometryPageState
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _updatePageContent();
+  }
+
+  void _updatePageContent() {
+    setState(() {
+      _pageContent = _getPageContent();
+    });
+  }
+
+  String _getPageContent() {
+    var content = "";
+    if (_isEnglish) {
+      content =
+          'A line is a straight path that extends infinitely in both directions.';
+      content += 'Types of Lines:';
+      content += '1. Line. It is a line that has no endpoints.';
+      content += '2. Ray. A part of a line with one endpoint.';
+      content += '3. Line Segment. A part of a line with two endpoints.';
+      content += '4. Parallel Lines. Lines that never intersect.';
+      content += '5. Perpendicular Lines. Lines that intersect at 90 degrees.';
+      content += '6. Intersection Lines. Lines that intersect at a point.';
+    } else {
+      content =
+          'Una línea es una trayectoria recta que se extiende infinitamente en ambas direcciones.';
+      content += 'Tipos de Líneas:';
+      content += '1. Línea Recta. Una línea que no tiene puntos finales.';
+      content += '2. Rayo. Una parte de una línea con un punto final.';
+      content +=
+          '3. Segmento de Línea. Una parte de una línea con dos puntos finales.';
+      content += '4. Líneas Paralelas. Líneas que nunca se intersecan.';
+      content +=
+          '5. Líneas Perpendiculares. Líneas que se intersecan en 90 grados.';
+      content +=
+          '6. Líneas de Intersección. Líneas que se intersecan en un punto.';
+    }
+
+    return content;
+  }
+
   Future<void> _speak(String text) async {
     if (_isSpeaking) {
       await flutterTts.stop(); // Stop speaking if already speaking
@@ -56,53 +102,19 @@ class _LinesIntroductionGeometryPageState
   }
 
   @override
-  void initState() {
-    super.initState();
-    _updatePageContent();
-  }
-
-  void _updatePageContent() {
-    setState(() {
-      _pageContent = _getPageContent();
-    });
-  }
-
-  String _getPageContent() {
-    var content = "";
-    if (_isEnglish) {
-      content =
-          'A line is a straight path that extends infinitely in both directions.';
-      content += 'Types of Lines:';
-      content += '1. Straight Line. It is a line that has no curves.';
-      content += '2. Ray. A part of a line with one endpoint.';
-      content += '3. Line Segment. A part of a line with two endpoints.';
-    } else {
-      content =
-          'Una línea es una trayectoria recta que se extiende infinitamente en ambas direcciones.';
-      content += 'Tipos de Líneas:';
-      content += '1. Línea Recta. Una línea que no tiene curvas.';
-      content += '2. Rayo. Una parte de una línea con un punto final.';
-      content +=
-          '3. Segmento de Línea. Una parte de una línea con dos puntos finales.';
-    }
-
-    return content;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Geometry: Lines'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back), // Add back arrow icon
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      LinesSectionsPage()), // Navigate back to PAGE2.dart
-            ); // Navigate back when arrow is pressed
+                      LinesSectionsPage()), // Navigate back to LinesSectionsPage
+            );
           },
         ),
         actions: [
@@ -112,7 +124,7 @@ class _LinesIntroductionGeometryPageState
           ),
           IconButton(
             icon: Icon(Icons.record_voice_over,
-                color: _isSpeaking ? Colors.blue : null), // Change color when speaking
+                color: _isSpeaking ? Colors.blue : null),
             onPressed: () {
               setState(() {
                 _voiceButtonClickCount++;
@@ -123,47 +135,53 @@ class _LinesIntroductionGeometryPageState
                 _speak('');
               }
             },
-          ),
+          )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                _isEnglish ? 'Lines' : 'Líneas',
-                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20.0),
-              _buildLineDiagram(),
-              SizedBox(height: 20.0),
-              _buildLineDefinition(_isEnglish),
-              SizedBox(height: 20.0),
-              _buildLineTypes(_isEnglish),
-            ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white60, Colors.white70],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Image.asset(
+                  'assets/images/lines/lines.png', // Replace with your asset path
+                  height: 300.0,
+                  width: 250.0,
+                  fit: BoxFit.contain,
+                ),
+                SizedBox(height: 20.0),
+                _buildLineDefinition(_isEnglish),
+                SizedBox(height: 20.0),
+                _buildLineTypes(_isEnglish),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildLineDiagram() {
-    return SizedBox(
-      height: 100.0,
-      child: CustomPaint(
-        painter: LinePainter(),
-      ),
-    );
-  }
-
   Widget _buildLineDefinition(bool isEnglish) {
-    return Text(
-      isEnglish
-          ? 'A line is a straight path that extends infinitely in both directions.'
-          : 'Una línea es una trayectoria recta que se extiende infinitamente en ambas direcciones.',
-      style: TextStyle(fontSize: 16.0),
+    return Card(
+      color: Colors.white.withOpacity(0.8),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          isEnglish
+              ? 'A line is a straight path that extends infinitely in both directions.'
+              : 'Una línea es una trayectoria recta que se extiende infinitamente en ambas direcciones.',
+          style: TextStyle(fontSize: 16.0),
+        ),
+      ),
     );
   }
 
@@ -173,65 +191,118 @@ class _LinesIntroductionGeometryPageState
       children: [
         Text(
           isEnglish ? 'Types of Lines:' : 'Tipos de Líneas:',
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
         SizedBox(height: 10.0),
         _buildLineTypeItem(
-          isEnglish ? '1. Straight Line' : '1. Línea Recta',
+          isEnglish ? '1. Line' : '1. Línea Recta',
           isEnglish
-              ? 'A line that has no curves.'
-              : 'Una línea que no tiene curvas.',
+              ? 'It is a line that has no endpoints.'
+              : 'Una línea que no tiene puntos finales.',
+          Icons.show_chart,
+          Colors.orange,
         ),
         _buildLineTypeItem(
           isEnglish ? '2. Ray' : '2. Rayo',
           isEnglish
               ? 'A part of a line with one endpoint.'
               : 'Una parte de una línea con un punto final.',
+          Icons.timeline,
+          Colors.green,
         ),
         _buildLineTypeItem(
           isEnglish ? '3. Line Segment' : '3. Segmento de Línea',
           isEnglish
               ? 'A part of a line with two endpoints.'
               : 'Una parte de una línea con dos puntos finales.',
+          Icons.show_chart_outlined,
+          Colors.blue,
+        ),
+        _buildLineTypeItem(
+          isEnglish ? '4. Parallel Lines' : '4. Líneas Paralelas',
+          isEnglish
+              ? 'Lines that never intersect.'
+              : 'Líneas que nunca se intersecan.',
+          Icons.import_export,
+          Colors.purple,
+        ),
+        _buildLineTypeItem(
+          isEnglish ? '5. Perpendicular Lines' : '5. Líneas Perpendiculares',
+          isEnglish
+              ? 'Lines that intersect at 90 degrees.'
+              : 'Líneas que se intersecan en 90 grados.',
+          Icons.crop_square_rounded,
+          Colors.red,
+        ),
+        _buildLineTypeItem(
+          isEnglish ? '6. Intersection Lines' : '6. Líneas de Intersección',
+          isEnglish
+              ? 'Lines that intersect at a point.'
+              : 'Líneas que se intersecan en un punto.',
+          Icons.view_stream,
+          Colors.teal,
         ),
       ],
     );
   }
 
-  Widget _buildLineTypeItem(String title, String description) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.bold),
+  Widget _buildLineTypeItem(
+      String title, String description, IconData icon, Color color) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(title),
+              content: Text(description),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Close'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+      child: Card(
+        color: Colors.white.withOpacity(0.8),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Icon(icon, size: 30.0, color: color),
+              SizedBox(width: 16.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    SizedBox(height: 5.0),
+                    Text(
+                      description,
+                      style: TextStyle(fontSize: 14.0),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 5.0),
-          Text(description),
-        ],
+        ),
       ),
     );
-  }
-}
-
-class LinePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = Colors.black
-      ..strokeWidth = 2.0;
-
-    canvas.drawLine(
-      Offset(20, size.height / 2),
-      Offset(size.width - 20, size.height / 2),
-      paint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
   }
 }
