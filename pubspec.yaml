@@ -71,3 +71,6 @@ flutter:
     - assets/images/lines/ray.png
     - assets/images/lines/segment.png
     - assets/images/angles/angles.png
+    - assets/images/angles/right.png
+    - assets/images/angles/acute.png
+    - assets/images/angles/obtuse.png
