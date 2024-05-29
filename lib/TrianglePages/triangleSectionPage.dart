@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'triangleIntroductionPage.dart';
 import 'trianglePracticePage.dart';
+import 'triangleQuiz.dart';
 import '../main.dart';
 
 void main() {
@@ -69,7 +70,7 @@ class TriangleSectionsPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => QuizPage()),
+                MaterialPageRoute(builder: (context) => TriangleQuizApp()),
               );
             },
           ),

@@ -159,7 +159,7 @@ class _AnglesIntroductionGeometryPageState
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Image.asset(
-                  'assets/images/angles.png', // Update with your asset path
+                  'assets/images/angles/angles.png', // Update with your asset path
                   height: 300.0,
                   width: 250.0,
                   fit: BoxFit.contain,
