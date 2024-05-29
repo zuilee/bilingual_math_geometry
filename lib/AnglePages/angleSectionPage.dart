@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'angleIntroductionPage.dart';
 import 'anglePracticePage.dart';
+import 'angleQuiz.dart';
 import '../main.dart';
 
 void main() {
@@ -74,7 +75,7 @@ class AnglesSectionsPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => QuizPage()),
+                MaterialPageRoute(builder: (context) => AngleQuizApp()),
               );
             },
           ),
