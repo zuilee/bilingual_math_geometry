@@ -74,3 +74,18 @@ flutter:
     - assets/images/angles/right.png
     - assets/images/angles/acute.png
     - assets/images/angles/obtuse.png
+    - assets/images/lines/line_all_new.png
+    - assets/images/lines/ray_learn.png
+    - assets/images/lines/segment_learn.png
+    - assets/images/lines/parallel_lines.png
+    - assets/images/lines/perpendicular_lines.png
+    - assets/images/lines/line.png
+    - assets/images/lines/intersecting_lines.png
+    - assets/images/lines/line_all_spanish.png
+    - assets/images/lines/intersecting_lines_spanish.png
+    - assets/images/lines/line_spanish.png
+    - assets/images/lines/parallel_lines_spanish.png
+    - assets/images/lines/perpendiculat_lines_spanish.png
+    - assets/images/lines/ray_spanish.png
+    - assets/images/lines/segment_spanish.png
+

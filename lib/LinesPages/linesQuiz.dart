@@ -1,3 +1,4 @@
+import 'package:bilingual_math_geometry/LinesPages/linesSectionPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,7 +9,7 @@ class LineQuizApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Line Quiz',
+      title: 'Lines Quiz',
       debugShowCheckedModeBanner: false,
       home: LineQuizPage(),
     );
@@ -30,11 +31,27 @@ class _LineQuizPageState extends State<LineQuizPage> {
   ];
 
   final List<List<String>> options = [
-    ['A straight path with infinite length.', 'A curved path with finite length.', 'A circle.'],
+    [
+      'A straight path with infinite length.',
+      'A curved path with finite length.',
+      'A circle.'
+    ],
     ['Length and no width.', 'Length and color.', 'Length and height.'],
-    ['Straight line, ray, line segment.', 'Curved line, zigzag line, wave line.', 'Circle, oval, square.'],
-    ['A part of a line with one endpoint.', 'A part of a line with two endpoints.', 'A line with infinite endpoints.'],
-    ['A part of a line with two endpoints.', 'A part of a line with one endpoint.', 'A straight path with infinite length.']
+    [
+      'Straight line, ray, line segment.',
+      'Curved line, zigzag line, wave line.',
+      'Circle, oval, square.'
+    ],
+    [
+      'A part of a line with one endpoint.',
+      'A part of a line with two endpoints.',
+      'A line with infinite endpoints.'
+    ],
+    [
+      'A part of a line with two endpoints.',
+      'A part of a line with one endpoint.',
+      'A straight path with infinite length.'
+    ]
   ];
 
   final List<String> answers = [
@@ -79,7 +96,8 @@ class _LineQuizPageState extends State<LineQuizPage> {
   }
 
   void checkAnswer() {
-    if (selectedOption != null && selectedOption == answers[currentQuestionIndex]) {
+    if (selectedOption != null &&
+        selectedOption == answers[currentQuestionIndex]) {
       setState(() {
         score += 5;
       });
@@ -105,7 +123,8 @@ class _LineQuizPageState extends State<LineQuizPage> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('Quiz Finished!'),
-                          content: Text('Congratulations! You completed the quiz. Your score is $score.'),
+                          content: Text(
+                              'Congratulations! You completed the quiz. Your score is $score.'),
                           actions: [
                             TextButton(
                               onPressed: () {
@@ -134,7 +153,8 @@ class _LineQuizPageState extends State<LineQuizPage> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Incorrect'),
-              content: Text('You have no attempts left. The correct answer is:\n\n${answers[currentQuestionIndex]}'),
+              content: Text(
+                  'You have no attempts left. The correct answer is:\n\n${answers[currentQuestionIndex]}'),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -151,7 +171,8 @@ class _LineQuizPageState extends State<LineQuizPage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text('Quiz Finished!'),
-                            content: Text('Congratulations! You completed the quiz. Your score is $score.'),
+                            content: Text(
+                                'Congratulations! You completed the quiz. Your score is $score.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -199,6 +220,17 @@ class _LineQuizPageState extends State<LineQuizPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Line Quiz'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back), // Add back arrow icon
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      LinesSectionsPage()), // Navigate back to PAGE2.dart
+            ); // Navigate back when arrow is pressed
+          },
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.all(16.0),

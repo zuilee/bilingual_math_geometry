@@ -10,19 +10,20 @@ class LinesPracticeQuiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lines Quiz',
+      title: 'Lines Practice',
       debugShowCheckedModeBanner: false,
-      home: LinesQuizPage(),
+      home: LinesPracticeQuizPage(),
     );
   }
 }
 
-class LinesQuizPage extends StatefulWidget {
+class LinesPracticeQuizPage extends StatefulWidget {
   @override
-  _LinesQuizPageState createState() => _LinesQuizPageState();
+  _LinesPracticeQuizPageState createState() => _LinesPracticeQuizPageState();
 }
 
-class _LinesQuizPageState extends State<LinesQuizPage> with TickerProviderStateMixin{
+class _LinesPracticeQuizPageState extends State<LinesPracticeQuizPage>
+    with TickerProviderStateMixin {
   int _score = 0;
   int _questionIndex = 0;
   final List<Map<String, dynamic>> _questions = [
@@ -105,16 +106,18 @@ class _LinesQuizPageState extends State<LinesQuizPage> with TickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lines Quiz'),
+        title: Text('Lines Practice'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back), // Add back arrow icon
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => LinesSectionsPage()), // Navigate back to PAGE2.dart
-                    ); // Navigate back when arrow is pressed
-              },
-            ),
+              MaterialPageRoute(
+                  builder: (context) =>
+                      LinesSectionsPage()), // Navigate back to PAGE2.dart
+            ); // Navigate back when arrow is pressed
+          },
+        ),
       ),
       body: _questionIndex < _questions.length
           ? Center(
@@ -303,7 +306,6 @@ class _LinesQuizPageState extends State<LinesQuizPage> with TickerProviderStateM
   }
 }
 
-
 class CelebrationScreen extends StatelessWidget {
   final int score;
   final int totalQuestions;
@@ -364,4 +366,3 @@ class CelebrationScreen extends StatelessWidget {
     );
   }
 }
-
