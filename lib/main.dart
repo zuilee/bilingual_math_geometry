@@ -29,7 +29,7 @@ class BilingualMathGeo extends StatelessWidget {
 class BilingualMathGeoHomePage extends StatelessWidget {
   final int initialLives = 20;
   final int initialPoints = 0;
-  final int totalLevels = 5; // Changed to 5 levels
+  final int totalLevels = 6; // Changed to 5 levels
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,6 @@ class BilingualMathGeoHomePage extends StatelessWidget {
                 onTap: () {
                   // Check if the shape is "Lines"
                   if (_getShapeForLevel(levelNumber) == 'Lines') {
-                    //Navigate to PAGE2.dart if it's "Lines"
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -85,7 +84,6 @@ class BilingualMathGeoHomePage extends StatelessWidget {
                     );
                     //showOptions(context);
                   } else if (_getShapeForLevel(levelNumber) == 'Planes') {
-                    // Navigate to PAGE2.dart if it's "Planes"
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -93,7 +91,6 @@ class BilingualMathGeoHomePage extends StatelessWidget {
                               PlanesSectionsPage()), // Navigate to PAGE2.dart
                     );
                   } else if (_getShapeForLevel(levelNumber) == 'Triangle') {
-                    // Navigate to PAGE2.dart if it's "Planes"
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -101,7 +98,6 @@ class BilingualMathGeoHomePage extends StatelessWidget {
                               TriangleSectionsPage()), // Navigate to PAGE2.dart
                     );
                   } else if (_getShapeForLevel(levelNumber) == 'Angles') {
-                    // Navigate to PAGE2.dart if it's "Planes"
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -110,7 +106,13 @@ class BilingualMathGeoHomePage extends StatelessWidget {
                     );
                   } else if (_getShapeForLevel(levelNumber) ==
                       'Quadrilateral') {
-                    // Navigate to PAGE2.dart if it's "Planes"
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              QuadrilateralSectionsPage()), // Navigate to PAGE2.dart
+                    );
+                  } else if (_getShapeForLevel(levelNumber) == 'Circle') {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -179,6 +181,8 @@ class BilingualMathGeoHomePage extends StatelessWidget {
         return Color.fromARGB(208, 173, 76, 76); // Triangle
       case 5:
         return const Color.fromARGB(255, 169, 63, 97); // Quadrilateral
+      case 6:
+        return Color.fromARGB(255, 101, 95, 95);
       default:
         return const Color.fromARGB(255, 101, 95, 95);
     }
@@ -197,6 +201,8 @@ class BilingualMathGeoHomePage extends StatelessWidget {
         return 'Triangle';
       case 5:
         return 'Quadrilateral';
+      case 6:
+        return 'Circle';
       default:
         return '';
     }

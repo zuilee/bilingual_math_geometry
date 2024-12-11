@@ -23,51 +23,76 @@ class LineQuizPage extends StatefulWidget {
 
 class _LineQuizPageState extends State<LineQuizPage> {
   final List<String> questions = [
-    'What is the definition of a line?',
-    'What are the two main characteristics of a line?',
-    'What are the different types of lines?',
-    'What is a ray?',
-    'What is a line segment?'
+    'You are standing at the edge of a straight road that extends as far as you can see. What is the best geometric representation of this road?',
+    'A flashlight is turned on in a dark room, emitting light in one direction. How can the path of light from the flashlight be represented?',
+    'You are measuring the length of a wooden stick with a ruler. What geometric concept does the stick represent?',
+    'Two railroad tracks run side by side and never meet, no matter how far they extend. How are these tracks geometrically classified?',
+    'A flagpole stands upright on flat ground. The pole and the ground meet at a right angle. How can this arrangement be described geometrically?',
+    'Two roads cross each other at an intersection but do not form right angles. What is the geometric relationship between these roads?',
+    'A basketball court has markings for the free throw lane. The sidelines of the court never touch, while the baseline and the sideline meet at a right angle. Which types of lines are the two sidelines and the sidelines and the baseline?',
+    'A ladder leans against a wall. The wall is vertical, and the ground is horizontal. The ladder forms a triangle with the wall and the ground. Which two lines are perpendicular in this scenario?',
+    'In a city grid system, the main street runs north-south, and cross streets run east-west. What is the relationship between the main street and any one of the cross streets?',
+    'You are driving on a highway with two lanes going in the same direction. These lanes run side by side without ever meeting. How can the geometric relationship between these lanes be described?',
   ];
 
   final List<List<String>> options = [
+    ['Line', 'Ray', 'Segment'],
+    ['Line', 'Ray', 'Segment'],
+    ['Line', 'Ray', 'Segment'],
+    ['Perpendicular lines', 'Intersecting lines', 'Parallel line'],
+    ['Parallel lines', 'Intersecting lines', 'Perpendicular lines'],
+    ['Parallel lines', 'Perpendicular lines', 'Intersecting lines'],
     [
-      'A straight path with infinite length.',
-      'A curved path with finite length.',
-      'A circle.'
-    ],
-    ['Length and no width.', 'Length and color.', 'Length and height.'],
-    [
-      'Straight line, ray, line segment.',
-      'Curved line, zigzag line, wave line.',
-      'Circle, oval, square.'
-    ],
-    [
-      'A part of a line with one endpoint.',
-      'A part of a line with two endpoints.',
-      'A line with infinite endpoints.'
+      'Parallel and Intersecting',
+      'Parallel and Perpendicular',
+      'Perpendicular and Intersecting'
     ],
     [
-      'A part of a line with two endpoints.',
-      'A part of a line with one endpoint.',
-      'A straight path with infinite length.'
-    ]
+      'The ladder and the wall',
+      'The ladder and the ground',
+      'The wall and the ground'
+    ],
+    ['Parallel lines', 'Perpendicular lines', 'Rays'],
+    ['Parallel lines', 'Perpendicular lines', 'Rays'],
   ];
 
   final List<String> answers = [
-    'A straight path with infinite length.',
-    'Length and no width.',
-    'Straight line, ray, line segment.',
-    'A part of a line with one endpoint.',
-    'A part of a line with two endpoints.'
+    'Line',
+    'Ray',
+    'Segment',
+    'Parallel line',
+    'Perpendicular lines',
+    'Intersecting lines',
+    'Parallel and Perpendicular',
+    'Perpendicular lines',
+    'Perpendicular lines',
+    'Parallel lines',
   ];
 
   final List<String> hints = [
-    'Think of a ruler.',
-    'One of them is about shape, and the other is about dimension.',
-    'One type is straight, another type has only one endpoint, and another type has two endpoints.',
-    'It starts from a point and extends infinitely in one direction.',
-    'It connects two points on the line.'
+    'A road extends infinitely on both sides.',
+    'The flashlight itself is one endpoint and the light extends infinitely in the direction it is pointed.',
+    'The wooden stick has two endpoints.',
+    'The railroads never meet.',
+    'Angle formed between pole and ground is exactly 90 degrees.',
+    'Angle between the two roads is not 90 degrees.',
+    'The sidelines never meet. The baseline and sideline meet at a 90 degree angle.',
+    'The wall and the ground meet at a 90 degree angle.',
+    'he main street and cross streets meet at a 90 degree angle.',
+    'The lanes never intersect.',
+  ];
+
+  final List<String> imagePath = [
+    'assets/images/lines/quiz/lq1.webp',
+    'assets/images/lines/quiz/lq2.jpg',
+    'assets/images/lines/quiz/lq3.jpg',
+    'assets/images/lines/quiz/lq4.jpg',
+    'assets/images/lines/quiz/lq5.jpg',
+    'assets/images/lines/quiz/lq6.jpg',
+    'assets/images/lines/quiz/lq7.webp',
+    'assets/images/lines/quiz/lq8.jpg',
+    'assets/images/lines/quiz/lq9.jpg',
+    'assets/images/lines/quiz/lq10.jpg',
   ];
 
   int currentQuestionIndex = 0;
@@ -246,8 +271,15 @@ class _LineQuizPageState extends State<LineQuizPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Image.asset(
+              imagePath[currentQuestionIndex], // Replace with your image path
+              height: 350.0, // Increased image height
+              width: double.infinity, // Set width to match screen
+              fit: BoxFit.contain,
+            ),
             Text(
               questions[currentQuestionIndex],
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),

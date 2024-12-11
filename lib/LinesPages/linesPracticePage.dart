@@ -13,6 +13,10 @@ class LinesPracticeQuiz extends StatelessWidget {
       title: 'Lines Practice',
       debugShowCheckedModeBanner: false,
       home: LinesPracticeQuizPage(),
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
     );
   }
 }
@@ -34,6 +38,7 @@ class _LinesPracticeQuizPageState extends State<LinesPracticeQuizPage>
         {'text': 'A straight path', 'correct': true},
         {'text': 'A circle', 'correct': false},
       ],
+      'questionImage': '',
     },
     {
       'question': 'What is a ray?',
@@ -42,6 +47,7 @@ class _LinesPracticeQuizPageState extends State<LinesPracticeQuizPage>
         {'text': 'Part of a line with one endpoint', 'correct': true},
         {'text': 'A straight path', 'correct': false},
       ],
+      'questionImage': '',
     },
     {
       'question': 'What is a line segment?',
@@ -50,7 +56,74 @@ class _LinesPracticeQuizPageState extends State<LinesPracticeQuizPage>
         {'text': 'Part of a line with two endpoints', 'correct': true},
         {'text': 'A straight path', 'correct': false},
       ],
+      'questionImage': '',
     },
+    {
+      'question': 'Which of the following statements is true?',
+      'answers': [
+        {'text': 'A ray has two endpoints.', 'correct': false},
+        {'text': 'A line segment has one endpoint.', 'correct': false},
+        {'text': 'A line has no endpoints.', 'correct': true},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question':
+          'If two lines never meet and are always the same distance apart, what is the relationship between them?',
+      'answers': [
+        {'text': 'The Lines are parallel', 'correct': true},
+        {'text': 'The Lines are perpendicular', 'correct': false},
+        {'text': 'The Lines are horizontal', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question':
+          'If two lines cross each other at a 90-degree angle, what type of lines are they?',
+      'answers': [
+        {'text': 'The Lines are parallel', 'correct': false},
+        {'text': 'The Lines are perpendicular', 'correct': true},
+        {'text': 'The Lines are horizontal', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question': 'Identify the line in this image.',
+      'answers': [
+        {'text': 'AB', 'correct': true},
+        {'text': 'AC', 'correct': false},
+        {'text': 'BC', 'correct': false},
+      ],
+      'questionImage': 'assets/images/lines/P7.png',
+    },
+    {
+      'question': 'Which parts of this image represent rays?',
+      'answers': [
+        {'text': 'CB and CA', 'correct': true},
+        {'text': 'AB and AC', 'correct': false},
+        {'text': 'CB and AB', 'correct': true},
+      ],
+      'questionImage': 'assets/images/lines/P8.png',
+    },
+    {
+      'question': 'Which parts of this image represent a line segment?',
+      'answers': [
+        {'text': 'AB', 'correct': false},
+        {'text': 'DC', 'correct': true},
+        {'text': 'BC', 'correct': false},
+      ],
+      'questionImage': 'assets/images/lines/P7.png',
+    },
+    {
+      'question':
+          'Which point is the endpoint of the ray, and in which direction does it extend?',
+      'answers': [
+        {'text': 'Endpoint A, extends right', 'correct': false},
+        {'text': 'Endpoint B, extends right', 'correct': false},
+        {'text': 'Endpoint A, extends left', 'correct': true},
+      ],
+      'questionImage': 'assets/images/lines/P10.png',
+    }
   ];
 
   late AnimationController _controller;
@@ -107,6 +180,7 @@ class _LinesPracticeQuizPageState extends State<LinesPracticeQuizPage>
     return Scaffold(
       appBar: AppBar(
         title: Text('Lines Practice'),
+        backgroundColor: Color.fromARGB(90, 102, 54, 51),
         leading: IconButton(
           icon: Icon(Icons.arrow_back), // Add back arrow icon
           onPressed: () {
@@ -145,7 +219,7 @@ class _LinesPracticeQuizPageState extends State<LinesPracticeQuizPage>
   Widget _buildFlipCard() {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: MediaQuery.of(context).size.height * 0.8,
       child: Card(
         elevation: 8.0,
         shape: RoundedRectangleBorder(
@@ -166,45 +240,126 @@ class _LinesPracticeQuizPageState extends State<LinesPracticeQuizPage>
     );
   }
 
+  // Widget _buildQuestionCard() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(16.0),
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         Expanded(
+  //           child: _questions[_questionIndex]['questionImage'] != ''
+  //               ? Image.asset(
+  //                   _questions[_questionIndex]
+  //                       ['questionImage'], // Replace with your asset path
+  //                   height: 300,
+  //                   width: 200.0,
+  //                   //fit: BoxFit.contain,
+  //                 )
+  //               : const SizedBox.shrink(),
+  //         ),
+  //         Expanded(
+  //           child: Text(
+  //             _questions[_questionIndex]['question'],
+  //             style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+  //             textAlign: TextAlign.center,
+  //           ),
+  //         ),
+  //         SizedBox(height: 20.0),
+  //         Expanded(
+  //           child: ListView.separated(
+  //             shrinkWrap: true,
+  //             itemCount: _questions[_questionIndex]['answers'].length,
+  //             separatorBuilder: (context, index) => SizedBox(height: 10.0),
+  //             itemBuilder: (context, index) {
+  //               final answer = (_questions[_questionIndex]['answers']
+  //                   as List<Map<String, dynamic>>)[index];
+  //               return ElevatedButton(
+  //                 onPressed: () => _answerQuestion(answer['correct']),
+  //                 style: ElevatedButton.styleFrom(
+  //                   shape: RoundedRectangleBorder(
+  //                     borderRadius: BorderRadius.circular(8.0),
+  //                   ),
+  //                   padding: EdgeInsets.symmetric(vertical: 16.0),
+  //                 ),
+  //                 child: Text(
+  //                   answer['text'],
+  //                   style: TextStyle(fontSize: 18.0),
+  //                   textAlign: TextAlign.center,
+  //                 ),
+  //               );
+  //             },
+  //           ),
+  //         ),
+  //         SizedBox(height: 20.0),
+  //         IconButton(
+  //           onPressed: _flipCard,
+  //           icon: Icon(Icons.flip),
+  //           style: IconButton.styleFrom(
+  //             shape: CircleBorder(),
+  //             padding: EdgeInsets.all(16.0),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
   Widget _buildQuestionCard() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
+          // Image handling: make it bigger and center it
+          _questions[_questionIndex]['questionImage'] != ''
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Image.asset(
+                    _questions[_questionIndex]['questionImage'],
+                    height: 350.0, // Increased image height
+                    width: double.infinity, // Set width to match screen
+                    fit: BoxFit.contain, // Ensure proper image scaling
+                  ),
+                )
+              : const SizedBox.shrink(),
+
+          // Question Text: Properly aligned and spaced
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
               _questions[_questionIndex]['question'],
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(height: 20.0),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: _questions[_questionIndex]['answers'].length,
-              separatorBuilder: (context, index) => SizedBox(height: 10.0),
-              itemBuilder: (context, index) {
-                final answer = (_questions[_questionIndex]['answers']
-                    as List<Map<String, dynamic>>)[index];
-                return ElevatedButton(
-                  onPressed: () => _answerQuestion(answer['correct']),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
+
+          // Answers list with button spacing
+          ListView.separated(
+            shrinkWrap: true,
+            itemCount: _questions[_questionIndex]['answers'].length,
+            separatorBuilder: (context, index) => SizedBox(height: 10.0),
+            itemBuilder: (context, index) {
+              final answer = (_questions[_questionIndex]['answers']
+                  as List<Map<String, dynamic>>)[index];
+              return ElevatedButton(
+                onPressed: () => _answerQuestion(answer['correct']),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: Text(
-                    answer['text'],
-                    style: TextStyle(fontSize: 18.0),
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              },
-            ),
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                ),
+                child: Text(
+                  answer['text'],
+                  style: TextStyle(fontSize: 18.0),
+                  textAlign: TextAlign.center,
+                ),
+              );
+            },
           ),
+
+          // Flip icon button with spacing
           SizedBox(height: 20.0),
           IconButton(
             onPressed: _flipCard,

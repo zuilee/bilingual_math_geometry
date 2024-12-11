@@ -22,35 +22,66 @@ class QuadrilateralQuizPage extends StatefulWidget {
 
 class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
   final List<String> questions = [
-    'What is a quadrilateral?',
-    'How many sides does a quadrilateral have?',
-    'What are the opposite sides of a quadrilateral?',
-    'What are the opposite angles of a quadrilateral?',
-    'What is the sum of the interior angles of a quadrilateral?'
+    'Which of these is commonly used for a standard window pane, where all four sides are equal and every angle forms a perfect right angle?',
+    'You are designing a table, and you want it to have opposite sides parallel and unequal in length, but with no right angles. What shape would best describe the tabletop?',
+    'The wings of a traditional kite often form a shape where two pairs of adjacent sides are equal. What shape does the kite resemble?',
+    'Which quadrilateral would be most appropriate for the screen of a modern TV or smartphone, where opposite sides are equal and each angle forms a right angle?',
+    'In designing a fancy picture frame, you want all four sides to be of equal length and each angle to be a right angle. What shape best describes this frame?',
+    'A book cover has a simple and practical design where opposite sides are parallel and equal, and all angles are right angles. What quadrilateral shape describes the book cover?',
+    '',
+    '',
+    '',
   ];
 
   final List<List<String>> options = [
-    ['A polygon with four sides', 'A polygon with five sides', 'A polygon with three sides'],
-    ['Four', 'Five', 'Six'],
-    ['None', 'Adjacent sides', 'Opposite sides'],
-    ['None', 'Adjacent angles', 'Opposite angles'],
-    ['180 degrees', '360 degrees', '90 degrees']
+    ['Square', 'Rhombus', 'Trapezoid'],
+    ['Parallelogram', 'Rectangle', 'Trapezoid'],
+    ['Parallelogram', 'Kite', 'Trapezoid'],
+    ['Parallelogram', 'Rectangle', 'Trapezoid'],
+    ['Square', 'Rectangle', 'Kite'],
+    ['Kite', 'Rectangle', 'Rhombus'],
+    ['Parallelogram', 'Rectangle', 'Trapezoid'],
+    ['Parallelogram', 'Rectangle', 'Trapezoid'],
+    ['Parallelogram', 'Rectangle', 'Trapezoid'],
   ];
 
   final List<String> answers = [
-    'A polygon with four sides',
-    'Four',
-    'Opposite sides',
-    'Opposite angles',
-    '360 degrees'
+    'Square',
+    'Trapezoid',
+    'Kite',
+    'Rectangle',
+    'Square',
+    'Rectangle',
+    '',
+    '',
+    '',
   ];
 
   final List<String> hints = [
-    'Think of a square or rectangle.',
-    'It\'s the same as the number of vertices.',
-    'They are parallel and of equal length.',
-    'They are equal in measure.',
-    'Think of the angles inside the quadrilateral.'
+    'All sides are of equal length and all angles are 90 degrees.',
+    'Two sides are parallel and opposite sides are of equal length.',
+    'Length of two adjacent sides is the same.',
+    'Opposite sides are of equal lengths and all angles are 90 degrees.',
+    'All sides are of equal length and all angles are 90 degrees.',
+    '',
+    '',
+    '',
+    '',
+    '',
+  ];
+
+  final List<String> imagePath = [
+    'assets/images/quadrilateral/quiz/qq1.jpg',
+    'assets/images/quadrilateral/quiz/qq2.jpg',
+    'assets/images/quadrilateral/quiz/qq3.jpg',
+    'assets/images/quadrilateral/quiz/qq4.webp',
+    'assets/images/quadrilateral/quiz/qq5.jpg',
+    'assets/images/quadrilateral/quiz/qq6.jpg',
+    '',
+    '',
+    '',
+    '',
+    '',
   ];
 
   int currentQuestionIndex = 0;
@@ -79,7 +110,8 @@ class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
   }
 
   void checkAnswer() {
-    if (selectedOption != null && selectedOption == answers[currentQuestionIndex]) {
+    if (selectedOption != null &&
+        selectedOption == answers[currentQuestionIndex]) {
       setState(() {
         score += 5; // Increment score by 5 points for each correct answer
       });
@@ -106,12 +138,14 @@ class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('Quiz Finished!'),
-                          content: Text('Congratulations! You completed the quiz. Your score is $score.'),
+                          content: Text(
+                              'Congratulations! You completed the quiz. Your score is $score.'),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
-                                Navigator.of(context).pop(); // Navigate back to the front page
+                                Navigator.of(context)
+                                    .pop(); // Navigate back to the front page
                               },
                               child: Text('Back to Home'),
                             ),
@@ -135,7 +169,8 @@ class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Incorrect'),
-              content: Text('You have no attempts left. The correct answer is:\n\n${answers[currentQuestionIndex]}'),
+              content: Text(
+                  'You have no attempts left. The correct answer is:\n\n${answers[currentQuestionIndex]}'),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -153,12 +188,14 @@ class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text('Quiz Finished!'),
-                            content: Text('Congratulations! You completed the quiz. Your score is $score.'),
+                            content: Text(
+                                'Congratulations! You completed the quiz. Your score is $score.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                  Navigator.of(context).pop(); // Navigate back to the front page
+                                  Navigator.of(context)
+                                      .pop(); // Navigate back to the front page
                                 },
                                 child: Text('Back to Home'),
                               ),
@@ -216,8 +253,15 @@ class _QuadrilateralQuizPageState extends State<QuadrilateralQuizPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Image.asset(
+              imagePath[currentQuestionIndex], // Replace with your image path
+              height: 350.0, // Increased image height
+              width: double.infinity, // Set width to match screen
+              fit: BoxFit.contain,
+            ),
             Text(
               questions[currentQuestionIndex],
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),

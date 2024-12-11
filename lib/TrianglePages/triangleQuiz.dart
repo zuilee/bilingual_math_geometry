@@ -22,31 +22,72 @@ class TriangleQuizPage extends StatefulWidget {
 
 class _TriangleQuizPageState extends State<TriangleQuizPage> {
   final List<String> questions = [
-    'What is the sum of interior angles in a triangle?',
-    'What type of triangle has all sides of equal length?',
-    'What type of triangle has one angle greater than 90 degrees?',
-    'What is the longest side of a right triangle called?'
+    'You see a road sign shaped like a triangle. It has all sides of equal length. What type of triangle is the sign?',
+    'The roof of a house has a triangular structure. The two sloping sides are equal in length, and the base is shorter. What type of triangle is the roof?',
+    'A slice of watermelon is cut into a triangular shape where all three sides are of same lengths. What type of triangle is it?',
+    'A handkerchief is folded into a triangular shape where all the angles are smaller than 90 degrees. What type of triangle does it represent?',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
   ];
 
   final List<List<String>> options = [
-    ['180 degrees', '90 degrees', '360 degrees'],
-    ['Equilateral triangle', 'Isosceles triangle', 'Scalene triangle'],
-    ['Acute triangle', 'Obtuse triangle', 'Right triangle'],
-    ['Hypotenuse', 'Adjacent side', 'Opposite side']
+    ['Equilateral', 'Isosceles', 'Scalene'],
+    ['Equilateral', 'Isosceles', 'Scalene'],
+    ['Equilateral', 'Isosceles', 'Scalene'],
+    ['Obtuse-angled', 'Right-angled', 'Acute-angled'],
+    ['Right-angled', 'Obtuse-angled', 'Acute-angled'],
+    ['Equilateral', 'Isosceles', 'Scalene'],
+    ['Equilateral', 'Isosceles', 'Scalene'],
+    ['Equilateral', 'Isosceles', 'Scalene'],
+    ['Equilateral', 'Isosceles', 'Scalene'],
+    ['Equilateral', 'Isosceles', 'Scalene'],
+    ['Equilateral', 'Isosceles', 'Scalene'],
   ];
 
   final List<String> answers = [
-    '180 degrees',
-    'Equilateral triangle',
-    'Obtuse triangle',
-    'Hypotenuse'
+    'Equilateral',
+    'Isosceles',
+    'Equilateral',
+    'Acute-angled',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
   ];
 
   final List<String> hints = [
-    'Think of the angles inside the triangle.',
-    'All sides are of equal length.',
-    'One angle is greater than 90 degrees.',
-    'It\'s the side opposite the right angle.'
+    'All three sides ane of equal length.',
+    'Two sides are of equal lenghth.',
+    'All three sides ane of equal length.',
+    'All three angles are less than 60 degrees.',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+  ];
+
+  final List<String> imagePath = [
+    'assets/images/triangles/quiz/tq1.webp',
+    'assets/images/triangles/quiz/tq2.webp',
+    'assets/images/triangles/quiz/tq3.jpg',
+    'assets/images/triangles/quiz/tq4.jpg',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
   ];
 
   int currentQuestionIndex = 0;
@@ -75,7 +116,8 @@ class _TriangleQuizPageState extends State<TriangleQuizPage> {
   }
 
   void checkAnswer() {
-    if (selectedOption != null && selectedOption == answers[currentQuestionIndex]) {
+    if (selectedOption != null &&
+        selectedOption == answers[currentQuestionIndex]) {
       setState(() {
         score += 5; // Increment score by 5 points for each correct answer
       });
@@ -102,12 +144,14 @@ class _TriangleQuizPageState extends State<TriangleQuizPage> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('Quiz Finished!'),
-                          content: Text('Congratulations! You completed the quiz. Your score is $score.'),
+                          content: Text(
+                              'Congratulations! You completed the quiz. Your score is $score.'),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
-                                Navigator.of(context).pop(); // Navigate back to the front page
+                                Navigator.of(context)
+                                    .pop(); // Navigate back to the front page
                               },
                               child: Text('Back to Home'),
                             ),
@@ -131,7 +175,8 @@ class _TriangleQuizPageState extends State<TriangleQuizPage> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Incorrect'),
-              content: Text('You have no attempts left. The correct answer is:\n\n${answers[currentQuestionIndex]}'),
+              content: Text(
+                  'You have no attempts left. The correct answer is:\n\n${answers[currentQuestionIndex]}'),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -149,12 +194,14 @@ class _TriangleQuizPageState extends State<TriangleQuizPage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text('Quiz Finished!'),
-                            content: Text('Congratulations! You completed the quiz. Your score is $score.'),
+                            content: Text(
+                                'Congratulations! You completed the quiz. Your score is $score.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                  Navigator.of(context).pop(); // Navigate back to the front page
+                                  Navigator.of(context)
+                                      .pop(); // Navigate back to the front page
                                 },
                                 child: Text('Back to Home'),
                               ),
@@ -212,8 +259,15 @@ class _TriangleQuizPageState extends State<TriangleQuizPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Image.asset(
+              imagePath[currentQuestionIndex], // Replace with your image path
+              height: 350.0, // Increased image height
+              width: double.infinity, // Set width to match screen
+              fit: BoxFit.contain,
+            ),
             Text(
               questions[currentQuestionIndex],
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),

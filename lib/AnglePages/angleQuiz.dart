@@ -22,35 +22,68 @@ class AngleQuizPage extends StatefulWidget {
 
 class _AngleQuizPageState extends State<AngleQuizPage> {
   final List<String> questions = [
-    'What is the measure of a right angle?',
-    'What is the measure of an acute angle?',
-    'What is the measure of an obtuse angle?',
-    'What is a straight angle?',
-    'What is the measure of a complete angle?'
+    'A ladder is leaning against a wall, forming an angle of 60° with the ground. What type of angle is formed between the ladder and ground?',
+    'The hands of a clock show 10:10, forming an angle of approximately 150° between them. What type of angle is this?',
+    'A road sign shows a bend where the road turns sharply, forming a 90 degree angle. What type of angle does this represent?',
+    'A seesaw is perfectly horizontal in its resting position. What angle is formed between the two sides?',
+    'A ferris wheel completes one full rotation (360°). What type of angle does this represent?',
+    'A car ramp is inclined at an angle of 120° with the ground. What type of angle does this represent?',
+    'The sails of a windmill form angles as they rotate. If two adjacent sails form an angle of exactly 90°, what type of angle is this?',
+    'A pizza slice has a pointed tip forming an angle of approximately 30°. What type of angle is at the tip?',
+    'The pages of an open book form an angle of about 180° when laid flat on a table. What type of angle is formed at the spine of the book?',
+    'A slice of a circular pie has an angle of 45° at its tip. What type of angle is represented at the tip of the slice?',
   ];
 
   final List<List<String>> options = [
-    ['90 degrees', '45 degrees', '120 degrees'],
-    ['Less than 90 degrees', 'Exactly 90 degrees', 'More than 90 degrees'],
-    ['More than 90 degrees', 'Exactly 90 degrees', 'Less than 90 degrees'],
-    ['180 degrees', '90 degrees', '360 degrees'],
-    ['360 degrees', '180 degrees', '90 degrees']
+    ['Acute Angle', 'Right Angle', 'Obtuse Angle'],
+    ['Right Angle', 'Obtuse Angle', 'Reflex Angle'],
+    ['Right Angle', 'Straight Angle', 'Acute Angle'],
+    ['Straight Angle', 'Right Angle', 'Full Rotation Angle'],
+    ['Reflex Angle', 'Full Rotation Angle', 'Straight Angle'],
+    ['Obtuse Angle', 'Acute Angle', 'Reflex Angle'],
+    ['Acute Angle', 'Right Angle ', 'Straight Angle'],
+    ['Acute Angle', 'Right Angle', 'Obtuse Angle'],
+    ['Straight Angle', 'Reflex Angle', 'Right Angle'],
+    ['Acute Angle', 'Obtuse Angle', 'Right Angle']
   ];
 
   final List<String> answers = [
-    '90 degrees',
-    'Less than 90 degrees',
-    'More than 90 degrees',
-    '180 degrees',
-    '360 degrees'
+    'Acute Angle',
+    'Obtuse Angle',
+    'Right Angle',
+    'Straight Angle',
+    'Full Rotation Angle',
+    'Obtuse Angle',
+    'Right Angle ',
+    'Acute Angle',
+    'Straight Angle',
+    'Acute Angle'
   ];
 
   final List<String> hints = [
-    'Think of the corners of a square.',
-    'It\'s smaller than a right angle.',
-    'It\'s larger than a right angle but less than a straight angle.',
-    'It\'s a straight line.',
-    'It\'s a full rotation.'
+    'The angle is less than 90 degrees.',
+    'Angle formed is greater than 90 degrees but less than 180 degrees.',
+    'Angle formed is exactly 90 degrees.',
+    'Angled formed is exactly 180 degrees.',
+    'Angle formed is exactly 360 degrees.',
+    'Angle is greater than 90 degrees but less than 180 degrees.',
+    'Angle formed is exactly 90 degrees.',
+    'Angle formed is less than 90 degrees.',
+    'Angled formed is exactly 180 degrees.',
+    'Angle formed is less than 90 degrees.',
+  ];
+
+  final List<String> imagePath = [
+    'assets/images/angles/quiz/aq1.jpg',
+    'assets/images/angles/quiz/aq2.png',
+    'assets/images/angles/quiz/aq3.jpg',
+    'assets/images/angles/quiz/aq4.jpeg',
+    'assets/images/angles/quiz/aq5.webp',
+    'assets/images/angles/quiz/aq6.jpg',
+    'assets/images/angles/quiz/aq7.jpg',
+    'assets/images/angles/quiz/aq8.jpg',
+    'assets/images/angles/quiz/aq9.jpg',
+    'assets/images/angles/quiz/aq10.webp',
   ];
 
   int currentQuestionIndex = 0;
@@ -79,7 +112,8 @@ class _AngleQuizPageState extends State<AngleQuizPage> {
   }
 
   void checkAnswer() {
-    if (selectedOption != null && selectedOption == answers[currentQuestionIndex]) {
+    if (selectedOption != null &&
+        selectedOption == answers[currentQuestionIndex]) {
       setState(() {
         score += 5; // Increment score by 5 points for each correct answer
       });
@@ -106,12 +140,14 @@ class _AngleQuizPageState extends State<AngleQuizPage> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('Quiz Finished!'),
-                          content: Text('Congratulations! You completed the quiz. Your score is $score.'),
+                          content: Text(
+                              'Congratulations! You completed the quiz. Your score is $score.'),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
-                                Navigator.of(context).pop(); // Navigate back to the front page
+                                Navigator.of(context)
+                                    .pop(); // Navigate back to the front page
                               },
                               child: Text('Back to Home'),
                             ),
@@ -135,7 +171,8 @@ class _AngleQuizPageState extends State<AngleQuizPage> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Incorrect'),
-              content: Text('You have no attempts left. The correct answer is:\n\n${answers[currentQuestionIndex]}'),
+              content: Text(
+                  'You have no attempts left. The correct answer is:\n\n${answers[currentQuestionIndex]}'),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -153,12 +190,14 @@ class _AngleQuizPageState extends State<AngleQuizPage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text('Quiz Finished!'),
-                            content: Text('Congratulations! You completed the quiz. Your score is $score.'),
+                            content: Text(
+                                'Congratulations! You completed the quiz. Your score is $score.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                  Navigator.of(context).pop(); // Navigate back to the front page
+                                  Navigator.of(context)
+                                      .pop(); // Navigate back to the front page
                                 },
                                 child: Text('Back to Home'),
                               ),
@@ -216,8 +255,15 @@ class _AngleQuizPageState extends State<AngleQuizPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Image.asset(
+              imagePath[currentQuestionIndex], // Replace with your image path
+              height: 350.0, // Increased image height
+              width: double.infinity, // Set width to match screen
+              fit: BoxFit.contain,
+            ),
             Text(
               questions[currentQuestionIndex],
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),

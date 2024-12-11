@@ -81,7 +81,8 @@ class _AnglesIntroductionGeometryPageState
         ? ' An angle greater than 180 degrees and less than 360 degrees.'
         : ' Un ángulo mayor de 180 grados y menor de 360 grados.';
     content += _isEnglish
-        ? '6. Full Rotation Angle' : '6. Ángulo de Rotación Completa';
+        ? '6. Full Rotation Angle'
+        : '6. Ángulo de Rotación Completa';
     content += _isEnglish
         ? ' An angle of exactly 360 degrees.'
         : ' Un ángulo de exactamente 360 grados.';
@@ -116,8 +117,7 @@ class _AnglesIntroductionGeometryPageState
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
-                  builder: (context) => AnglesSectionsPage()),
+              MaterialPageRoute(builder: (context) => AnglesSectionsPage()),
             ); // Navigate back when arrow is pressed
           },
         ),
@@ -158,12 +158,19 @@ class _AnglesIntroductionGeometryPageState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.asset(
-                  'assets/images/angles/angles.png', // Update with your asset path
-                  height: 300.0,
-                  width: 250.0,
-                  fit: BoxFit.contain,
-                ),
+                _isEnglish
+                    ? Image.asset(
+                        'assets/images/angles/Angles_E.png', // Replace with your asset path
+                        height: 500.0,
+                        width: 300.0,
+                        fit: BoxFit.contain,
+                      )
+                    : Image.asset(
+                        'assets/images/angles/Angles_S.png', // Replace with your asset path
+                        height: 500.0,
+                        width: 300.0,
+                        fit: BoxFit.contain,
+                      ),
                 SizedBox(height: 20.0),
                 _buildAngleDefinition(_isEnglish),
                 SizedBox(height: 20.0),
@@ -205,59 +212,61 @@ class _AnglesIntroductionGeometryPageState
         ),
         SizedBox(height: 10.0),
         _buildAngleTypeItem(
-          isEnglish ? '1. Acute Angle' : '1. Ángulo Agudo',
-          isEnglish
-              ? 'An angle less than 90 degrees.'
-              : 'Un ángulo menor de 90 grados.',
-          Icons.access_alarm,
-          Colors.orange,
-        ),
+            isEnglish ? '1. Acute Angle' : '1. Ángulo Agudo',
+            isEnglish
+                ? 'An angle less than 90 degrees.'
+                : 'Un ángulo menor de 90 grados.',
+            isEnglish
+                ? 'assets/images/angles/Acute_E.png'
+                : 'assets/images/angles/AcuteAngle_s.png'),
         _buildAngleTypeItem(
-          isEnglish ? '2. Right Angle' : '2. Ángulo Recto',
-          isEnglish
-              ? 'An angle of exactly 90 degrees.'
-              : 'Un ángulo de exactamente 90 grados.',
-          Icons.access_time,
-          Colors.green,
-        ),
+            isEnglish ? '2. Right Angle' : '2. Ángulo Recto',
+            isEnglish
+                ? 'An angle of exactly 90 degrees.'
+                : 'Un ángulo de exactamente 90 grados.',
+            isEnglish
+                ? 'assets/images/angles/Right_Angle_E.png'
+                : 'assets/images/angles/RightAngle_S.png'),
         _buildAngleTypeItem(
-          isEnglish ? '3. Obtuse Angle' : '3. Ángulo Obtuso',
-          isEnglish
-              ? 'An angle greater than 90 degrees.'
-              : 'Un ángulo mayor de 90 grados.',
-          Icons.account_balance,
-          Colors.blue,
-        ),
+            isEnglish ? '3. Obtuse Angle' : '3. Ángulo Obtuso',
+            isEnglish
+                ? 'An angle greater than 90 degrees.'
+                : 'Un ángulo mayor de 90 grados.',
+            isEnglish
+                ? 'assets/images/angles/ObtuseANgle_E.png'
+                : 'assets/images/angles/ObtuseAngle_S.png'),
         _buildAngleTypeItem(
-          isEnglish ? '4. Straight Angle' : '4. Ángulo Rectilíneo',
-          isEnglish
-              ? 'An angle of exactly 180 degrees.'
-              : 'Un ángulo de exactamente 180 grados.',
-          Icons.account_balance_wallet,
-          Colors.purple,
-        ),
+            isEnglish ? '4. Straight Angle' : '4. Ángulo Rectilíneo',
+            isEnglish
+                ? 'An angle of exactly 180 degrees.'
+                : 'Un ángulo de exactamente 180 grados.',
+            isEnglish
+                ? 'assets/images/angles/StraightAngle_E.png'
+                : 'assets/images/angles/StraightAngle_S.png'),
         _buildAngleTypeItem(
-          isEnglish ? '5. Reflex Angle' : '5. Ángulo Reflejo',
-          isEnglish
-              ? 'An angle greater than 180 degrees and less than 360 degrees.'
-              : 'Un ángulo mayor de 180 grados y menor de 360 grados.',
-          Icons.account_box,
-          Colors.red,
-        ),
+            isEnglish ? '5. Reflex Angle' : '5. Ángulo Reflejo',
+            isEnglish
+                ? 'An angle greater than 180 degrees and less than 360 degrees.'
+                : 'Un ángulo mayor de 180 grados y menor de 360 grados.',
+            isEnglish
+                ? 'assets/images/angles/ReflexAngle_E.png'
+                : 'assets/images/angles/ReflexAngle_S.png'),
         _buildAngleTypeItem(
-          isEnglish ? '6. Full Rotation Angle' : '6. Ángulo de Rotación Completa',
-          isEnglish
-              ? 'An angle of exactly 360 degrees.'
-              : 'Un ángulo de exactamente 360 grados.',
-          Icons.add_alarm,
-          Colors.brown,
-        ),
+            isEnglish
+                ? '6. Full Rotation Angle'
+                : '6. Ángulo de Rotación Completa',
+            isEnglish
+                ? 'An angle of exactly 360 degrees.'
+                : 'Un ángulo de exactamente 360 grados.',
+            isEnglish
+                ? 'assets/images/angles/FullRotationAngle_E.png'
+                : 'assets/images/angles/FullRotationAngle_s.png'),
       ],
     );
   }
 
   Widget _buildAngleTypeItem(
-      String title, String description, IconData icon, Color color) {
+      String title, String description, String imagePath) {
     return GestureDetector(
       onTap: () {
         // Handle interaction with the angle type item
@@ -267,7 +276,30 @@ class _AnglesIntroductionGeometryPageState
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text(title),
-              content: Text(description),
+              content: SingleChildScrollView(
+                // Add this to handle possible overflow
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      height: 400, // Set your desired height
+                      width: 600, // Set your desired width
+                      child: Image.asset(
+                        imagePath, // Replace with your asset path
+                        height: 300.0,
+                        width: 250.0,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(description,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ],
+                ),
+              ),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -286,7 +318,6 @@ class _AnglesIntroductionGeometryPageState
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              Icon(icon, size: 30.0, color: color),
               SizedBox(width: 16.0),
               Expanded(
                 child: Column(

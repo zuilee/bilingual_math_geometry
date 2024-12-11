@@ -29,35 +29,39 @@ class PlanesSectionsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Planes Sections'),
+        backgroundColor: Color.fromARGB(90, 102, 54, 51),
         leading: IconButton(
           icon: Icon(Icons.arrow_back), // Add back arrow icon
           onPressed: () {
             Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => BilingualMathGeoHomePage()), // Navigate back to PAGE2.dart
-                ); // Navigate back when arrow is pressed
-              },
-            ),
-
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      BilingualMathGeoHomePage()), // Navigate back to PAGE2.dart
+            ); // Navigate back when arrow is pressed
+          },
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SectionItem(
-            title: 'LEARN',
+            title: 'Learn',
             icon: Icons.book,
-            color: Colors.green,
+            color: Color.fromARGB(255, 106, 188, 147),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlanesIntroductionPage()), // Navigate to PAGE2.dart
+                MaterialPageRoute(
+                    builder: (context) =>
+                        PlanesIntroductionPage()), // Navigate to PAGE2.dart
               );
             },
           ),
           SectionItem(
-            title: 'PRACTICE',
+            title: 'Practice',
             icon: Icons.lightbulb,
-            color: Colors.orange,
+            color: Color.fromARGB(255, 215, 134, 80),
             onPressed: () {
               Navigator.push(
                 context,
@@ -66,9 +70,9 @@ class PlanesSectionsPage extends StatelessWidget {
             },
           ),
           SectionItem(
-            title: 'QUIZ',
+            title: 'Quiz',
             icon: Icons.question_answer,
-            color: Colors.blue,
+            color: Color.fromARGB(200, 109, 143, 201),
             onPressed: () {
               Navigator.push(
                 context,
@@ -105,7 +109,8 @@ class SectionItem extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: color,
-            padding: EdgeInsets.all(50.0), // Adjusted padding to make it smaller
+            padding:
+                EdgeInsets.all(50.0), // Adjusted padding to make it smaller
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),

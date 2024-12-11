@@ -142,12 +142,19 @@ class _PlanesIntroductionGeometryPageState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.asset(
-                  'assets/images/plane/plane_image.png', // Update with your asset path
-                  height: 300.0,
-                  width: 250.0,
-                  fit: BoxFit.contain,
-                ),
+                _isEnglish
+                    ? Image.asset(
+                        'assets/images/plane/Plane_E.png', // Replace with your asset path
+                        height: 400.0,
+                        width: 250.0,
+                        fit: BoxFit.contain,
+                      )
+                    : Image.asset(
+                        'assets/images/plane/Plane_S.png', // Replace with your asset path
+                        height: 400.0,
+                        width: 250.0,
+                        fit: BoxFit.contain,
+                      ),
                 SizedBox(height: 20.0),
                 _buildPlaneDefinition(_isEnglish),
                 SizedBox(height: 20.0),
@@ -189,35 +196,35 @@ class _PlanesIntroductionGeometryPageState
         ),
         SizedBox(height: 10.0),
         _buildPlaneTypeItem(
-          isEnglish ? '1. Horizontal Plane' : '1. Plano Horizontal',
-          isEnglish
-              ? 'A plane that is parallel to the horizon.Horizontal planes are flat surfaces that are parallel to the ground or horizontal reference plane.Examples of horizontal planes include the surface of a table, the floor.'
-              : 'Un plano que es paralelo al horizonte.Los planos horizontales son superficies planas paralelas al suelo o al plano de referencia horizontal.Ejemplos de planos horizontales incluyen la superficie de una mesa, el suelo',
-          Icons.horizontal_split,
-          Colors.orange,
-        ),
+            isEnglish ? '1. Horizontal Plane' : '1. Plano Horizontal',
+            isEnglish
+                ? 'A plane that is parallel to the horizon.Horizontal planes are flat surfaces that are parallel to the ground or horizontal reference plane.Examples of horizontal planes include the surface of a table, the floor.'
+                : 'Un plano que es paralelo al horizonte.Los planos horizontales son superficies planas paralelas al suelo o al plano de referencia horizontal.Ejemplos de planos horizontales incluyen la superficie de una mesa, el suelo',
+            isEnglish
+                ? 'assets/images/plane/Horizontal_E.png'
+                : 'assets/images/plane/Horizontal_S.png'),
         _buildPlaneTypeItem(
-          isEnglish ? '2. Vertical Plane' : '2. Plano Vertical',
-          isEnglish
-              ? 'Vertical planes are flat surfaces that are perpendicular to the horizontal reference plane. They are oriented vertically, like the walls of a room or the yz-plane in a 3D coordinate system.'
-              : 'Los planos verticales son superficies planas que son perpendiculares al plano de referencia horizontal. Están orientados verticalmente, como las paredes de una habitación o el plano yz en un sistema de coordenadas 3D.',
-          Icons.vertical_split,
-          Colors.green,
-        ),
+            isEnglish ? '2. Vertical Plane' : '2. Plano Vertical',
+            isEnglish
+                ? 'Vertical planes are flat surfaces that are perpendicular to the horizontal reference plane. They are oriented vertically, like the walls of a room or the yz-plane in a 3D coordinate system.'
+                : 'Los planos verticales son superficies planas que son perpendiculares al plano de referencia horizontal. Están orientados verticalmente, como las paredes de una habitación o el plano yz en un sistema de coordenadas 3D.',
+            isEnglish
+                ? 'assets/images/plane/Vertical_E.png'
+                : 'assets/images/plane/Vertical_S.png'),
         _buildPlaneTypeItem(
-          isEnglish ? '3. Inclined Plane' : '3. Plano Inclinado',
-          isEnglish
-              ? 'A plane that is at an angle to the horizontal plane.Inclined planes, also known as ramps, are flat surfaces that are tilted or angled relative to the horizontal reference plane. They are neither horizontal nor vertical, but lie at some angle in between.'
-              : 'Un plano que está en un ángulo con respecto al plano horizontal.Los planos inclinados, también conocidos como rampas, son superficies planas que están inclinadas o en ángulo con respecto al plano de referencia horizontal. No son ni horizontales ni verticales, sino que se encuentran en algún ángulo intermedio.',
-          Icons.trending_up,
-          Colors.blue,
-        ),
+            isEnglish ? '3. Inclined Plane' : '3. Plano Inclinado',
+            isEnglish
+                ? 'A plane that is at an angle to the horizontal plane.Inclined planes, also known as ramps, are flat surfaces that are tilted or angled relative to the horizontal reference plane. They are neither horizontal nor vertical, but lie at some angle in between.'
+                : 'Un plano que está en un ángulo con respecto al plano horizontal.Los planos inclinados, también conocidos como rampas, son superficies planas que están inclinadas o en ángulo con respecto al plano de referencia horizontal. No son ni horizontales ni verticales, sino que se encuentran en algún ángulo intermedio.',
+            isEnglish
+                ? 'assets/images/plane/Inclined_E.png'
+                : 'assets/images/plane/Inclined_S.png'),
       ],
     );
   }
 
   Widget _buildPlaneTypeItem(
-      String title, String description, IconData icon, Color color) {
+      String title, String description, String imagePath) {
     return GestureDetector(
       onTap: () {
         // Handle interaction with the plane type item
@@ -227,7 +234,30 @@ class _PlanesIntroductionGeometryPageState
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text(title),
-              content: Text(description),
+              content: SingleChildScrollView(
+                // Add this to handle possible overflow
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      height: 400, // Set your desired height
+                      width: 600, // Set your desired width
+                      child: Image.asset(
+                        imagePath, // Replace with your asset path
+                        height: 300.0,
+                        width: 250.0,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(description,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ],
+                ),
+              ),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -246,7 +276,6 @@ class _PlanesIntroductionGeometryPageState
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              Icon(icon, size: 30.0, color: color),
               SizedBox(width: 16.0),
               Expanded(
                 child: Column(

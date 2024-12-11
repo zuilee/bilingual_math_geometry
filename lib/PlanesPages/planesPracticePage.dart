@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'planesSectionPage.dart';
 import 'dart:math';
+
 void main() {
   runApp(PlanesPracticeQuiz());
 }
@@ -9,7 +10,7 @@ class PlanesPracticeQuiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Planes Quiz',
+      title: 'Planes Practice',
       debugShowCheckedModeBanner: false,
       home: QuizPage(),
     );
@@ -21,7 +22,7 @@ class QuizPage extends StatefulWidget {
   _QuizPageState createState() => _QuizPageState();
 }
 
-class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
+class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   int _score = 0;
   int _questionIndex = 0;
   final List<Map<String, dynamic>> _questions = [
@@ -32,6 +33,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
         {'text': 'A three-dimensional shape', 'correct': false},
         {'text': 'A curved surface', 'correct': false},
       ],
+      'questionImage': '',
     },
     {
       'question': 'What is a horizontal plane?',
@@ -40,6 +42,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
         {'text': 'A plane perpendicular to the horizon', 'correct': false},
         {'text': 'A slanted plane', 'correct': false},
       ],
+      'questionImage': '',
     },
     {
       'question': 'What is a vertical plane?',
@@ -48,6 +51,74 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
         {'text': 'A plane perpendicular to the horizon', 'correct': true},
         {'text': 'A slanted plane', 'correct': false},
       ],
+      'questionImage': '',
+    },
+    {
+      'question': 'Which of the following best describes an inclined plane?',
+      'answers': [
+        {'text': 'A plane that curves upward', 'correct': false},
+        {'text': 'A flat surface at an angle to the ground', 'correct': true},
+        {'text': 'A flat surface parallel to the ground', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question':
+          'Which of these is an example of a horizontal plane in real life?',
+      'answers': [
+        {'text': 'A wall', 'correct': false},
+        {'text': 'The surface of a table', 'correct': true},
+        {'text': 'A ramp', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question':
+          'True or False: A vertical plane is always parallel to the ground.',
+      'answers': [
+        {'text': 'True', 'correct': false},
+        {'text': 'False', 'correct': true},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question': 'What are the types of planes?',
+      'answers': [
+        {'text': 'Horizontal, vertical, inclined', 'correct': true},
+        {'text': 'Acute, obtuse, right', 'correct': false},
+        {'text': 'None of the above', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question':
+          'What angle does a vertical plane typically make with the ground?',
+      'answers': [
+        {'text': '45 degrees', 'correct': false},
+        {'text': '90 degrees', 'correct': true},
+        {'text': '180 degrees', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question':
+          'Which of the following angles would an inclined plane make with the ground?',
+      'answers': [
+        {'text': '45 degrees', 'correct': true},
+        {'text': '90 degrees', 'correct': false},
+        {'text': '0 degrees', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question':
+          'What angle does a horizontal plane typically make with the ground?',
+      'answers': [
+        {'text': '45 degrees', 'correct': false},
+        {'text': '90 degrees', 'correct': false},
+        {'text': '0 degrees', 'correct': true},
+      ],
+      'questionImage': '',
     },
   ];
 
@@ -109,11 +180,13 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           icon: Icon(Icons.arrow_back), // Add back arrow icon
           onPressed: () {
             Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => PlanesSectionsPage()), // Navigate back to PAGE2.dart
-                ); // Navigate back when arrow is pressed
-              },
-            ),
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      PlanesSectionsPage()), // Navigate back to PAGE2.dart
+            ); // Navigate back when arrow is pressed
+          },
+        ),
       ),
       body: _questionIndex < _questions.length
           ? Center(
@@ -136,7 +209,8 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
               onRestart: _resetQuiz,
             ),
     );
-  } 
+  }
+
   Widget _buildFlipCard() {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
@@ -161,45 +235,115 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
     );
   }
 
+  // Widget _buildQuestionCard() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(16.0),
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         Expanded(
+  //           child: Text(
+  //             _questions[_questionIndex]['question'],
+  //             style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+  //             textAlign: TextAlign.center,
+  //           ),
+  //         ),
+  //         SizedBox(height: 20.0),
+  //         Expanded(
+  //           child: ListView.separated(
+  //             shrinkWrap: true,
+  //             itemCount: _questions[_questionIndex]['answers'].length,
+  //             separatorBuilder: (context, index) => SizedBox(height: 10.0),
+  //             itemBuilder: (context, index) {
+  //               final answer = (_questions[_questionIndex]['answers']
+  //                   as List<Map<String, dynamic>>)[index];
+  //               return ElevatedButton(
+  //                 onPressed: () => _answerQuestion(answer['correct']),
+  //                 style: ElevatedButton.styleFrom(
+  //                   shape: RoundedRectangleBorder(
+  //                     borderRadius: BorderRadius.circular(8.0),
+  //                   ),
+  //                   padding: EdgeInsets.symmetric(vertical: 16.0),
+  //                 ),
+  //                 child: Text(
+  //                   answer['text'],
+  //                   style: TextStyle(fontSize: 18.0),
+  //                   textAlign: TextAlign.center,
+  //                 ),
+  //               );
+  //             },
+  //           ),
+  //         ),
+  //         SizedBox(height: 20.0),
+  //         IconButton(
+  //           onPressed: _flipCard,
+  //           icon: Icon(Icons.flip),
+  //           style: IconButton.styleFrom(
+  //             shape: CircleBorder(),
+  //             padding: EdgeInsets.all(16.0),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
   Widget _buildQuestionCard() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
+          // Image handling: make it bigger and center it
+          _questions[_questionIndex]['questionImage'] != ''
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Image.asset(
+                    _questions[_questionIndex]['questionImage'],
+                    height: 350.0, // Increased image height
+                    width: double.infinity, // Set width to match screen
+                    fit: BoxFit.contain, // Ensure proper image scaling
+                  ),
+                )
+              : const SizedBox.shrink(),
+
+          // Question Text: Properly aligned and spaced
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
               _questions[_questionIndex]['question'],
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(height: 20.0),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: _questions[_questionIndex]['answers'].length,
-              separatorBuilder: (context, index) => SizedBox(height: 10.0),
-              itemBuilder: (context, index) {
-                final answer = (_questions[_questionIndex]['answers']
-                    as List<Map<String, dynamic>>)[index];
-                return ElevatedButton(
-                  onPressed: () => _answerQuestion(answer['correct']),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
+
+          // Answers list with button spacing
+          ListView.separated(
+            shrinkWrap: true,
+            itemCount: _questions[_questionIndex]['answers'].length,
+            separatorBuilder: (context, index) => SizedBox(height: 10.0),
+            itemBuilder: (context, index) {
+              final answer = (_questions[_questionIndex]['answers']
+                  as List<Map<String, dynamic>>)[index];
+              return ElevatedButton(
+                onPressed: () => _answerQuestion(answer['correct']),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: Text(
-                    answer['text'],
-                    style: TextStyle(fontSize: 18.0),
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              },
-            ),
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                ),
+                child: Text(
+                  answer['text'],
+                  style: TextStyle(fontSize: 18.0),
+                  textAlign: TextAlign.center,
+                ),
+              );
+            },
           ),
+
+          // Flip icon button with spacing
           SizedBox(height: 20.0),
           IconButton(
             onPressed: _flipCard,

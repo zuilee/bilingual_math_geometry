@@ -271,7 +271,7 @@ class _LinesIntroductionGeometryPageState
   }
 
   Widget _buildLineTypeItem(
-      String title, String description, String image_path) {
+      String title, String description, String imagePath) {
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -288,7 +288,7 @@ class _LinesIntroductionGeometryPageState
                       height: 400, // Set your desired height
                       width: 600, // Set your desired width
                       child: Image.asset(
-                        image_path, // Replace with your asset path
+                        imagePath, // Replace with your asset path
                         height: 300.0,
                         width: 250.0,
                         fit: BoxFit.contain,

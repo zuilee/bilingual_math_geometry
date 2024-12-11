@@ -29,6 +29,7 @@ class AnglesSectionsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Angles Sections'),
+        backgroundColor: Color.fromARGB(90, 102, 54, 51),
         leading: IconButton(
           icon: Icon(Icons.arrow_back), // Add back arrow icon
           onPressed: () {
@@ -45,9 +46,9 @@ class AnglesSectionsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SectionItem(
-            title: 'LEARN',
+            title: 'Learn',
             icon: Icons.book,
-            color: Colors.green,
+            color: Color.fromARGB(255, 106, 188, 147),
             onPressed: () {
               Navigator.push(
                 context,
@@ -58,9 +59,9 @@ class AnglesSectionsPage extends StatelessWidget {
             },
           ),
           SectionItem(
-            title: 'PRACTICE',
+            title: 'Practice',
             icon: Icons.lightbulb,
-            color: Colors.orange,
+            color: Color.fromARGB(255, 215, 134, 80),
             onPressed: () {
               Navigator.push(
                 context,
@@ -69,9 +70,9 @@ class AnglesSectionsPage extends StatelessWidget {
             },
           ),
           SectionItem(
-            title: 'QUIZ',
+            title: 'Quiz',
             icon: Icons.question_answer,
-            color: Colors.blue,
+            color: Color.fromARGB(200, 109, 143, 201),
             onPressed: () {
               Navigator.push(
                 context,

@@ -159,12 +159,19 @@ class _QuadrilateralIntroductionGeometryPageState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.asset(
-                  'assets/images/quadrilateral/quadrilateral_image.png', // Update with your asset path
-                  height: 300.0,
-                  width: 250.0,
-                  fit: BoxFit.contain,
-                ),
+                _isEnglish
+                    ? Image.asset(
+                        'assets/images/quadrilateral/Quadrilateral_E.png', // Replace with your asset path
+                        height: 500.0,
+                        width: 300.0,
+                        fit: BoxFit.contain,
+                      )
+                    : Image.asset(
+                        'assets/images/quadrilateral/Quadrilateral_S.png', // Replace with your asset path
+                        height: 500.0,
+                        width: 3000.0,
+                        fit: BoxFit.contain,
+                      ),
                 SizedBox(height: 20.0),
                 _buildQuadrilateralDefinition(_isEnglish),
                 SizedBox(height: 20.0),
@@ -206,59 +213,59 @@ class _QuadrilateralIntroductionGeometryPageState
         ),
         SizedBox(height: 10.0),
         _buildQuadrilateralTypeItem(
-          isEnglish ? '1. Square' : '1. Cuadrado',
-          isEnglish
-              ? 'A quadrilateral with all four sides of equal length and all angles equal to 90 degrees.'
-              : 'Un cuadrilátero con los cuatro lados de igual longitud y todos los ángulos iguales a 90 grados.',
-          Icons.crop_square,
-          Colors.orange,
-        ),
+            isEnglish ? '1. Square' : '1. Cuadrado',
+            isEnglish
+                ? 'A quadrilateral with all four sides of equal length and all angles equal to 90 degrees.'
+                : 'Un cuadrilátero con los cuatro lados de igual longitud y todos los ángulos iguales a 90 grados.',
+            isEnglish
+                ? 'assets/images/quadrilateral/Square_E.png'
+                : 'assets/images/quadrilateral/Square_S.png'),
         _buildQuadrilateralTypeItem(
-          isEnglish ? '2. Rectangle' : '2. Rectángulo',
-          isEnglish
-              ? 'A quadrilateral with opposite sides equal in length and all angles equal to 90 degrees.'
-              : 'Un cuadrilátero con lados opuestos de igual longitud y todos los ángulos iguales a 90 grados.',
-          Icons.crop_landscape,
-          Colors.green,
-        ),
+            isEnglish ? '2. Rectangle' : '2. Rectángulo',
+            isEnglish
+                ? 'A quadrilateral with opposite sides equal in length and all angles equal to 90 degrees.'
+                : 'Un cuadrilátero con lados opuestos de igual longitud y todos los ángulos iguales a 90 grados.',
+            isEnglish
+                ? 'assets/images/quadrilateral/Rectangle_E.png'
+                : 'assets/images/quadrilateral/Rectangle_S.png'),
         _buildQuadrilateralTypeItem(
-          isEnglish ? '3. Rhombus' : '3. Rombus',
-          isEnglish
-              ? 'A quadrilateral with all four sides of equal length.'
-              : 'Un cuadrilátero con los cuatro lados de igual longitud.',
-          Icons.crop_rotate,
-          Colors.blue,
-        ),
+            isEnglish ? '3. Rhombus' : '3. Rombus',
+            isEnglish
+                ? 'A quadrilateral with all four sides of equal length and opposite angles equal.'
+                : 'Un cuadrilátero con los cuatro lados de igual longitud.',
+            isEnglish
+                ? 'assets/images/quadrilateral/Rhombus_E.png'
+                : 'assets/images/quadrilateral/Rhombus_S.png'),
         _buildQuadrilateralTypeItem(
-          isEnglish ? '4. Trapezoid' : '4. Trapecio',
-          isEnglish
-              ? 'A quadrilateral with at least one pair of parallel sides.'
-              : 'Un cuadrilátero con al menos un par de lados paralelos.',
-          Icons.crop_free,
-          Colors.purple,
-        ),
+            isEnglish ? '4. Trapezoid' : '4. Trapecio',
+            isEnglish
+                ? 'A quadrilateral with at least one pair of parallel sides.'
+                : 'Un cuadrilátero con al menos un par de lados paralelos.',
+            isEnglish
+                ? 'assets/images/quadrilateral/Trapezoid_E.png'
+                : 'assets/images/quadrilateral/Trapezoid_S.png'),
         _buildQuadrilateralTypeItem(
-          isEnglish ? '5. Parallelogram' : '5. Paralelogramo',
-          isEnglish
-              ? 'A quadrilateral with opposite sides parallel and equal in length.'
-              : 'Un cuadrilátero con lados opuestos paralelos y de igual longitud.',
-          Icons.crop_square_sharp,
-          Colors.red, // Choose an appropriate color
-      ),
-      _buildQuadrilateralTypeItem(
-          isEnglish ? '6. Kite' : '6. Cometa',
-          isEnglish
-              ? 'A quadrilateral with two distinct pairs of adjacent sides that are equal in length.'
-              : 'Un cuadrilátero con dos pares distintos de lados adyacentes que tienen la misma longitud.',
-          Icons.filter_drama, // Choose an appropriate icon
-          Color.fromARGB(255, 41, 128, 62), // Choose an appropriate color
-      ),
+            isEnglish ? '5. Parallelogram' : '5. Paralelogramo',
+            isEnglish
+                ? 'A quadrilateral with opposite sides parallel and equal in length.'
+                : 'Un cuadrilátero con lados opuestos paralelos y de igual longitud.',
+            isEnglish
+                ? 'assets/images/quadrilateral/Parallelogram_E.png'
+                : 'assets/images/quadrilateral/Parallelogram_S.png'),
+        _buildQuadrilateralTypeItem(
+            isEnglish ? '6. Kite' : '6. Cometa',
+            isEnglish
+                ? 'A quadrilateral with two distinct pairs of adjacent sides that are equal in length.'
+                : 'Un cuadrilátero con dos pares distintos de lados adyacentes que tienen la misma longitud.',
+            isEnglish
+                ? 'assets/images/quadrilateral/Kite_E.png'
+                : 'assets/images/quadrilateral/Kite_S.png'),
       ],
     );
   }
 
   Widget _buildQuadrilateralTypeItem(
-      String title, String description, IconData icon, Color color) {
+      String title, String description, String imagePath) {
     return GestureDetector(
       onTap: () {
 // Handle interaction with the quadrilateral type item
@@ -268,7 +275,30 @@ class _QuadrilateralIntroductionGeometryPageState
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text(title),
-              content: Text(description),
+              content: SingleChildScrollView(
+                // Add this to handle possible overflow
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      height: 400, // Set your desired height
+                      width: 600, // Set your desired width
+                      child: Image.asset(
+                        imagePath, // Replace with your asset path
+                        height: 300.0,
+                        width: 250.0,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(description,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ],
+                ),
+              ),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -287,7 +317,6 @@ class _QuadrilateralIntroductionGeometryPageState
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              Icon(icon, size: 30.0, color: color),
               SizedBox(width: 16.0),
               Expanded(
                 child: Column(
@@ -315,4 +344,3 @@ class _QuadrilateralIntroductionGeometryPageState
     );
   }
 }
-

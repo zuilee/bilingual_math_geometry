@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'triangleSectionPage.dart';
+
 void main() {
   runApp(TrianglePracticeQuiz());
 }
@@ -41,7 +42,57 @@ class _QuizPageState extends State<QuizPage> {
       ],
     },
     {
-      'question': 'What is a triangle with one angle greater than 90 degrees called?',
+      'question': 'What defines a right-angled triangle?',
+      'answers': [
+        {'text': 'A triangle with one angle less than 90°', 'correct': false},
+        {'text': 'A triangle with one angle equal to 90°', 'correct': false},
+        {'text': 'A triangle with all sides equal', 'correct': true},
+      ],
+    },
+    {
+      'question': 'Which type of triangle has all angles less than 90°?',
+      'answers': [
+        {'text': 'Right triangle', 'correct': false},
+        {'text': 'Obtuse triangle', 'correct': true},
+        {'text': 'Acute triangle', 'correct': false},
+      ],
+    },
+    {
+      'question': 'How many equal sides does an isosceles triangle have?',
+      'answers': [
+        {'text': 'None', 'correct': false},
+        {'text': 'Three', 'correct': false},
+        {'text': 'Two', 'correct': true},
+      ],
+    },
+    {
+      'question': 'Which triangle has no equal sides?',
+      'answers': [
+        {'text': 'Scalene triangle', 'correct': true},
+        {'text': 'Isosceles triangle', 'correct': false},
+        {'text': 'Equilateral triangle', 'correct': false},
+      ],
+    },
+    {
+      'question':
+          'True or False: In an equilateral triangle, all angles are 60°.',
+      'answers': [
+        {'text': 'True ', 'correct': true},
+        {'text': 'Flase', 'correct': false},
+      ],
+    },
+    {
+      'question':
+          'Identify the type of triangle formed by sides of 3 cm, 4 cm, and 5 cm.',
+      'answers': [
+        {'text': 'Scalene triangle triangle', 'correct': true},
+        {'text': 'Isoceles triangle', 'correct': false},
+        {'text': 'Acute triangle', 'correct': false},
+      ],
+    },
+    {
+      'question':
+          'What is a triangle with one angle greater than 90 degrees called?',
       'answers': [
         {'text': 'Acute triangle', 'correct': false},
         {'text': 'Obtuse triangle', 'correct': true},
@@ -72,16 +123,18 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Triangles Quiz'),
+        title: Text('Triangles Practice'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back), // Add back arrow icon
           onPressed: () {
             Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => TriangleSectionsPage()), // Navigate back to PAGE2.dart
-                ); // Navigate back when arrow is pressed
-              },
-            ),
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      TriangleSectionsPage()), // Navigate back to PAGE2.dart
+            ); // Navigate back when arrow is pressed
+          },
+        ),
       ),
       body: _questionIndex < _questions.length
           ? Column(
@@ -90,16 +143,21 @@ class _QuizPageState extends State<QuizPage> {
               children: [
                 Text(
                   _questions[_questionIndex]['question'],
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20.0),
-                ...(_questions[_questionIndex]['answers'] as List<Map<String, dynamic>>).map((answer) {
+                ...(_questions[_questionIndex]['answers']
+                        as List<Map<String, dynamic>>)
+                    .map((answer) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: ElevatedButton(
                       onPressed: () => _answerQuestion(answer['correct']),
-                      child: Text(answer['text']),
+                      child: Text(
+                        answer['text'],
+                        style: TextStyle(fontSize: 20.0),
+                      ),
                     ),
                   );
                 }).toList(),
@@ -111,7 +169,8 @@ class _QuizPageState extends State<QuizPage> {
                 children: [
                   Text(
                     'Quiz Completed!',
-                    style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 20.0),
                   Text(

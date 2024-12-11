@@ -10,7 +10,7 @@ class QuadrilateralPracticeQuiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Quadrilateral Quiz',
+      title: 'Quadrilateral Practice',
       debugShowCheckedModeBanner: false,
       home: QuizPage(),
     );
@@ -27,18 +27,19 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   int _questionIndex = 0;
   final List<Map<String, dynamic>> _questions = [
     {
-      'question': 'What is a square?',
+      'question': 'Define a square',
       'answers': [
-        {'text': 'A quadrilateral with four right angles', 'correct': true},
+        {'text': 'A quadrilateral with two right angles', 'correct': false},
         {
           'text': 'A quadrilateral with all sides of equal length',
           'correct': true
         },
         {'text': 'A quadrilateral with no right angles', 'correct': false},
       ],
+      'questionImage': '',
     },
     {
-      'question': 'What is a rectangle?',
+      'question': 'Define a rectangle',
       'answers': [
         {'text': 'A quadrilateral with four right angles', 'correct': true},
         {
@@ -47,9 +48,10 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
         },
         {'text': 'A quadrilateral with no right angles', 'correct': false},
       ],
+      'questionImage': '',
     },
     {
-      'question': 'What is a parallelogram?',
+      'question': 'Define a parallelogram',
       'answers': [
         {'text': 'A quadrilateral with four right angles', 'correct': false},
         {
@@ -61,6 +63,96 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
           'correct': true
         },
       ],
+      'questionImage': '',
+    },
+    {
+      'question': 'Define a Kite',
+      'answers': [
+        {
+          'text':
+              'A quadrilateral with two distinct pairs of adjacent sides that are equal in length.',
+          'correct': true
+        },
+        {
+          'text':
+              'A quadrilateral with all sides equal and opposite angles equal.',
+          'correct': false
+        },
+        {
+          'text': 'A quadrilateral with only one pair of parallel sides.',
+          'correct': true
+        },
+      ],
+      'questionImage': '',
+    },
+    {
+      'question': 'Define a Rhombus',
+      'answers': [
+        {
+          'text': 'A quadrilateral with all sides of equal length',
+          'correct': false
+        },
+        {
+          'text':
+              'A quadrilateral with all four sides of equal length and opposite angles equal.',
+          'correct': true
+        },
+        {'text': 'A quadrilateral with four right angles', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question': 'Define a Trapezoid',
+      'answers': [
+        {
+          'text': 'A quadrilateral with one pair of parallel sides. ',
+          'correct': true
+        },
+        {
+          'text':
+              'A quadrilateral with two pairs of opposite sides equal and all angles 90°.',
+          'correct': false
+        },
+        {'text': 'A quadrilateral with four right angles', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question':
+          'Which of the following quadrilaterals has only one pair of parallel sides?',
+      'answers': [
+        {'text': 'Rectangle', 'correct': false},
+        {'text': 'Trapezoid', 'correct': true},
+        {'text': 'Kite', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question': 'What is a kite’s defining property?',
+      'answers': [
+        {'text': 'Two pairs of adjacent sides are equal', 'correct': true},
+        {'text': 'All sides are equal', 'correct': false},
+        {'text': 'It has no right angles', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question':
+          'True or False: A rhombus is a parallelogram with all sides equal.',
+      'answers': [
+        {'text': 'True', 'correct': true},
+        {'text': 'False', 'correct': false},
+      ],
+      'questionImage': '',
+    },
+    {
+      'question': 'How many sides does a quadrilateral have?',
+      'answers': [
+        {'text': '3', 'correct': false},
+        {'text': '5', 'correct': false},
+        {'text': '4', 'correct': true},
+      ],
+      'questionImage': '',
     },
   ];
 
@@ -177,45 +269,115 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     );
   }
 
+  // Widget _buildQuestionCard() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(16.0),
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         Expanded(
+  //           child: Text(
+  //             _questions[_questionIndex]['question'],
+  //             style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+  //             textAlign: TextAlign.center,
+  //           ),
+  //         ),
+  //         SizedBox(height: 20.0),
+  //         Expanded(
+  //           child: ListView.separated(
+  //             shrinkWrap: true,
+  //             itemCount: _questions[_questionIndex]['answers'].length,
+  //             separatorBuilder: (context, index) => SizedBox(height: 10.0),
+  //             itemBuilder: (context, index) {
+  //               final answer = (_questions[_questionIndex]['answers']
+  //                   as List<Map<String, dynamic>>)[index];
+  //               return ElevatedButton(
+  //                 onPressed: () => _answerQuestion(answer['correct']),
+  //                 style: ElevatedButton.styleFrom(
+  //                   shape: RoundedRectangleBorder(
+  //                     borderRadius: BorderRadius.circular(8.0),
+  //                   ),
+  //                   padding: EdgeInsets.symmetric(vertical: 16.0),
+  //                 ),
+  //                 child: Text(
+  //                   answer['text'],
+  //                   style: TextStyle(fontSize: 18.0),
+  //                   textAlign: TextAlign.center,
+  //                 ),
+  //               );
+  //             },
+  //           ),
+  //         ),
+  //         SizedBox(height: 20.0),
+  //         IconButton(
+  //           onPressed: _flipCard,
+  //           icon: Icon(Icons.flip),
+  //           style: IconButton.styleFrom(
+  //             shape: CircleBorder(),
+  //             padding: EdgeInsets.all(16.0),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
   Widget _buildQuestionCard() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
+          // Image handling: make it bigger and center it
+          _questions[_questionIndex]['questionImage'] != ''
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Image.asset(
+                    _questions[_questionIndex]['questionImage'],
+                    height: 350.0, // Increased image height
+                    width: double.infinity, // Set width to match screen
+                    fit: BoxFit.contain, // Ensure proper image scaling
+                  ),
+                )
+              : const SizedBox.shrink(),
+
+          // Question Text: Properly aligned and spaced
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
               _questions[_questionIndex]['question'],
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(height: 20.0),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: _questions[_questionIndex]['answers'].length,
-              separatorBuilder: (context, index) => SizedBox(height: 10.0),
-              itemBuilder: (context, index) {
-                final answer = (_questions[_questionIndex]['answers']
-                    as List<Map<String, dynamic>>)[index];
-                return ElevatedButton(
-                  onPressed: () => _answerQuestion(answer['correct']),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
+
+          // Answers list with button spacing
+          ListView.separated(
+            shrinkWrap: true,
+            itemCount: _questions[_questionIndex]['answers'].length,
+            separatorBuilder: (context, index) => SizedBox(height: 10.0),
+            itemBuilder: (context, index) {
+              final answer = (_questions[_questionIndex]['answers']
+                  as List<Map<String, dynamic>>)[index];
+              return ElevatedButton(
+                onPressed: () => _answerQuestion(answer['correct']),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: Text(
-                    answer['text'],
-                    style: TextStyle(fontSize: 18.0),
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              },
-            ),
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                ),
+                child: Text(
+                  answer['text'],
+                  style: TextStyle(fontSize: 18.0),
+                  textAlign: TextAlign.center,
+                ),
+              );
+            },
           ),
+
+          // Flip icon button with spacing
           SizedBox(height: 20.0),
           IconButton(
             onPressed: _flipCard,
