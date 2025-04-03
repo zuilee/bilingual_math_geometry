@@ -9,76 +9,96 @@ class SectionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
     final double horizontalPadding = screenWidth * 0.10;
 
     return Scaffold(
       body: Stack(
+        clipBehavior: Clip.none,
         children: [
+          // Background
           Positioned.fill(
             child: Image.asset('assets/images/backgroundd.gif', fit: BoxFit.cover),
           ),
-          Positioned.fill(child: CustomPaint(painter: _WaveHeaderPainter())),
-          SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  height: 140,
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          child: IconButton(
-                            icon: const Icon(Icons.arrow_back, size: 34, color: Colors.white),
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const BilingualMathGeoHomePage(),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Text(
-                          title.toUpperCase(),
-                          style: const TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            shadows: [Shadow(offset: Offset(1, 1), blurRadius: 2, color: Colors.black26)],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+
+          // Scrollable Content Below Wave
+          Positioned.fill(
+            top: 140,
+            child: SingleChildScrollView(
+              clipBehavior: Clip.none,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: screenHeight * 0.10,
+                  bottom: 24.0,
+                  left: horizontalPadding,
+                  right: horizontalPadding,
                 ),
-                const SizedBox(height: 80),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                    child: ListView.separated(
-                      itemCount: sectionItems.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 35),
-                      itemBuilder: (context, index) {
-                        final item = sectionItems[index];
-                        return _buildSectionTile(
-                          context,
-                          item['title'],
-                          item['icon'],
-                          item['color'],
-                          item['page'],
-                        );
-                      },
+                child: Column(
+                  children: List.generate(sectionItems.length, (index) {
+                    final item = sectionItems[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 35.0),
+                      child: _buildSectionTile(
+                        context,
+                        item['title'],
+                        item['icon'],
+                        item['color'],
+                        item['page'],
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ),
+          ),
+
+          // Header + Back Icon
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 140,
+            child: SafeArea(
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  // Wave Background
+                  Positioned.fill(child: CustomPaint(painter: _WaveHeaderPainter())),
+
+                  // Back Button
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12.0),
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back, size: 34, color: Colors.white),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const BilingualMathGeoHomePage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
+
+                  // Title
+                  Center(
+                    child: Text(
+                      title.toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        shadows: [Shadow(offset: Offset(1, 1), blurRadius: 2, color: Colors.black26)],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -93,40 +113,45 @@ class SectionsPage extends StatelessWidget {
     Color color,
     Widget page,
   ) {
-    return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => page)),
-      child: Material(
-        elevation: 4,
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          height: 100,
-          decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
-          child: Stack(
-            children: [
-              Positioned(
-                top: 10,
-                right: 10,
-                child: Icon(icon, color: Colors.white.withOpacity(0.15), size: 48),
-              ),
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(icon, size: 40, color: Colors.white),
-                    const SizedBox(width: 16),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        shadows: [Shadow(offset: Offset(1, 1), blurRadius: 2, color: Colors.black26)],
-                      ),
-                    ),
-                  ],
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => page)),
+        child: Material(
+          elevation: 4,
+          clipBehavior: Clip.none,
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            height: 100,
+            decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(20)),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: Icon(icon, color: Colors.white.withOpacity(0.15), size: 48),
                 ),
-              ),
-            ],
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(icon, size: 40, color: Colors.white),
+                      const SizedBox(width: 16),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          shadows: [Shadow(offset: Offset(1, 1), blurRadius: 2, color: Colors.black26)],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
