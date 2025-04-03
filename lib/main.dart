@@ -1,9 +1,6 @@
-import 'package:bilingual_math_geometry/AnglePages/angleSectionPage.dart';
-import 'package:bilingual_math_geometry/PlanesPages/planesSectionPage.dart';
-import 'package:bilingual_math_geometry/QuadrilateralPages/quadrilateralSectionPage.dart';
-import 'package:bilingual_math_geometry/TrianglePages/triangleSectionPage.dart';
 import 'package:flutter/material.dart';
-import 'LinesPages/linesSectionPage.dart';
+import 'sections.dart'; // Reusable section screen
+import 'shapes_data.dart'; // Centralized shape config
 
 void main() {
   runApp(const BilingualMathGeo());
@@ -15,263 +12,179 @@ class BilingualMathGeo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Explora - Geometry',
-      theme: ThemeData(
-        primaryColor: Color(0xFFFBDAB),
-      ),
-      home: BilingualMathGeoHomePage(),
+      title: 'EXPLORA - GEOMETRY',
+      theme: ThemeData(primaryColor: Colors.white),
+      home: const BilingualMathGeoHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
-
-  void showOptions(int levelNumber) {}
 }
 
 class BilingualMathGeoHomePage extends StatelessWidget {
-  final int initialLives = 20;
-  final int initialPoints = 0;
-  final int totalLevels = 6; // Changed to 5 levels
+  const BilingualMathGeoHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text('Explora - Geometry')),
-        backgroundColor: Color.fromARGB(90, 102, 54, 51),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+      body: Stack(
+        children: [
+          // Background
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/backgroundd.gif',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned.fill(child: CustomPaint(painter: _WaveBackgroundPainter())),
+
+          SafeArea(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.favorite),
-                Text(
-                  '$initialLives',
-                  style: TextStyle(fontSize: 16),
+                const SizedBox(
+                  height: 140,
+                  child: Center(
+                    child: Text(
+                      'EXPLORA - GEOMETRY',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.1), // 10% top padding
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        int count = constraints.maxWidth < 600
+                            ? 1
+                            : (constraints.maxWidth < 900 ? 2 : 3);
+                        return GridView.builder(
+                          itemCount: shapes.length,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: count,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
+                            childAspectRatio: 3.0,
+                          ),
+                          itemBuilder: (context, index) {
+                            final shape = shapes[index];
+                            return _buildShapeTile(
+                              context,
+                              shape['name'],
+                              shape['icon'],
+                              shape['color'],
+                              shape['section'],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              // Navigate to settings page
-            },
-          ),
         ],
       ),
-      body: GridView.count(
-          //child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-
-          padding: const EdgeInsets.all(20),
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
-          crossAxisCount: 3,
-          childAspectRatio: 1.5,
-          children: List.generate(totalLevels, (index) {
-            //itemCount: totalLevels;
-            //itemBuilder: (context, index) {
-            int levelNumber = index + 1;
-            return GestureDetector(
-                onTap: () {
-                  // Check if the shape is "Lines"
-                  if (_getShapeForLevel(levelNumber) == 'Lines') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              LinesSectionsPage()), // Navigate to PAGE2.dart
-                    );
-                    //showOptions(context);
-                  } else if (_getShapeForLevel(levelNumber) == 'Planes') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              PlanesSectionsPage()), // Navigate to PAGE2.dart
-                    );
-                  } else if (_getShapeForLevel(levelNumber) == 'Triangle') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              TriangleSectionsPage()), // Navigate to PAGE2.dart
-                    );
-                  } else if (_getShapeForLevel(levelNumber) == 'Angles') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              AnglesSectionsPage()), // Navigate to PAGE2.dart
-                    );
-                  } else if (_getShapeForLevel(levelNumber) ==
-                      'Quadrilateral') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              QuadrilateralSectionsPage()), // Navigate to PAGE2.dart
-                    );
-                  } else if (_getShapeForLevel(levelNumber) == 'Circle') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              QuadrilateralSectionsPage()), // Navigate to PAGE2.dart
-                    );
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Container(
-                      height: 20,
-                      width: 70,
-                      decoration: BoxDecoration(
-                        color: _getColorForLevel(levelNumber),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
-                        child: ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: Center(
-                            child: Text(
-                              _getShapeForLevel(levelNumber),
-                              style: const TextStyle(
-                                  fontSize: 25.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      )),
-                ));
-            //};
-          })
-          //),
-          ),
-      // bottomNavigationBar: BottomAppBar(
-      //   color: const Color.fromARGB(255, 2, 3, 2),
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.end,
-      //     children: [
-      //       IconButton(
-      //         icon: Icon(Icons.map),
-      //         color: Colors.white,
-      //         onPressed: () {
-      //           // Navigate to map page
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 
-  Color _getColorForLevel(int levelNumber) {
-    // Return a different color for each level
-    switch (levelNumber) {
-      case 1:
-        return Color.fromARGB(150, 81, 115, 157); // Lines
-      case 2:
-        return const Color.fromARGB(255, 106, 188, 147); // Planes
-      case 3:
-        return const Color.fromARGB(255, 215, 134, 80); // Angles
-      case 4:
-        return Color.fromARGB(208, 173, 76, 76); // Triangle
-      case 5:
-        return const Color.fromARGB(255, 169, 63, 97); // Quadrilateral
-      case 6:
-        return Color.fromARGB(255, 101, 95, 95);
-      default:
-        return const Color.fromARGB(255, 101, 95, 95);
-    }
-  }
+  Widget _buildShapeTile(
+    BuildContext context,
+    String title,
+    IconData icon,
+    Color color,
+    List<Map<String, dynamic>> sectionItems,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SectionsPage(
+              title: title,
+              sectionItems: sectionItems,
+            ),
+          ),
+        );
+      },
+      child: Material(
+        elevation: 5,
+        borderRadius: BorderRadius.circular(20),
+        color: color,
+        child: Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Stack(
+            children: [
+              // Centered row of icon + text
+              Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(icon, color: Colors.white, size: 36),
+                    const SizedBox(width: 12),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
-  String _getShapeForLevel(int levelNumber) {
-    // Return a different shape name for each level
-    switch (levelNumber) {
-      case 1:
-        return 'Lines';
-      case 2:
-        return 'Planes';
-      case 3:
-        return 'Angles';
-      case 4:
-        return 'Triangle';
-      case 5:
-        return 'Quadrilateral';
-      case 6:
-        return 'Circle';
-      default:
-        return '';
-    }
-  }
-}
-
-class LevelPage extends StatelessWidget {
-  final int levelNumber;
-
-  LevelPage(this.levelNumber);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Level $levelNumber'),
-      ),
-      body: Center(
-        child: Text(
-          'This is Level $levelNumber',
-          style: TextStyle(fontSize: 24.0),
+              // Large faded icon at top-right corner
+              Positioned(
+                top: 10,
+                right: 14,
+                child: Icon(
+                  icon,
+                  color: Colors.white.withOpacity(0.22),
+                  size: 44, // bigger shadow-style icon
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-Widget showOptions(BuildContext context) {
-  print("here");
-  return Scaffold(
-    body: Center(
-      child: Column(
-        children: [
-          GestureDetector(
-              onTap: () {
-                // Navigate to PAGE2.dart if it's "Lines"
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          BilingualMathGeoHomePage()), // Navigate to PAGE2.dart
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Container(
-                    height: 20,
-                    width: 70,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: Center(
-                          child: Text(
-                            "Juilee",
-                            style: const TextStyle(
-                                fontSize: 25.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    )),
-              ))
-        ],
-      ),
-    ),
-  );
+class _WaveBackgroundPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final secondaryPaint = Paint()..color = const Color(0xFFB3E5FC);
+    final secondaryPath = Path()
+      ..moveTo(0, 0)
+      ..lineTo(0, 160)
+      ..quadraticBezierTo(size.width * 0.25, 200, size.width * 0.5, 160)
+      ..quadraticBezierTo(size.width * 0.75, 120, size.width, 160)
+      ..lineTo(size.width, 0)
+      ..close();
+    canvas.drawPath(secondaryPath, secondaryPaint);
+
+    final primaryPaint = Paint()..color = const Color(0xFF4A90E2);
+    final primaryPath = Path()
+      ..moveTo(0, 0)
+      ..lineTo(0, 140)
+      ..quadraticBezierTo(size.width * 0.25, 180, size.width * 0.5, 140)
+      ..quadraticBezierTo(size.width * 0.75, 100, size.width, 140)
+      ..lineTo(size.width, 0)
+      ..close();
+    canvas.drawPath(primaryPath, primaryPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

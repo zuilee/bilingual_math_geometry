@@ -56,6 +56,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/backgroundd.gif
     - assets/images/quadrilateral/parallelogram.png
     - assets/images/quadrilateral/rectangle.png
     - assets/images/quadrilateral/square.png
@@ -119,20 +120,20 @@ flutter:
     - assets/images/quadrilateral/Square_S.png
     - assets/images/quadrilateral/Trapezoid_E.png
     - assets/images/quadrilateral/Trapezoid_S.png
-    - assets/images/triangles/Acute_E.png
-    - assets/images/triangles/Acute_S.png
-    - assets/images/triangles/Equilateral_E.png
-    - assets/images/triangles/Equilateral_S.png
-    - assets/images/triangles/Isoceles_E.png
-    - assets/images/triangles/Isoceles_S.png
-    - assets/images/triangles/Obtuse_E.png
-    - assets/images/triangles/Obtuse_S.png
-    - assets/images/triangles/Right_E.png
-    - assets/images/triangles/Right_S.png
-    - assets/images/triangles/Scalene_E.png
-    - assets/images/triangles/Scalene_S.png
-    - assets/images/triangles/Triangle_E.png
-    - assets/images/triangles/Triangle_S.png
+    - assets/images/triangle/Acute_E.png
+    - assets/images/triangle/Acute_S.png
+    - assets/images/triangle/Equilateral_E.png
+    - assets/images/triangle/Equilateral_S.png
+    - assets/images/triangle/Isoceles_E.png
+    - assets/images/triangle/Isoceles_S.png
+    - assets/images/triangle/Obtuse_E.png
+    - assets/images/triangle/Obtuse_S.png
+    - assets/images/triangle/Right_E.png
+    - assets/images/triangle/Right_S.png
+    - assets/images/triangle/Scalene_E.png
+    - assets/images/triangle/Scalene_S.png
+    - assets/images/triangle/Triangle_E.png
+    - assets/images/triangle/Triangle_S.png
     - assets/images/plane/Horizontal_E.png
     - assets/images/plane/Horizontal_S.png
     - assets/images/plane/Inclined_E.png
@@ -183,10 +184,37 @@ flutter:
     - assets/images/quadrilateral/quiz/qq4.webp
     - assets/images/quadrilateral/quiz/qq5.jpg
     - assets/images/quadrilateral/quiz/qq6.jpg
-    - assets/images/triangles/quiz/tq1.webp
-    - assets/images/triangles/quiz/tq2.webp
-    - assets/images/triangles/quiz/tq3.jpg
-    - assets/images/triangles/quiz/tq4.jpg
+    - assets/images/triangle/quiz/tq1.webp
+    - assets/images/triangle/quiz/tq2.webp
+    - assets/images/triangle/quiz/tq3.jpg
+    - assets/images/triangle/quiz/tq4.jpg
+    - assets/images/circle/circle_e.png
+    - assets/images/circle/circle_s.png
+    - assets/images/circle/Raduis_s.png
+    - assets/images/circle/Raduis_e.png
+    - assets/images/circle/Diameter_s.png
+    - assets/images/circle/Diameter_e.png
+    - assets/images/circle/Circumference_s.png
+    - assets/images/circle/Circumference_e.png
+    - assets/images/circle/Chord_s.png
+    - assets/images/circle/Chord_e.png
+    - assets/images/circle/Arc_s.png
+    - assets/images/circle/Arc_e.png
+    - assets/images/circle/Tangent_s.png
+    - assets/images/circle/Tangent_e.png
+    - assets/images/circle/Practice1.png
+    - assets/images/circle/Practice2.png
+    - assets/images/circle/Practice3.png
+    - assets/images/circle/Practice4.png
+    - assets/images/circle/Practice5.png
+    - assets/images/circle/Practice6.png
+    - assets/images/circle/q1.png
+    - assets/images/circle/q2.png
+    - assets/images/circle/q3.png
+    - assets/images/circle/q4.png
+    - assets/images/circle/q5.png
+    - assets/images/circle/q6.png
+    - assets/images/circle/q7.png
 
 
 
