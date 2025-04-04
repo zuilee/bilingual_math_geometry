@@ -11,17 +11,24 @@ class BilingualMathGeo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'EXPLORA - GEOMETRY',
-      theme: ThemeData(primaryColor: Colors.white),
-      home: const BilingualMathGeoHomePage(),
       debugShowCheckedModeBanner: false,
+      home: BilingualMathGeoHomePage(),
     );
   }
 }
 
-class BilingualMathGeoHomePage extends StatelessWidget {
+class BilingualMathGeoHomePage extends StatefulWidget {
   const BilingualMathGeoHomePage({super.key});
+
+  @override
+  State<BilingualMathGeoHomePage> createState() =>
+      _BilingualMathGeoHomePageState();
+}
+
+class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
+  bool _isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +38,28 @@ class BilingualMathGeoHomePage extends StatelessWidget {
       body: Stack(
         clipBehavior: Clip.none,
         children: [
-          // Fixed Background GIF
+          // Smoothly fading background image
           Positioned.fill(
-            child: Image.asset(
-              'assets/images/backgroundd.gif',
-              fit: BoxFit.cover,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              switchInCurve: Curves.easeInOut,
+              switchOutCurve: Curves.easeInOut,
+              child: Container(
+                key: ValueKey(_isDarkMode),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(_isDarkMode
+                        ? 'assets/images/backgroundd-dark.gif'
+                        : 'assets/images/backgroundd.gif'),
+                    fit: BoxFit.cover,
+                    alignment: Alignment.topCenter,
+                  ),
+                ),
+              ),
             ),
           ),
 
-          // Scrollable content with 10% vertical padding at top
+          // Scrollable content with padding
           Positioned.fill(
             top: 160,
             child: SingleChildScrollView(
@@ -84,7 +104,7 @@ class BilingualMathGeoHomePage extends StatelessWidget {
             ),
           ),
 
-          // Fixed blue wave at top
+          // Top Wave with Title and Toggle Button
           Positioned(
             top: 0,
             left: 0,
@@ -95,7 +115,9 @@ class BilingualMathGeoHomePage extends StatelessWidget {
                 clipBehavior: Clip.none,
                 children: [
                   Positioned.fill(
-                    child: CustomPaint(painter: _WaveBackgroundPainter()),
+                    child: CustomPaint(
+                        painter: _WaveBackgroundPainter(
+                            isDarkMode: _isDarkMode)),
                   ),
                   const Align(
                     alignment: Alignment.center,
@@ -105,6 +127,55 @@ class BilingualMathGeoHomePage extends StatelessWidget {
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  // Icon Toggle Button - Center right
+                  Positioned(
+                    right: 24,
+                    top: 56,
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _isDarkMode = !_isDarkMode;
+                        });
+                      },
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        width: 60,
+                        height: 32,
+                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                        decoration: BoxDecoration(
+                          color: _isDarkMode
+                              ? Colors.indigo.withOpacity(0.8)
+                              : Colors.yellow.shade600.withOpacity(0.85),
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            AnimatedAlign(
+                              duration: const Duration(milliseconds: 300),
+                              alignment: _isDarkMode
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
+                              child: Icon(
+                                _isDarkMode
+                                    ? Icons.nightlight_round
+                                    : Icons.wb_sunny,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -185,29 +256,38 @@ class BilingualMathGeoHomePage extends StatelessWidget {
 }
 
 class _WaveBackgroundPainter extends CustomPainter {
+  final bool isDarkMode;
+
+  _WaveBackgroundPainter({required this.isDarkMode});
+
   @override
   void paint(Canvas canvas, Size size) {
-    final secondaryPaint = Paint()..color = const Color(0xFFB3E5FC);
+    final secondaryPaint = Paint()
+      ..color =
+          isDarkMode ? const Color(0xFF2F4B73) : const Color(0xFFB3E5FC);
+
     final secondaryPath = Path()
       ..moveTo(0, 0)
       ..lineTo(0, 160)
       ..quadraticBezierTo(size.width * 0.25, 200, size.width * 0.5, 160)
-      ..quadraticBezierTo(size.width * 0.75, 120, size.width, 160)
+      ..quadraticBezierTo(size.width * 0.85, 140, size.width, 200)
       ..lineTo(size.width, 0)
       ..close();
     canvas.drawPath(secondaryPath, secondaryPaint);
 
-    final primaryPaint = Paint()..color = const Color(0xFF4A90E2);
+    final primaryPaint = Paint()
+      ..color = isDarkMode ? const Color(0xFF1C2C4C) : const Color(0xFF4A90E2);
+
     final primaryPath = Path()
       ..moveTo(0, 0)
       ..lineTo(0, 140)
       ..quadraticBezierTo(size.width * 0.25, 180, size.width * 0.5, 140)
-      ..quadraticBezierTo(size.width * 0.75, 100, size.width, 140)
+      ..quadraticBezierTo(size.width * 0.85, 100, size.width, 160)
       ..lineTo(size.width, 0)
       ..close();
     canvas.drawPath(primaryPath, primaryPaint);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

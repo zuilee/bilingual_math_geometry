@@ -8,6 +8,7 @@ final List<Map<String, dynamic>> shapes = [
     'name': 'Lines',
     'icon': Icons.show_chart,
     'color': const Color(0xFFF76E11),
+    'darkcolor': const Color(0xFFA3501D),
     'intro': {
       'definition': {
         'en': 'A line is a straight path that extends infinitely in both directions.',
@@ -299,6 +300,7 @@ final List<Map<String, dynamic>> shapes = [
     'name': 'Planes',
     'icon': Icons.view_stream,
     'color': const Color(0xFF09C4B0),
+    'darkcolor': const Color(0xFF147E70),
     'intro': {
       'definition': {
         'en': 'A plane is a flat, two-dimensional surface that extends infinitely in all directions.',
@@ -546,6 +548,7 @@ final List<Map<String, dynamic>> shapes = [
     'name': 'Angles',
     'icon': Icons.call_split,
     'color': const Color(0xFF8B5CF6),
+    'darkcolor': const Color(0xFF5E3A70),
     'intro': {
       'definition': {
         'en': 'An angle is a figure formed by two rays sharing a common endpoint called the vertex.',
@@ -827,6 +830,7 @@ final List<Map<String, dynamic>> shapes = [
     'name': 'Triangle',
     'icon': Icons.change_history,
     'color': const Color(0xFFFF5963),
+    'darkcolor': const Color(0xFFC62828),
     'intro': {
       'definition': {
         'en': 'A triangle is a polygon with three edges and three vertices.',
@@ -1051,6 +1055,7 @@ final List<Map<String, dynamic>> shapes = [
     'name': 'Quadrilateral',
     'icon': Icons.crop_square,
     'color': const Color(0xFF5CB85C),
+    'darkcolor': const Color(0xFF388E3C),
     'intro': {
       'definition': {
         'en': 'A quadrilateral is a polygon with four sides and four vertices.',
@@ -1299,6 +1304,7 @@ final List<Map<String, dynamic>> shapes = [
     'name': 'Circle',
     'icon': Icons.circle,
     'color': const Color(0xFFFFB400),
+    'darkcolor': const Color(0xFFB28704),
     'intro': {
       'definition': {
         'en': 'A circle is a closed shape where all points on the boundary are equidistant from the center.',

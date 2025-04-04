@@ -4,7 +4,7 @@ import 'shapes_data.dart';
 
 class GenericQuizPage extends StatefulWidget {
   final String shapeName;
-  const GenericQuizPage({super.key, required this.shapeName});
+  const GenericQuizPage({Key? key, required this.shapeName}) : super(key: key);
 
   @override
   _GenericQuizPageState createState() => _GenericQuizPageState();
