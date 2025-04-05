@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'shapes_data.dart';
 import '../sections.dart';
+import 'theme_state.dart';
 
 class GenericPracticePage extends StatefulWidget {
   final String shapeName;
@@ -20,7 +21,6 @@ class _GenericPracticePageState extends State<GenericPracticePage>
   late Animation<double> _animation;
   bool _isFlipped = false;
 
-  // Retrieve the shape's data and practice info from shapes_data.dart
   Map<String, dynamic> get shapeData =>
       shapes.firstWhere((element) => element['name'] == widget.shapeName);
   Map<String, dynamic> get practiceData => shapeData['practice'];
@@ -72,12 +72,14 @@ class _GenericPracticePageState extends State<GenericPracticePage>
     _isFlipped = !_isFlipped;
   }
 
-  Widget _buildFlipCard() {
+  /// The flip card container that flips between question & answer.
+  Widget _buildFlipCard(bool isDark) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * 0.8,
       child: Card(
         elevation: 8.0,
+        color: isDark ? const Color(0xFF171717) : Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
@@ -85,18 +87,18 @@ class _GenericPracticePageState extends State<GenericPracticePage>
             ? Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.identity()..rotateY(pi),
-                child: _buildAnswerCard(),
+                child: _buildAnswerCard(isDark),
               )
             : Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.identity()..rotateY(0),
-                child: _buildQuestionCard(),
+                child: _buildQuestionCard(isDark),
               ),
       ),
     );
   }
 
-  Widget _buildQuestionCard() {
+  Widget _buildQuestionCard(bool isDark) {
     final currentQuestion = _questions[_questionIndex];
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -104,24 +106,26 @@ class _GenericPracticePageState extends State<GenericPracticePage>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Display the question image if available.
-          currentQuestion['questionImage'] != ''
-              ? Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
-                  child: Image.asset(
-                    currentQuestion['questionImage'],
-                    height: 350.0,
-                    width: double.infinity,
-                    fit: BoxFit.contain,
-                  ),
-                )
-              : const SizedBox.shrink(),
+          if (currentQuestion['questionImage'] != '')
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Image.asset(
+                currentQuestion['questionImage'],
+                height: 350.0,
+                width: double.infinity,
+                fit: BoxFit.contain,
+              ),
+            ),
           // Display the question text.
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
               currentQuestion['question'],
-              style:
-                  const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: isDark ? Colors.white : Colors.black,
+              ),
               textAlign: TextAlign.center,
             ),
           ),
@@ -129,13 +133,16 @@ class _GenericPracticePageState extends State<GenericPracticePage>
           ListView.separated(
             shrinkWrap: true,
             itemCount: (currentQuestion['answers'] as List).length,
-            separatorBuilder: (context, index) =>
-                const SizedBox(height: 10.0),
+            separatorBuilder: (context, index) => const SizedBox(height: 10.0),
             itemBuilder: (context, index) {
               final answer = (currentQuestion['answers'] as List)[index];
               return ElevatedButton(
                 onPressed: () => _answerQuestion(answer['correct']),
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: isDark
+                      ? const Color(0xFF171717)
+                      : Theme.of(context).primaryColor,
+                  foregroundColor: isDark ? Colors.white : Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -150,10 +157,10 @@ class _GenericPracticePageState extends State<GenericPracticePage>
             },
           ),
           const SizedBox(height: 20.0),
-          // Flip button to show the answer/hint.
           IconButton(
             onPressed: _flipCard,
             icon: const Icon(Icons.flip),
+            color: isDark ? Colors.white : Colors.black,
             style: IconButton.styleFrom(
               shape: const CircleBorder(),
               padding: const EdgeInsets.all(16.0),
@@ -164,7 +171,7 @@ class _GenericPracticePageState extends State<GenericPracticePage>
     );
   }
 
-  Widget _buildAnswerCard() {
+  Widget _buildAnswerCard(bool isDark) {
     final currentQuestion = _questions[_questionIndex];
     final answers = currentQuestion['answers'] as List;
     final correctAnswer =
@@ -174,33 +181,38 @@ class _GenericPracticePageState extends State<GenericPracticePage>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Optionally, display an answer image if your data includes an 'answerImage' key.
-          currentQuestion.containsKey('answerImage') &&
-                  currentQuestion['answerImage'] != ''
-              ? Image.asset(
-                  currentQuestion['answerImage'],
-                  width: 250,
-                  height: 250,
-                  fit: BoxFit.contain,
-                )
-              : const SizedBox.shrink(),
+          if (currentQuestion.containsKey('answerImage') &&
+              currentQuestion['answerImage'] != '')
+            Image.asset(
+              currentQuestion['answerImage'],
+              width: 250,
+              height: 250,
+              fit: BoxFit.contain,
+            ),
           const SizedBox(height: 20.0),
-          const Text(
+          Text(
             'Correct Answer:',
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : Colors.black,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 10.0),
           Text(
             correctAnswer,
-            style: const TextStyle(fontSize: 20.0),
+            style: TextStyle(
+              fontSize: 20.0,
+              color: isDark ? Colors.white : Colors.black,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20.0),
-          // Flip button to go back to the question card.
           IconButton(
             onPressed: _flipCard,
             icon: const Icon(Icons.flip),
+            color: isDark ? Colors.white : Colors.black,
             style: IconButton.styleFrom(
               shape: const CircleBorder(),
               padding: const EdgeInsets.all(16.0),
@@ -211,23 +223,36 @@ class _GenericPracticePageState extends State<GenericPracticePage>
     );
   }
 
-  Widget _buildResultScreen() {
+  Widget _buildResultScreen(bool isDark) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             'Quiz Completed!',
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : Colors.black,
+            ),
           ),
           const SizedBox(height: 20.0),
           Text(
             'Your Score: $_score/${_questions.length}',
-            style: const TextStyle(fontSize: 18.0),
+            style: TextStyle(
+              fontSize: 18.0,
+              color: isDark ? Colors.white : Colors.black,
+            ),
           ),
           const SizedBox(height: 20.0),
           ElevatedButton(
             onPressed: _resetQuiz,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: isDark
+                  ? const Color(0xFF171717)
+                  : Theme.of(context).primaryColor,
+              foregroundColor: isDark ? Colors.white : Colors.white,
+            ),
             child: const Text('Restart Quiz'),
           ),
         ],
@@ -237,41 +262,76 @@ class _GenericPracticePageState extends State<GenericPracticePage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${widget.shapeName} Practice'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SectionsPage(
-                  title: widget.shapeName,
-                  sectionItems:
-                      List<Map<String, dynamic>>.from(shapeData['section']),
-                ),
+    return AnimatedBuilder(
+      animation: themeModel,
+      builder: (context, _) {
+        bool isDark = themeModel.isDarkMode;
+        return Scaffold(
+          // AppBar styling for dark/light mode
+          appBar: AppBar(
+            backgroundColor: isDark ? const Color(0xFF171717) : Colors.white,
+            iconTheme: IconThemeData(
+              color: isDark ? Colors.white : Colors.black,
+            ),
+            title: Text(
+              '${widget.shapeName} Practice',
+              style: TextStyle(
+                color: isDark ? Colors.white : Colors.black,
               ),
-            );
-          },
-        ),
-      ),
-      body: _questionIndex < _questions.length
-          ? Center(
-              child: AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  return Transform(
-                    transform: Matrix4.identity()
-                      ..setEntry(3, 2, 0.001)
-                      ..rotateY(_animation.value * pi),
-                    alignment: Alignment.center,
-                    child: _buildFlipCard(),
-                  );
+            ),
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: isDark ? Colors.white : Colors.black,
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SectionsPage(
+                      title: widget.shapeName,
+                      sectionItems:
+                          List<Map<String, dynamic>>.from(shapeData['section']),
+                    ),
+                  ),
+                );
+              },
+            ),
+            actions: [
+              // Dark mode toggle button
+              IconButton(
+                icon: Icon(
+                  isDark ? Icons.nightlight_round : Icons.wb_sunny,
+                  color: isDark ? Colors.white : Colors.black,
+                ),
+                onPressed: () {
+                  themeModel.toggleTheme();
                 },
               ),
-            )
-          : _buildResultScreen(),
+            ],
+          ),
+          // Body background color
+          body: Container(
+            color: isDark ? const Color(0xFF212121) : Colors.white,
+            child: _questionIndex < _questions.length
+                ? Center(
+                    child: AnimatedBuilder(
+                      animation: _animation,
+                      builder: (context, child) {
+                        return Transform(
+                          transform: Matrix4.identity()
+                            ..setEntry(3, 2, 0.001)
+                            ..rotateY(_animation.value * pi),
+                          alignment: Alignment.center,
+                          child: _buildFlipCard(isDark),
+                        );
+                      },
+                    ),
+                  )
+                : _buildResultScreen(isDark),
+          ),
+        );
+      },
     );
   }
 }

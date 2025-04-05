@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'shapes_data.dart';
-import '../sections.dart';
+// import '../sections.dart';
+import 'theme_state.dart';
 
 class GenericIntroductionPage extends StatefulWidget {
   final String shapeName;
@@ -19,7 +20,6 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
   int _voiceButtonClickCount = 0;
   String _pageContent = '';
 
-  // Retrieve the shape's data and introduction info from shapes_data.dart
   Map<String, dynamic> get shapeData =>
       shapes.firstWhere((element) => element['name'] == widget.shapeName);
   Map<String, dynamic> get introData => shapeData['intro'];
@@ -44,7 +44,6 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
   }
 
   String _getPageContent() {
-    // Concatenate the definition and types text for TTS.
     String content = _isEnglish
         ? introData['definition']['en']
         : introData['definition']['es'];
@@ -80,23 +79,29 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
     }
   }
 
-  Widget _buildDefinition(bool isEnglish) {
+  /// Builds the definition card at the top of the page.
+  Widget _buildDefinition(bool isEnglish, bool isDark) {
     return Card(
-      color: Colors.white.withOpacity(0.8),
+      // Card background
+      color: isDark ? const Color(0xFF171717) : Colors.white.withOpacity(0.8),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Text(
           isEnglish
               ? introData['definition']['en']
               : introData['definition']['es'],
-          style:
-              const TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 19.0,
+            fontWeight: FontWeight.bold,
+            color: isDark ? Colors.white : Colors.black,
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildTypes(bool isEnglish) {
+  /// Builds the list of types (e.g. "Acute Angle", "Right Angle", etc.)
+  Widget _buildTypes(bool isEnglish, bool isDark) {
     String headerText = isEnglish
         ? 'Types of ${widget.shapeName}:'
         : 'Tipos de ${widget.shapeName}:';
@@ -105,10 +110,10 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
       children: [
         Text(
           headerText,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: isDark ? Colors.white : Colors.black,
           ),
         ),
         const SizedBox(height: 10.0),
@@ -120,21 +125,28 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
           String imagePath = isEnglish
               ? type['image']['en']
               : type['image']['es'];
-          return _buildTypeItem(title, description, imagePath);
+          return _buildTypeItem(title, description, imagePath, isDark);
         }).toList(),
       ],
     );
   }
 
-  Widget _buildTypeItem(String title, String description, String imagePath) {
+  /// Builds each clickable item in the list of types (with image & description).
+  Widget _buildTypeItem(String title, String description, String imagePath, bool isDark) {
     return GestureDetector(
       onTap: () {
-        // On tap, show an AlertDialog with a larger view.
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(title),
+              // Popup background
+              backgroundColor: isDark ? const Color.fromARGB(255, 49, 49, 49) : Colors.white,
+              title: Text(
+                title,
+                style: TextStyle(
+                  color: isDark ? Colors.white : Colors.black,
+                ),
+              ),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -152,9 +164,10 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
                     const SizedBox(height: 16),
                     Text(
                       description,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
+                        color: isDark ? Colors.white : Colors.black,
                       ),
                     ),
                   ],
@@ -162,6 +175,10 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
               ),
               actions: [
                 TextButton(
+                  style: TextButton.styleFrom(
+                    // "Close" button text color
+                    foregroundColor: isDark ? Colors.white : Colors.black,
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -173,7 +190,8 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
         );
       },
       child: Card(
-        color: Colors.white.withOpacity(0.8),
+        // Card background
+        color: isDark ? const Color(0xFF171717) : Colors.white.withOpacity(0.8),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
@@ -185,15 +203,19 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0,
+                        color: isDark ? Colors.white : Colors.black,
                       ),
                     ),
                     const SizedBox(height: 5.0),
                     Text(
                       description,
-                      style: const TextStyle(fontSize: 14.0),
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
                     ),
                   ],
                 ),
@@ -207,79 +229,90 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
 
   @override
   Widget build(BuildContext context) {
-    String mainImage = _isEnglish
-        ? introData['mainImage']['en']
-        : introData['mainImage']['es'];
+    return AnimatedBuilder(
+      animation: themeModel,
+      builder: (context, _) {
+        bool isDark = themeModel.isDarkMode;
+        String mainImage = _isEnglish
+            ? introData['mainImage']['en']
+            : introData['mainImage']['es'];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Geometry: ${widget.shapeName}'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SectionsPage(
-                  title: widget.shapeName,
-                  sectionItems: List<Map<String, dynamic>>.from(
-                      shapeData['section']),
-                ),
-              ),
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.translate),
-            onPressed: _toggleLanguage,
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.record_voice_over,
-              color: _isSpeaking ? Colors.blue : null,
+        return Scaffold(
+          // AppBar with dark mode styling
+          appBar: AppBar(
+            backgroundColor: isDark ? const Color(0xFF171717) : Colors.white,
+            iconTheme: IconThemeData(
+              color: isDark ? Colors.white : Colors.black,
             ),
-            onPressed: () {
-              setState(() {
-                _voiceButtonClickCount++;
-              });
-              if (_voiceButtonClickCount == 1) {
-                _speak(_pageContent);
-              } else if (_voiceButtonClickCount == 2) {
-                _speak('');
-              }
-            },
-          )
-        ],
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white60, Colors.white70],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              if (mainImage.isNotEmpty)
-                Image.asset(
-                  mainImage,
-                  height: 400.0,
-                  width: 300.0,
-                  fit: BoxFit.contain,
+            title: Text(
+              'Geometry: ${widget.shapeName}',
+              style: TextStyle(
+                color: isDark ? Colors.white : Colors.black,
+              ),
+            ),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.translate,
+                  color: isDark ? Colors.white : Colors.black,
                 ),
-              const SizedBox(height: 20.0),
-              _buildDefinition(_isEnglish),
-              const SizedBox(height: 20.0),
-              _buildTypes(_isEnglish),
+                onPressed: _toggleLanguage,
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.record_voice_over,
+                  // If speaking, show blue; else white/black based on mode
+                  color: _isSpeaking
+                      ? Colors.blue
+                      : (isDark ? Colors.white : Colors.black),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _voiceButtonClickCount++;
+                  });
+                  if (_voiceButtonClickCount == 1) {
+                    _speak(_pageContent);
+                  } else if (_voiceButtonClickCount == 2) {
+                    _speak('');
+                  }
+                },
+              ),
+              IconButton(
+                icon: Icon(
+                  isDark ? Icons.nightlight_round : Icons.wb_sunny,
+                  color: isDark ? Colors.white : Colors.black,
+                ),
+                onPressed: () {
+                  themeModel.toggleTheme();
+                },
+              ),
             ],
           ),
-        ),
-      ),
+          // Body background color
+          body: Container(
+            color: isDark ? const Color(0xFF212121) : Colors.white,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (mainImage.isNotEmpty)
+                    Image.asset(
+                      mainImage,
+                      height: 400.0,
+                      width: 300.0,
+                      fit: BoxFit.contain,
+                    ),
+                  const SizedBox(height: 20.0),
+                  _buildDefinition(_isEnglish, isDark),
+                  const SizedBox(height: 20.0),
+                  _buildTypes(_isEnglish, isDark),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

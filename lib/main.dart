@@ -1,54 +1,54 @@
 import 'package:flutter/material.dart';
 import 'sections.dart';
 import 'shapes_data.dart';
+import 'theme_state.dart';
 
 void main() {
-  runApp(const BilingualMathGeo());
+  runApp(BilingualMathGeo());
 }
 
 class BilingualMathGeo extends StatelessWidget {
-  const BilingualMathGeo({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'EXPLORA - GEOMETRY',
-      debugShowCheckedModeBanner: false,
-      home: BilingualMathGeoHomePage(),
+    // Wrap MaterialApp in AnimatedBuilder so that any change in themeModel rebuilds it immediately.
+    return AnimatedBuilder(
+      animation: themeModel,
+      builder: (context, _) {
+        return MaterialApp(
+          title: 'EXPLORA - GEOMETRY',
+          debugShowCheckedModeBanner: false,
+          home: BilingualMathGeoHomePage(),
+        );
+      },
     );
   }
 }
 
 class BilingualMathGeoHomePage extends StatefulWidget {
-  const BilingualMathGeoHomePage({super.key});
-
   @override
   State<BilingualMathGeoHomePage> createState() =>
       _BilingualMathGeoHomePageState();
 }
 
 class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
-  bool _isDarkMode = false;
-
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = themeModel.isDarkMode;
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Stack(
         clipBehavior: Clip.none,
         children: [
-          // Smoothly fading background image
+          // Smoothly fading background image.
           Positioned.fill(
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),
-              switchInCurve: Curves.easeInOut,
-              switchOutCurve: Curves.easeInOut,
               child: Container(
-                key: ValueKey(_isDarkMode),
+                key: ValueKey(isDarkMode),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(_isDarkMode
+                    image: AssetImage(isDarkMode
                         ? 'assets/images/backgroundd-dark.gif'
                         : 'assets/images/backgroundd.gif'),
                     fit: BoxFit.cover,
@@ -58,8 +58,7 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
               ),
             ),
           ),
-
-          // Scrollable content with padding
+          // Scrollable content with padding.
           Positioned.fill(
             top: 160,
             child: SingleChildScrollView(
@@ -89,11 +88,15 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
                       ),
                       itemBuilder: (context, index) {
                         final shape = shapes[index];
+                        // Choose darkcolor if dark mode is enabled.
+                        Color tileColor = isDarkMode
+                            ? shape['darkcolor'] as Color
+                            : shape['color'] as Color;
                         return _buildShapeTile(
                           context,
                           shape['name'],
                           shape['icon'],
-                          shape['color'],
+                          tileColor,
                           shape['section'],
                         );
                       },
@@ -103,8 +106,7 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
               ),
             ),
           ),
-
-          // Top Wave with Title and Toggle Button
+          // Top Wave with Title and Toggle Button.
           Positioned(
             top: 0,
             left: 0,
@@ -116,8 +118,8 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
                 children: [
                   Positioned.fill(
                     child: CustomPaint(
-                        painter: _WaveBackgroundPainter(
-                            isDarkMode: _isDarkMode)),
+                      painter: _WaveBackgroundPainter(isDarkMode: isDarkMode),
+                    ),
                   ),
                   const Align(
                     alignment: Alignment.center,
@@ -130,51 +132,52 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
                       ),
                     ),
                   ),
-                  // Icon Toggle Button - Center right
+                  // Toggle Button with pointer cursor.
                   Positioned(
                     right: 24,
                     top: 56,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _isDarkMode = !_isDarkMode;
-                        });
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        width: 60,
-                        height: 32,
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        decoration: BoxDecoration(
-                          color: _isDarkMode
-                              ? Colors.indigo.withOpacity(0.8)
-                              : Colors.yellow.shade600.withOpacity(0.85),
-                          borderRadius: BorderRadius.circular(30),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 6,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            AnimatedAlign(
-                              duration: const Duration(milliseconds: 300),
-                              alignment: _isDarkMode
-                                  ? Alignment.centerRight
-                                  : Alignment.centerLeft,
-                              child: Icon(
-                                _isDarkMode
-                                    ? Icons.nightlight_round
-                                    : Icons.wb_sunny,
-                                size: 20,
-                                color: Colors.white,
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () {
+                          themeModel.toggleTheme();
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          width: 60,
+                          height: 32,
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                          decoration: BoxDecoration(
+                            color: isDarkMode
+                                ? Colors.indigo.withOpacity(0.8)
+                                : Colors.yellow.shade600.withOpacity(0.85),
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 6,
+                                offset: Offset(0, 2),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              AnimatedAlign(
+                                duration: const Duration(milliseconds: 300),
+                                alignment: isDarkMode
+                                    ? Alignment.centerRight
+                                    : Alignment.centerLeft,
+                                child: Icon(
+                                  isDarkMode
+                                      ? Icons.nightlight_round
+                                      : Icons.wb_sunny,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -215,7 +218,8 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
           borderRadius: BorderRadius.circular(20),
           color: color,
           child: Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20)),
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Stack(
               clipBehavior: Clip.none,
@@ -257,15 +261,12 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
 
 class _WaveBackgroundPainter extends CustomPainter {
   final bool isDarkMode;
-
   _WaveBackgroundPainter({required this.isDarkMode});
-
+  
   @override
   void paint(Canvas canvas, Size size) {
     final secondaryPaint = Paint()
-      ..color =
-          isDarkMode ? const Color(0xFF2F4B73) : const Color(0xFFB3E5FC);
-
+      ..color = isDarkMode ? const Color(0xFF2F4B73) : const Color(0xFFB3E5FC);
     final secondaryPath = Path()
       ..moveTo(0, 0)
       ..lineTo(0, 160)
@@ -274,10 +275,8 @@ class _WaveBackgroundPainter extends CustomPainter {
       ..lineTo(size.width, 0)
       ..close();
     canvas.drawPath(secondaryPath, secondaryPaint);
-
     final primaryPaint = Paint()
       ..color = isDarkMode ? const Color(0xFF1C2C4C) : const Color(0xFF4A90E2);
-
     final primaryPath = Path()
       ..moveTo(0, 0)
       ..lineTo(0, 140)
@@ -287,7 +286,7 @@ class _WaveBackgroundPainter extends CustomPainter {
       ..close();
     canvas.drawPath(primaryPath, primaryPaint);
   }
-
+  
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
