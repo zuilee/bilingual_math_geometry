@@ -57,6 +57,9 @@ flutter:
 
   assets:
     - assets/images/backgroundd.gif
+    - assets/images/practice.gif
+    - assets/images/practice-dark.gif
+    - assets/images/party-pop.gif
     - assets/images/quadrilateral/parallelogram.png
     - assets/images/quadrilateral/rectangle.png
     - assets/images/quadrilateral/square.png

@@ -13,17 +13,21 @@ class GenericQuizPage extends StatefulWidget {
 class _GenericQuizPageState extends State<GenericQuizPage> {
   late List<Map<String, dynamic>> _questions;
   int currentQuestionIndex = 0;
-  int attemptsLeft = 3;
+  int attemptsLeft = 2;
   String? selectedOption;
   int score = 0;
+
+  Map<String, dynamic> get shapeData =>
+      shapes.firstWhere((element) => element['name'] == widget.shapeName);
+
+  Color _getThemeColor(bool isDark) {
+    return isDark ? shapeData['darkcolor'] : shapeData['color'];
+  }
 
   @override
   void initState() {
     super.initState();
-    final shapeData =
-        shapes.firstWhere((element) => element['name'] == widget.shapeName);
-    _questions =
-        List<Map<String, dynamic>>.from(shapeData['quiz']['questions']);
+    _questions = List<Map<String, dynamic>>.from(shapeData['quiz']['questions']);
   }
 
   void showHint(bool isDark) {
@@ -34,19 +38,11 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
         builder: (context) {
           return AlertDialog(
             backgroundColor: isDark ? const Color(0xFF171717) : null,
-            title: Text(
-              'Hint',
-              style: TextStyle(color: isDark ? Colors.white : Colors.black),
-            ),
-            content: Text(
-              hint,
-              style: TextStyle(color: isDark ? Colors.white : Colors.black),
-            ),
+            title: Text('Hint', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
+            content: Text(hint, style: TextStyle(color: isDark ? Colors.white : Colors.black)),
             actions: [
               TextButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: isDark ? Colors.white : Colors.black,
-                ),
+                style: TextButton.styleFrom(foregroundColor: isDark ? Colors.white : Colors.black),
                 onPressed: () => Navigator.of(context).pop(),
                 child: const Text('OK'),
               ),
@@ -63,100 +59,57 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
       setState(() {
         score += 5;
       });
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor: isDark ? const Color(0xFF171717) : null,
-            title: Text(
-              'Correct!',
-              style: TextStyle(color: isDark ? Colors.white : Colors.black),
-            ),
-            content: Text(
-              'Well done!',
-              style: TextStyle(color: isDark ? Colors.white : Colors.black),
-            ),
-            actions: [
-              TextButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: isDark ? Colors.white : Colors.black,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  nextQuestion(isDark);
-                },
-                child: const Text('Next'),
-              ),
-            ],
-          );
-        },
-      );
+      _showDialog('Correct!', 'Well done!', isDark, true);
     } else {
-      attemptsLeft--;
+      setState(() {
+        score -= 1;
+        attemptsLeft--;
+      });
+
       if (attemptsLeft <= 0) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              backgroundColor: isDark ? const Color(0xFF171717) : null,
-              title: Text(
-                'Incorrect',
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
-              ),
-              content: Text(
-                'You have no attempts left. The correct answer is:\n\n${_questions[currentQuestionIndex]['correctAnswer']}',
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
-              ),
-              actions: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: isDark ? Colors.white : Colors.black,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    nextQuestion(isDark);
-                  },
-                  child: const Text('Next'),
-                ),
-              ],
-            );
-          },
+        _showDialog(
+          'Incorrect',
+          'You have used all attempts.\nThe correct answer is:\n\n${_questions[currentQuestionIndex]['correctAnswer']}',
+          isDark,
+          true,
         );
       } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              backgroundColor: isDark ? const Color(0xFF171717) : null,
-              title: Text(
-                'Incorrect',
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
-              ),
-              content: Text(
-                'Try again. You have $attemptsLeft attempts left.',
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
-              ),
-              actions: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: isDark ? Colors.white : Colors.black,
-                  ),
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
+        _showDialog(
+          'Incorrect',
+          'Try again. You have $attemptsLeft attempt left.',
+          isDark,
+          false,
         );
       }
     }
   }
 
-  void nextQuestion(bool isDark) {
+  void _showDialog(String title, String content, bool isDark, bool moveNext) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: isDark ? const Color(0xFF171717) : null,
+        title: Text(title, style: TextStyle(color: isDark ? Colors.white : Colors.black)),
+        content: Text(content, style: TextStyle(color: isDark ? Colors.white : Colors.black)),
+        actions: [
+          TextButton(
+            style: TextButton.styleFrom(foregroundColor: isDark ? Colors.white : Colors.black),
+            onPressed: () {
+              Navigator.of(context).pop();
+              if (moveNext) nextQuestion();
+            },
+            child: Text(moveNext ? 'Next' : 'OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void nextQuestion() {
     if (currentQuestionIndex < _questions.length - 1) {
       setState(() {
         currentQuestionIndex++;
-        attemptsLeft = 3;
+        attemptsLeft = 2;
         selectedOption = null;
       });
     } else {
@@ -164,23 +117,23 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            backgroundColor: isDark ? const Color(0xFF171717) : null,
+            backgroundColor: themeModel.isDarkMode ? const Color(0xFF171717) : null,
             title: Text(
               'Quiz Finished!',
-              style: TextStyle(color: isDark ? Colors.white : Colors.black),
+              style: TextStyle(color: themeModel.isDarkMode ? Colors.white : Colors.black),
             ),
             content: Text(
               'Congratulations! You completed the quiz. Your score is $score.',
-              style: TextStyle(color: isDark ? Colors.white : Colors.black),
+              style: TextStyle(color: themeModel.isDarkMode ? Colors.white : Colors.black),
             ),
             actions: [
               TextButton(
                 style: TextButton.styleFrom(
-                  foregroundColor: isDark ? Colors.white : Colors.black,
+                  foregroundColor: themeModel.isDarkMode ? Colors.white : Colors.black,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).pop(); // Go back to Sections.
+                  Navigator.of(context).pop();
                 },
                 child: const Text('Back to Home'),
               ),
@@ -197,131 +150,153 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
       animation: themeModel,
       builder: (context, _) {
         bool isDark = themeModel.isDarkMode;
+        final Color themeColor = _getThemeColor(isDark);
         final currentQuestion = _questions[currentQuestionIndex];
+        final media = MediaQuery.of(context);
 
         return Scaffold(
-          // AppBar styling for dark/light mode
-          appBar: AppBar(
-            backgroundColor: isDark ? const Color(0xFF171717) : Colors.white,
-            iconTheme: IconThemeData(
-              color: isDark ? Colors.white : Colors.black,
-            ),
-            title: Text(
-              '${widget.shapeName} Quiz',
-              style: TextStyle(
-                color: isDark ? Colors.white : Colors.black,
-              ),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Center(
-                  child: Text(
-                    'Score: $score',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: isDark ? Colors.white : Colors.black,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(67.2),
+            child: Container(
+              color: themeColor,
+              child: SafeArea(
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () => Navigator.pop(context),
                     ),
-                  ),
-                ),
-              ),
-              // Dark mode toggle button.
-              IconButton(
-                icon: Icon(
-                  isDark ? Icons.nightlight_round : Icons.wb_sunny,
-                  color: isDark ? Colors.white : Colors.black,
-                ),
-                onPressed: () {
-                  themeModel.toggleTheme();
-                },
-              ),
-            ],
-          ),
-          // Fill the screen & allow scrolling if needed.
-          body: LayoutBuilder(
-            builder: (context, constraints) {
-              return SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: Container(
-                    color: isDark ? const Color(0xFF212121) : Colors.white,
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (currentQuestion['questionImage'] != '')
-                          Padding(
-                            padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-                            child: Image.asset(
-                              currentQuestion['questionImage'],
-                              height: 350.0,
-                              width: double.infinity,
-                              fit: BoxFit.contain,
-                            ),
-                          )
-                        else
-                          const SizedBox.shrink(),
-                        const SizedBox(height: 10.0),
-                        Text(
-                          currentQuestion['question'],
-                          style: TextStyle(
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          '${widget.shapeName} Quiz',
+                          style: const TextStyle(
+                            color: Colors.white,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
-                            color: isDark ? Colors.white : Colors.black,
                           ),
-                          textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 20.0),
-                        // Options
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: (currentQuestion['options'] as List)
-                              .map<Widget>((option) {
-                            return RadioListTile<String>(
-                              title: Text(
-                                option,
-                                style: TextStyle(
-                                  color: isDark ? Colors.white : Colors.black,
-                                ),
-                              ),
-                              value: option,
-                              groupValue: selectedOption,
-                              onChanged: (String? value) {
-                                setState(() {
-                                  selectedOption = value;
-                                });
-                              },
-                              activeColor: isDark ? Colors.white : Theme.of(context).primaryColor,
-                            );
-                          }).toList(),
-                        ),
-                        const SizedBox(height: 10.0),
-                        TextButton(
-                          onPressed: () => showHint(isDark),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
                           child: Text(
-                            'Hint',
-                            style: TextStyle(
-                              color: isDark ? Colors.white : Colors.black,
-                            ),
+                            'Score: $score',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0),
                           ),
                         ),
-                        const SizedBox(height: 10.0),
-                        ElevatedButton(
-                          onPressed: () => checkAnswer(isDark),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: isDark
-                                ? const Color(0xFF171717)
-                                : Theme.of(context).primaryColor,
-                            foregroundColor: Colors.white,
+                        IconButton(
+                          icon: Icon(
+                            isDark ? Icons.nightlight_round : Icons.wb_sunny,
+                            color: Colors.white,
                           ),
-                          child: const Text('Submit'),
+                          onPressed: () {
+                            themeModel.toggleTheme();
+                          },
                         ),
                       ],
                     ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          body: Container(
+            color: isDark ? const Color(0xFF212121) : Colors.white,
+            width: double.infinity,
+            height: double.infinity,
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: 600,
+                  maxHeight: media.size.height * 0.85,
+                ),
+                child: Card(
+                  elevation: 8.0,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  color: isDark ? const Color(0xFF171717) : Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        return SingleChildScrollView(
+                          physics: constraints.maxHeight < 600
+                              ? const BouncingScrollPhysics()
+                              : const NeverScrollableScrollPhysics(),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              if (currentQuestion['questionImage'] != '')
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  child: Image.asset(
+                                    currentQuestion['questionImage'],
+                                    height: constraints.maxHeight * 0.38,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              Text(
+                                currentQuestion['question'],
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDark ? Colors.white : themeColor,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 16.0),
+                              ...List<Widget>.from(
+                                (currentQuestion['options'] as List).map(
+                                  (option) => RadioListTile<String>(
+                                    title: Text(
+                                      option,
+                                      style: TextStyle(color: isDark ? Colors.white : themeColor),
+                                    ),
+                                    value: option,
+                                    groupValue: selectedOption,
+                                    onChanged: (String? value) {
+                                      setState(() {
+                                        selectedOption = value;
+                                      });
+                                    },
+                                    activeColor: themeColor,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 10.0),
+                              TextButton(
+                                onPressed: () => showHint(isDark),
+                                child: Text(
+                                  'Hint',
+                                  style: TextStyle(color: isDark ? Colors.white : themeColor),
+                                ),
+                              ),
+                              const SizedBox(height: 10.0),
+                              ElevatedButton(
+                                onPressed: () => checkAnswer(isDark),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: themeColor,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                                child: const Text('Submit'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              );
-            },
+              ),
+            ),
           ),
         );
       },

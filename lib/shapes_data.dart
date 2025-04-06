@@ -250,7 +250,7 @@ final List<Map<String, dynamic>> shapes = [
             'The ladder and the ground',
             'The wall and the ground'
           ],
-          'correctAnswer': 'The ladder and the ground',
+          'correctAnswer': 'The wall and the ground',
           'hint': 'The wall and the ground meet at a 90 degree angle.',
           'questionImage': 'assets/images/lines/quiz/lq8.jpg',
         },
@@ -285,7 +285,7 @@ final List<Map<String, dynamic>> shapes = [
         'icon': Icons.lightbulb_outline,
         'color': const Color(0xFFF76E11),
         'darkcolor': const Color(0xFFA3501D),
-        'page': 'learn',
+        'page': 'practice',
       },
       {
         'title': 'Quiz',
@@ -861,8 +861,8 @@ final List<Map<String, dynamic>> shapes = [
             'es': 'Un triángulo con al menos dos lados de igual longitud.'
           },
           'image': {
-            'en': 'assets/images/triangle/Isosceles_E.png',
-            'es': 'assets/images/triangle/Isosceles_S.png'
+            'en': 'assets/images/triangle/Isoceles_E.png',
+            'es': 'assets/images/triangle/Isoceles_S.png'
           }
         },
         {
@@ -1007,7 +1007,7 @@ final List<Map<String, dynamic>> shapes = [
           'options': ['Equilateral', 'Isosceles', 'Scalene'],
           'correctAnswer': 'Equilateral',
           'hint': 'All three sides are of equal length.',
-          'questionImage': 'assets/images/triangles/quiz/tq1.webp',
+          'questionImage': 'assets/images/triangle/quiz/tq1.webp',
         },
         {
           'question':
@@ -1015,7 +1015,7 @@ final List<Map<String, dynamic>> shapes = [
           'options': ['Equilateral', 'Isosceles', 'Scalene'],
           'correctAnswer': 'Isosceles',
           'hint': 'Two sides are of equal length.',
-          'questionImage': 'assets/images/triangles/quiz/tq2.webp',
+          'questionImage': 'assets/images/triangle/quiz/tq2.webp',
         },
         {
           'question':
@@ -1023,7 +1023,7 @@ final List<Map<String, dynamic>> shapes = [
           'options': ['Equilateral', 'Isosceles', 'Scalene'],
           'correctAnswer': 'Equilateral',
           'hint': 'All three sides are of equal length.',
-          'questionImage': 'assets/images/triangles/quiz/tq3.jpg',
+          'questionImage': 'assets/images/triangle/quiz/tq3.jpg',
         },
         {
           'question':
@@ -1031,7 +1031,7 @@ final List<Map<String, dynamic>> shapes = [
           'options': ['Obtuse-angled', 'Right-angled', 'Acute-angled'],
           'correctAnswer': 'Acute-angled',
           'hint': 'All three angles are less than 90 degrees.',
-          'questionImage': 'assets/images/triangles/quiz/tq4.jpg',
+          'questionImage': 'assets/images/triangle/quiz/tq4.jpg',
         },
         // Additional questions are left empty as per the original file.
       ],

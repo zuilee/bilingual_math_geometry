@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'shapes_data.dart';
-import '../sections.dart';
 import 'theme_state.dart';
 
 class GenericPracticePage extends StatefulWidget {
@@ -21,9 +20,17 @@ class _GenericPracticePageState extends State<GenericPracticePage>
   late Animation<double> _animation;
   bool _isFlipped = false;
 
+  // Retrieve shape data so we can use shape['color'] and shape['darkcolor'].
   Map<String, dynamic> get shapeData =>
       shapes.firstWhere((element) => element['name'] == widget.shapeName);
   Map<String, dynamic> get practiceData => shapeData['practice'];
+
+  // Returns the shape's button color according to mode.
+  Color _getShapeButtonColor(bool isDark) {
+    final Color shapeColor = shapeData['color'];
+    final Color shapeDarkColor = shapeData['darkcolor'];
+    return isDark ? shapeDarkColor : shapeColor;
+  }
 
   @override
   void initState() {
@@ -60,6 +67,7 @@ class _GenericPracticePageState extends State<GenericPracticePage>
       _score = 0;
       _questionIndex = 0;
       _isFlipped = false;
+      _controller.reset();
     });
   }
 
@@ -72,11 +80,17 @@ class _GenericPracticePageState extends State<GenericPracticePage>
     _isFlipped = !_isFlipped;
   }
 
-  /// The flip card container that flips between question & answer.
+  /// Builds the flip card for questions.
   Widget _buildFlipCard(bool isDark) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.8,
-      height: MediaQuery.of(context).size.height * 0.8,
+    final double maxCardWidth = min(MediaQuery.of(context).size.width * 0.9, 600);
+    final double maxCardHeight = min(MediaQuery.of(context).size.height * 0.9, 650);
+
+    return Container(
+      width: maxCardWidth,
+      height: maxCardHeight,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
       child: Card(
         elevation: 8.0,
         color: isDark ? const Color(0xFF171717) : Colors.white,
@@ -98,166 +112,236 @@ class _GenericPracticePageState extends State<GenericPracticePage>
     );
   }
 
+  /// Builds the question side of the flip card.
   Widget _buildQuestionCard(bool isDark) {
     final currentQuestion = _questions[_questionIndex];
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Display the question image if available.
-          if (currentQuestion['questionImage'] != '')
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: Image.asset(
-                currentQuestion['questionImage'],
-                height: 350.0,
-                width: double.infinity,
-                fit: BoxFit.contain,
-              ),
-            ),
-          // Display the question text.
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(
-              currentQuestion['question'],
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: isDark ? Colors.white : Colors.black,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          // List of answer buttons.
-          ListView.separated(
-            shrinkWrap: true,
-            itemCount: (currentQuestion['answers'] as List).length,
-            separatorBuilder: (context, index) => const SizedBox(height: 10.0),
-            itemBuilder: (context, index) {
-              final answer = (currentQuestion['answers'] as List)[index];
-              return ElevatedButton(
-                onPressed: () => _answerQuestion(answer['correct']),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: isDark
-                      ? const Color(0xFF171717)
-                      : Theme.of(context).primaryColor,
-                  foregroundColor: isDark ? Colors.white : Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double horizontalPad = constraints.maxWidth * 0.05;
+        final double topPad = constraints.maxHeight * 0.10;
+        final double bottomPad = constraints.maxHeight * 0.05;
+
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(horizontalPad, topPad, horizontalPad, bottomPad),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Top content: image, question text, answer buttons.
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (currentQuestion['questionImage'] != '')
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: Image.asset(
+                            currentQuestion['questionImage'],
+                            height: 300.0,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          currentQuestion['question'],
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? Colors.white : Colors.black,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: (currentQuestion['answers'] as List).length,
+                        separatorBuilder: (context, index) => const SizedBox(height: 10.0),
+                        itemBuilder: (context, index) {
+                          final answer = (currentQuestion['answers'] as List)[index];
+                          return ElevatedButton(
+                            onPressed: () => _answerQuestion(answer['correct']),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: _getShapeButtonColor(isDark),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            ),
+                            child: Text(
+                              answer['text'],
+                              style: const TextStyle(fontSize: 18.0),
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                ),
-                child: Text(
-                  answer['text'],
-                  style: const TextStyle(fontSize: 18.0),
-                  textAlign: TextAlign.center,
-                ),
-              );
-            },
-          ),
-          const SizedBox(height: 20.0),
-          IconButton(
-            onPressed: _flipCard,
-            icon: const Icon(Icons.flip),
-            color: isDark ? Colors.white : Colors.black,
-            style: IconButton.styleFrom(
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(16.0),
+                  // Flip button pinned at bottom center.
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: IconButton(
+                      onPressed: _flipCard,
+                      icon: const Icon(Icons.flip),
+                      color: isDark ? Colors.white : Colors.black,
+                      style: IconButton.styleFrom(
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(16.0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
+  /// Builds the answer side of the flip card.
   Widget _buildAnswerCard(bool isDark) {
     final currentQuestion = _questions[_questionIndex];
     final answers = currentQuestion['answers'] as List;
     final correctAnswer =
         answers.firstWhere((answer) => answer['correct'] == true)['text'];
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (currentQuestion.containsKey('answerImage') &&
-              currentQuestion['answerImage'] != '')
-            Image.asset(
-              currentQuestion['answerImage'],
-              width: 250,
-              height: 250,
-              fit: BoxFit.contain,
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double horizontalPad = constraints.maxWidth * 0.05;
+        final double topPad = constraints.maxHeight * 0.10;
+        final double bottomPad = constraints.maxHeight * 0.05;
+
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(horizontalPad, topPad, horizontalPad, bottomPad),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (currentQuestion.containsKey('answerImage') &&
+                          currentQuestion['answerImage'] != '')
+                        Image.asset(
+                          currentQuestion['answerImage'],
+                          width: 250,
+                          height: 250,
+                          fit: BoxFit.contain,
+                        ),
+                      const SizedBox(height: 20.0),
+                      Text(
+                        'Correct Answer:',
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 10.0),
+                      Text(
+                        correctAnswer,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  // Flip button pinned at bottom center.
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: IconButton(
+                      onPressed: _flipCard,
+                      icon: const Icon(Icons.flip),
+                      color: isDark ? Colors.white : Colors.black,
+                      style: IconButton.styleFrom(
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(16.0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          const SizedBox(height: 20.0),
-          Text(
-            'Correct Answer:',
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
-              color: isDark ? Colors.white : Colors.black,
-            ),
-            textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 10.0),
-          Text(
-            correctAnswer,
-            style: TextStyle(
-              fontSize: 20.0,
-              color: isDark ? Colors.white : Colors.black,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 20.0),
-          IconButton(
-            onPressed: _flipCard,
-            icon: const Icon(Icons.flip),
-            color: isDark ? Colors.white : Colors.black,
-            style: IconButton.styleFrom(
-              shape: const CircleBorder(),
-              padding: const EdgeInsets.all(16.0),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  Widget _buildResultScreen(bool isDark) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Quiz Completed!',
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
-              color: isDark ? Colors.white : Colors.black,
+  /// Builds the final completion screen without a card or transformation.
+  Widget _buildCompletionScreen(bool isDark) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double horizontalPad = constraints.maxWidth * 0.05;
+        final double topPad = constraints.maxHeight * 0.10;
+        final double bottomPad = constraints.maxHeight * 0.05;
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(horizontalPad, topPad, horizontalPad, bottomPad),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Party-pop GIF at the top.
+                  Image.asset(
+                    'assets/images/party-pop.gif',
+                    height: 250,
+                    fit: BoxFit.contain,
+                  ),
+                  const SizedBox(height: 20.0),
+                  Text(
+                    'Quiz Completed!',
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20.0),
+                  Text(
+                    'Your Score: $_score/${_questions.length}',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: isDark ? Colors.white : Colors.black,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20.0),
+                  ElevatedButton(
+                    onPressed: _resetQuiz,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _getShapeButtonColor(isDark),
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text('Restart Quiz'),
+                  ),
+                ],
+              ),
             ),
           ),
-          const SizedBox(height: 20.0),
-          Text(
-            'Your Score: $_score/${_questions.length}',
-            style: TextStyle(
-              fontSize: 18.0,
-              color: isDark ? Colors.white : Colors.black,
-            ),
-          ),
-          const SizedBox(height: 20.0),
-          ElevatedButton(
-            onPressed: _resetQuiz,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: isDark
-                  ? const Color(0xFF171717)
-                  : Theme.of(context).primaryColor,
-              foregroundColor: isDark ? Colors.white : Colors.white,
-            ),
-            child: const Text('Restart Quiz'),
-          ),
-        ],
-      ),
+        );
+      },
     );
+  }
+
+  Color _getShapeCardColor(bool isDark) {
+    final Color shapeColor = shapeData['color'];
+    final Color shapeDarkColor = shapeData['darkcolor'];
+    return isDark ? shapeDarkColor : shapeColor;
   }
 
   @override
@@ -267,68 +351,105 @@ class _GenericPracticePageState extends State<GenericPracticePage>
       builder: (context, _) {
         bool isDark = themeModel.isDarkMode;
         return Scaffold(
-          // AppBar styling for dark/light mode
-          appBar: AppBar(
-            backgroundColor: isDark ? const Color(0xFF171717) : Colors.white,
-            iconTheme: IconThemeData(
-              color: isDark ? Colors.white : Colors.black,
-            ),
-            title: Text(
-              '${widget.shapeName} Practice',
-              style: TextStyle(
-                color: isDark ? Colors.white : Colors.black,
-              ),
-            ),
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: isDark ? Colors.white : Colors.black,
-              ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SectionsPage(
-                      title: widget.shapeName,
-                      sectionItems:
-                          List<Map<String, dynamic>>.from(shapeData['section']),
-                    ),
-                  ),
-                );
-              },
-            ),
-            actions: [
-              // Dark mode toggle button
-              IconButton(
-                icon: Icon(
-                  isDark ? Icons.nightlight_round : Icons.wb_sunny,
-                  color: isDark ? Colors.white : Colors.black,
-                ),
-                onPressed: () {
-                  themeModel.toggleTheme();
-                },
-              ),
-            ],
-          ),
-          // Body background color
-          body: Container(
-            color: isDark ? const Color(0xFF212121) : Colors.white,
-            child: _questionIndex < _questions.length
-                ? Center(
-                    child: AnimatedBuilder(
-                      animation: _animation,
-                      builder: (context, child) {
-                        return Transform(
-                          transform: Matrix4.identity()
-                            ..setEntry(3, 2, 0.001)
-                            ..rotateY(_animation.value * pi),
-                          alignment: Alignment.center,
-                          child: _buildFlipCard(isDark),
-                        );
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(67.2),
+            child: Container(
+              color: _getShapeCardColor(themeModel.isDarkMode),
+              child: SafeArea(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () {
+                        Navigator.pop(context);
                       },
                     ),
-                  )
-                : _buildResultScreen(isDark),
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          'Practice: ${widget.shapeName}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            themeModel.isDarkMode
+                                ? Icons.nightlight_round
+                                : Icons.wb_sunny,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            themeModel.toggleTheme();
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          // Background with GIF, shifted down by 10%
+          body: Stack(
+            children: [
+              Positioned.fill(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  child: Container(
+                    key: ValueKey(isDark),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          isDark
+                              ? 'assets/images/practice-dark.gif'
+                              : 'assets/images/practice.gif',
+                        ),
+                        fit: BoxFit.cover,
+                        alignment: const Alignment(0, 0.3),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // Main content: if quiz is not complete, show the flip card with animation; otherwise, show final screen.
+              Container(
+                width: double.infinity,
+                height: double.infinity,
+                child: _questionIndex < _questions.length
+                    ? LayoutBuilder(
+                        builder: (context, constraints) {
+                          return SingleChildScrollView(
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                              child: Center(
+                                child: AnimatedBuilder(
+                                  animation: _animation,
+                                  builder: (context, child) {
+                                    return Transform(
+                                      transform: Matrix4.identity()
+                                        ..setEntry(3, 2, 0.001)
+                                        ..rotateY(_animation.value * pi),
+                                      alignment: Alignment.center,
+                                      child: _buildFlipCard(isDark),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    : _buildCompletionScreen(isDark),
+              ),
+            ],
           ),
         );
       },
