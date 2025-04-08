@@ -1574,30 +1574,6 @@ final List<Map<String, dynamic>> shapes = [
           ],
           'questionImage': '',
         },
-        {
-          'question':
-              'You place a stick through the center of a round lollipop from one side to the other. What is the stick representing?',
-          'options': ['Radius', 'Diameter', 'Chord'],
-          'correctAnswer': 'Diameter',
-          'hint': 'It passes through the center, connecting two opposite points.',
-          'questionImage': 'assets/images/circle/q8.png',
-        },
-        {
-          'question':
-              'In a circular racetrack, a runner completes one full round. What distance did they cover?',
-          'options': ['Diameter', 'Radius', 'Circumference'],
-          'correctAnswer': 'Circumference',
-          'hint': 'It’s the total path along the outer edge of the circle.',
-          'questionImage': 'assets/images/circle/q9.png',
-        },
-        {
-          'question':
-              'You draw a triangle inside a circle such that each vertex touches the circle. What is the circle called in this case?',
-          'options': ['Circumcircle', 'Arc', 'Tangent'],
-          'correctAnswer': 'Circumcircle',
-          'hint': 'It’s a circle that passes through all the triangle’s corners.',
-          'questionImage': 'assets/images/circle/q10.png',
-        },
       ],
     },
     'quiz': {
@@ -1657,6 +1633,30 @@ final List<Map<String, dynamic>> shapes = [
           'correctAnswer': 'Radius',
           'hint': 'Each line starts from the center and ends on the boundary.',
           'questionImage': 'assets/images/circle/q7.png',
+        },
+        {
+          'question':
+              'You place a stick through the center of a round lollipop from one side to the other. What is the stick representing?',
+          'options': ['Radius', 'Diameter', 'Chord'],
+          'correctAnswer': 'Diameter',
+          'hint': 'It passes through the center, connecting two opposite points.',
+          'questionImage': 'assets/images/circle/q8.png',
+        },
+        {
+          'question':
+              'In a circular racetrack, a runner completes one full round. What distance did they cover?',
+          'options': ['Diameter', 'Radius', 'Circumference'],
+          'correctAnswer': 'Circumference',
+          'hint': 'It’s the total path along the outer edge of the circle.',
+          'questionImage': 'assets/images/circle/q9.png',
+        },
+        {
+          'question':
+              'You draw a triangle inside a circle such that each vertex touches the circle. What is the circle called in this case?',
+          'options': ['Circumcircle', 'Arc', 'Tangent'],
+          'correctAnswer': 'Circumcircle',
+          'hint': 'It’s a circle that passes through all the triangle’s corners.',
+          'questionImage': 'assets/images/circle/q10.png',
         },
       ],
     },

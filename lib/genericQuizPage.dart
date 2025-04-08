@@ -68,14 +68,38 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
       });
 
       if (attemptsLeft <= 0) {
-        nextQuestion();
+        final correctAnswer = _questions[currentQuestionIndex]['correctAnswer'];
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            backgroundColor: isDark ? const Color(0xFF171717) : null,
+            title: Text('Incorrect', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
+            content: Text(
+              'You have used all attempts.\nThe correct answer is:\n\n$correctAnswer',
+              style: TextStyle(color: isDark ? Colors.white : Colors.black),
+            ),
+            actions: [
+              TextButton(
+                style: TextButton.styleFrom(foregroundColor: isDark ? Colors.white : Colors.black),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  nextQuestion();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
       } else {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
             backgroundColor: isDark ? const Color(0xFF171717) : null,
             title: Text('Incorrect', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
-            content: Text('Try again. You have $attemptsLeft attempt left.', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
+            content: Text(
+              'Try again. You have $attemptsLeft attempt${attemptsLeft == 1 ? '' : 's'} left.',
+              style: TextStyle(color: isDark ? Colors.white : Colors.black),
+            ),
             actions: [
               TextButton(
                 style: TextButton.styleFrom(foregroundColor: isDark ? Colors.white : Colors.black),
@@ -197,7 +221,6 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
