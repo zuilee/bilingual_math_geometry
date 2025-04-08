@@ -446,7 +446,7 @@ final List<Map<String, dynamic>> shapes = [
               'A construction worker is building a ramp for a wheelchair. The ramp is inclined at a 12° angle with the ground. What type of plane does the ramp represent?',
           'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
           'correctAnswer': 'Inclined plane',
-          'hint': '',
+          'hint': 'This type of plane is sloped and helps objects move up or down gradually.',
           'questionImage': 'assets/images/plane/quiz/pq1.jpg',
         },
         {
@@ -454,7 +454,7 @@ final List<Map<String, dynamic>> shapes = [
               'When an airplane takes off, it travels along a runway that is essentially a large flat surface. What type of plane is the runway considered to be?',
           'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
           'correctAnswer': 'Horizontal plane',
-          'hint': '',
+          'hint': 'This type of plane is flat and level with the ground.',
           'questionImage': 'assets/images/plane/quiz/pq2.jpg',
         },
         {
@@ -462,7 +462,7 @@ final List<Map<String, dynamic>> shapes = [
               'A large sliding door in a building is mounted vertically and opens by sliding along the wall. What type of plane is the sliding door mounted on?',
           'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
           'correctAnswer': 'Vertical plane',
-          'hint': '',
+          'hint': 'This type of plane stands upright, like a wall.',
           'questionImage': 'assets/images/plane/quiz/pq3.jpg',
         },
         {
@@ -470,7 +470,7 @@ final List<Map<String, dynamic>> shapes = [
               'A skier is descending a snow-covered slope. The slope forms an angle of 30° with the horizontal. What type of plane is the slope of the hill considered to be?',
           'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
           'correctAnswer': 'Inclined plane',
-          'hint': '',
+          'hint': 'Skiers typically go down this slanted type of surface.',
           'questionImage': 'assets/images/plane/quiz/pq4.jpg',
         },
         {
@@ -478,7 +478,7 @@ final List<Map<String, dynamic>> shapes = [
               'A shelf in your house is mounted on the wall. The surface of the shelf is parallel to the ground. What type of plane is the shelf considered to be?',
           'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
           'correctAnswer': 'Horizontal plane',
-          'hint': '',
+          'hint': 'Think about a level surface where items rest without rolling.',
           'questionImage': 'assets/images/plane/quiz/pq5.jpg',
         },
         {
@@ -486,7 +486,7 @@ final List<Map<String, dynamic>> shapes = [
               'In a science experiment, a student places a book on an inclined surface that forms a 15° angle with the floor. What type of plane does the inclined surface represent?',
           'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
           'correctAnswer': 'Inclined plane',
-          'hint': '',
+          'hint': 'An angled plane that causes items to slide or roll.',
           'questionImage': 'assets/images/plane/quiz/pq6.jpg',
         },
         {
@@ -494,7 +494,7 @@ final List<Map<String, dynamic>> shapes = [
               'A photographer uses a vertical backdrop for a photo shoot, ensuring it is perfectly upright. What type of plane is the backdrop placed on?',
           'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
           'correctAnswer': 'Vertical plane',
-          'hint': '',
+          'hint': 'This plane goes straight up and down, like a standing wall.',
           'questionImage': 'assets/images/plane/quiz/pq7.jpg',
         },
         {
@@ -502,7 +502,7 @@ final List<Map<String, dynamic>> shapes = [
               'A diver jumps from a diving board that extends horizontally over a pool. Which type of plane does the diving board represent?',
           'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
           'correctAnswer': 'Horizontal plane',
-          'hint': '',
+          'hint': 'A flat, level surface that’s parallel to the water below.',
           'questionImage': 'assets/images/plane/quiz/pq8.jpg',
         },
         {
@@ -510,7 +510,7 @@ final List<Map<String, dynamic>> shapes = [
               'A car is parked on a road that is tilted to help rainwater drain. The slope of the road is at a 5° incline. What type of plane is the surface of the road considered to be?',
           'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
           'correctAnswer': 'Inclined plane',
-          'hint': '',
+          'hint': 'Even a slight slope counts as this kind of angled plane.',
           'questionImage': 'assets/images/plane/quiz/pq9.webp',
         },
         {
@@ -518,7 +518,7 @@ final List<Map<String, dynamic>> shapes = [
               'In a factory, workers assemble parts on a conveyor belt. The conveyor belt is tilted slightly to move items. What type of plane does the surface of the conveyor belt represent?',
           'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
           'correctAnswer': 'Inclined plane',
-          'hint': '',
+          'hint': 'This type of plane helps items move from one height to another.',
           'questionImage': 'assets/images/plane/quiz/pq10.jpg',
         },
       ],
@@ -939,8 +939,8 @@ final List<Map<String, dynamic>> shapes = [
           'question': 'What defines a right-angled triangle?',
           'answers': [
             {'text': 'A triangle with one angle less than 90°', 'correct': false},
-            {'text': 'A triangle with one angle equal to 90°', 'correct': false},
-            {'text': 'A triangle with all sides equal', 'correct': true},
+            {'text': 'A triangle with one angle equal to 90°', 'correct': true},
+            {'text': 'A triangle with all sides equal', 'correct': false}, 
           ],
           'questionImage': '',
         },
@@ -948,8 +948,8 @@ final List<Map<String, dynamic>> shapes = [
           'question': 'Which type of triangle has all angles less than 90°?',
           'answers': [
             {'text': 'Right triangle', 'correct': false},
-            {'text': 'Obtuse triangle', 'correct': true},
-            {'text': 'Acute triangle', 'correct': false},
+            {'text': 'Obtuse triangle', 'correct': false}, 
+            {'text': 'Acute triangle', 'correct': true},
           ],
           'questionImage': '',
         },
@@ -997,6 +997,15 @@ final List<Map<String, dynamic>> shapes = [
           ],
           'questionImage': '',
         },
+        {
+          'question': 'Which triangle has two equal angles and two equal sides?',
+          'answers': [
+            {'text': 'Isosceles triangle', 'correct': true},
+            {'text': 'Right triangle', 'correct': false},
+            {'text': 'Scalene triangle', 'correct': false},
+          ],
+          'questionImage': '',
+        },
       ],
     },
     'quiz': {
@@ -1033,7 +1042,54 @@ final List<Map<String, dynamic>> shapes = [
           'hint': 'All three angles are less than 90 degrees.',
           'questionImage': 'assets/images/triangle/quiz/tq4.jpg',
         },
-        // Additional questions are left empty as per the original file.
+        {
+          'question':
+              'A ladder placed against a wall forms a triangle with the ground. The angle between the ladder and the ground is 90 degrees. What type of triangle is formed?',
+          'options': ['Acute-angled', 'Right-angled', 'Obtuse-angled'],
+          'correctAnswer': 'Right-angled',
+          'hint': 'One angle is exactly 90 degrees.',
+          'questionImage': 'assets/images/triangle/quiz/q5.png',
+        },
+        {
+          'question':
+              'A wooden stand is shaped like a triangle, and one of its angles is more than 90 degrees. What kind of triangle is it?',
+          'options': ['Right-angled', 'Scalene', 'Obtuse-angled'],
+          'correctAnswer': 'Obtuse-angled',
+          'hint': 'One angle is greater than 90 degrees.',
+          'questionImage': 'assets/images/triangle/quiz/q7.png',
+        },
+        {
+          'question':
+              'You cut a piece of cardboard into a triangle with all sides of different lengths. What type of triangle is it?',
+          'options': ['Equilateral', 'Scalene', 'Isosceles'],
+          'correctAnswer': 'Scalene',
+          'hint': 'All sides have different lengths.',
+          'questionImage': 'assets/images/triangle/quiz/q7.png',
+        },
+        {
+          'question':
+              'A flag is made in a triangle shape where two angles are equal and one is different. What triangle does it represent?',
+          'options': ['Isosceles', 'Scalene', 'Equilateral'],
+          'correctAnswer': 'Isosceles',
+          'hint': 'Two angles (and sides) are the same.',
+          'questionImage': 'assets/images/triangle/quiz/q8.png',
+        },
+        {
+          'question':
+              'A bridge has triangular trusses with all angles measuring 60°. What type of triangle are the trusses shaped in?',
+          'options': ['Isosceles', 'Equilateral', 'Acute-angled'],
+          'correctAnswer': 'Equilateral',
+          'hint': 'Each angle is 60°, and all sides are equal.',
+          'questionImage': 'assets/images/triangle/quiz/q9.png',
+        },
+        {
+          'question':
+              'A pizza slice forms a triangle with two equal sides and a sharp tip. What kind of triangle is it likely to be?',
+          'options': ['Scalene', 'Equilateral', 'Isosceles'],
+          'correctAnswer': 'Isosceles',
+          'hint': 'Two equal edges from the crust to the tip.',
+          'questionImage': 'assets/images/triangle/quiz/q10.png',
+        },
       ],
     },
     'section': [
@@ -1286,6 +1342,38 @@ final List<Map<String, dynamic>> shapes = [
           'hint': 'Design with opposite sides parallel and equal, and all angles are right angles.',
           'questionImage': 'assets/images/quadrilateral/quiz/qq6.jpg',
         },
+        {
+          'question':
+              'A diamond-shaped wall clock has all sides of equal length, but the angles are not 90 degrees. What shape does it represent?',
+          'options': ['Rectangle', 'Rhombus', 'Square'],
+          'correctAnswer': 'Rhombus',
+          'hint': 'All sides are equal, but no right angles.',
+          'questionImage': 'assets/images/quadrilateral/quiz/qq7.png',
+        },
+        {
+          'question':
+              'A trapeze artist’s safety net is stretched in a shape where only one pair of sides is parallel. What quadrilateral does this represent?',
+          'options': ['Kite', 'Trapezoid', 'Rhombus'],
+          'correctAnswer': 'Trapezoid',
+          'hint': 'Only one pair of opposite sides are parallel.',
+          'questionImage': 'assets/images/quadrilateral/quiz/qq8.png',
+        },
+        {
+          'question':
+              'A drawing board is designed with two pairs of equal-length adjacent sides, but the opposite sides are not equal or parallel. What shape is it?',
+          'options': ['Kite', 'Parallelogram', 'Rectangle'],
+          'correctAnswer': 'Kite',
+          'hint': 'Two adjacent sides are of equal length.',
+          'questionImage': 'assets/images/quadrilateral/quiz/qq9.png',
+        },
+        {
+          'question':
+              'You are tiling a floor with a pattern made of slanted quadrilaterals where opposite sides are equal and parallel, but angles are not 90 degrees. What shape are the tiles?',
+          'options': ['Rhombus', 'Rectangle', 'Kite'],
+          'correctAnswer': 'Rhombus',
+          'hint': 'Opposite sides are equal and angles are slanted.',
+          'questionImage': 'assets/images/quadrilateral/quiz/qq10.png',
+        },
       ],
     },
     'section': [
@@ -1485,6 +1573,30 @@ final List<Map<String, dynamic>> shapes = [
             {'text': '3', 'correct': false},
           ],
           'questionImage': '',
+        },
+        {
+          'question':
+              'You place a stick through the center of a round lollipop from one side to the other. What is the stick representing?',
+          'options': ['Radius', 'Diameter', 'Chord'],
+          'correctAnswer': 'Diameter',
+          'hint': 'It passes through the center, connecting two opposite points.',
+          'questionImage': 'assets/images/circle/q8.png',
+        },
+        {
+          'question':
+              'In a circular racetrack, a runner completes one full round. What distance did they cover?',
+          'options': ['Diameter', 'Radius', 'Circumference'],
+          'correctAnswer': 'Circumference',
+          'hint': 'It’s the total path along the outer edge of the circle.',
+          'questionImage': 'assets/images/circle/q9.png',
+        },
+        {
+          'question':
+              'You draw a triangle inside a circle such that each vertex touches the circle. What is the circle called in this case?',
+          'options': ['Circumcircle', 'Arc', 'Tangent'],
+          'correctAnswer': 'Circumcircle',
+          'hint': 'It’s a circle that passes through all the triangle’s corners.',
+          'questionImage': 'assets/images/circle/q10.png',
         },
       ],
     },

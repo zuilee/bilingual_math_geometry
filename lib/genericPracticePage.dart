@@ -281,24 +281,34 @@ class _GenericPracticePageState extends State<GenericPracticePage>
   }
 
   /// Builds the final completion screen without a card or transformation.
-  Widget _buildCompletionScreen(bool isDark) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final double horizontalPad = constraints.maxWidth * 0.05;
-        final double topPad = constraints.maxHeight * 0.10;
-        final double bottomPad = constraints.maxHeight * 0.05;
-        return SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraints.maxHeight),
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(horizontalPad, topPad, horizontalPad, bottomPad),
-              child: Column(
+ Widget _buildCompletionScreen(bool isDark) {
+  final double maxCardWidth = min(MediaQuery.of(context).size.width * 0.9, 600);
+  final double maxCardHeight = min(MediaQuery.of(context).size.height * 0.9, 650);
+
+  return Center(
+    child: Container(
+      width: maxCardWidth,
+      height: maxCardHeight,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: Card(
+        elevation: 8.0,
+        color: isDark ? const Color(0xFF171717) : Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Party-pop GIF at the top.
                   Image.asset(
                     'assets/images/party-pop.gif',
-                    height: 250,
+                    height: 200,
                     fit: BoxFit.contain,
                   ),
                   const SizedBox(height: 20.0),
@@ -320,23 +330,31 @@ class _GenericPracticePageState extends State<GenericPracticePage>
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 20.0),
-                  ElevatedButton(
-                    onPressed: _resetQuiz,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _getShapeButtonColor(isDark),
-                      foregroundColor: Colors.white,
-                    ),
-                    child: const Text('Restart Quiz'),
-                  ),
                 ],
               ),
-            ),
+              const SizedBox(height: 32.0),
+              ElevatedButton(
+                onPressed: _resetQuiz,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _getShapeButtonColor(isDark),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 14.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                child: const Text(
+                  'Restart Quiz',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ),
+            ],
           ),
-        );
-      },
-    );
-  }
+        ),
+      ),
+    ),
+  );
+}
 
   Color _getShapeCardColor(bool isDark) {
     final Color shapeColor = shapeData['color'];

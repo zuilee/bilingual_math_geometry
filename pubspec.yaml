@@ -60,6 +60,7 @@ flutter:
     - assets/images/practice.gif
     - assets/images/practice-dark.gif
     - assets/images/party-pop.gif
+    - assets/images/full-marks.gif
     - assets/images/quadrilateral/parallelogram.png
     - assets/images/quadrilateral/rectangle.png
     - assets/images/quadrilateral/square.png
@@ -187,10 +188,19 @@ flutter:
     - assets/images/quadrilateral/quiz/qq4.webp
     - assets/images/quadrilateral/quiz/qq5.jpg
     - assets/images/quadrilateral/quiz/qq6.jpg
+    - assets/images/quadrilateral/quiz/qq7.png
+    - assets/images/quadrilateral/quiz/qq8.png
+    - assets/images/quadrilateral/quiz/qq9.png
+    - assets/images/quadrilateral/quiz/qq10.png
     - assets/images/triangle/quiz/tq1.webp
     - assets/images/triangle/quiz/tq2.webp
     - assets/images/triangle/quiz/tq3.jpg
     - assets/images/triangle/quiz/tq4.jpg
+    - assets/images/triangle/quiz/q5.png
+    - assets/images/triangle/quiz/q7.png
+    - assets/images/triangle/quiz/q8.png
+    - assets/images/triangle/quiz/q9.png
+    - assets/images/triangle/quiz/q10.png
     - assets/images/circle/circle_e.png
     - assets/images/circle/circle_s.png
     - assets/images/circle/Raduis_s.png
@@ -218,6 +228,9 @@ flutter:
     - assets/images/circle/q5.png
     - assets/images/circle/q6.png
     - assets/images/circle/q7.png
+    - assets/images/circle/q8.png
+    - assets/images/circle/q9.png
+    - assets/images/circle/q10.png
     - assets/images/backgroundd-dark.gif
 
 

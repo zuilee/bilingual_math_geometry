@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'shapes_data.dart';
 import 'theme_state.dart';
 
@@ -59,7 +60,7 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
       setState(() {
         score += 5;
       });
-      _showDialog('Correct!', 'Well done!', isDark, true);
+      nextQuestion();
     } else {
       setState(() {
         score -= 1;
@@ -67,42 +68,25 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
       });
 
       if (attemptsLeft <= 0) {
-        _showDialog(
-          'Incorrect',
-          'You have used all attempts.\nThe correct answer is:\n\n${_questions[currentQuestionIndex]['correctAnswer']}',
-          isDark,
-          true,
-        );
+        nextQuestion();
       } else {
-        _showDialog(
-          'Incorrect',
-          'Try again. You have $attemptsLeft attempt left.',
-          isDark,
-          false,
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            backgroundColor: isDark ? const Color(0xFF171717) : null,
+            title: Text('Incorrect', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
+            content: Text('Try again. You have $attemptsLeft attempt left.', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
+            actions: [
+              TextButton(
+                style: TextButton.styleFrom(foregroundColor: isDark ? Colors.white : Colors.black),
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
         );
       }
     }
-  }
-
-  void _showDialog(String title, String content, bool isDark, bool moveNext) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: isDark ? const Color(0xFF171717) : null,
-        title: Text(title, style: TextStyle(color: isDark ? Colors.white : Colors.black)),
-        content: Text(content, style: TextStyle(color: isDark ? Colors.white : Colors.black)),
-        actions: [
-          TextButton(
-            style: TextButton.styleFrom(foregroundColor: isDark ? Colors.white : Colors.black),
-            onPressed: () {
-              Navigator.of(context).pop();
-              if (moveNext) nextQuestion();
-            },
-            child: Text(moveNext ? 'Next' : 'OK'),
-          ),
-        ],
-      ),
-    );
   }
 
   void nextQuestion() {
@@ -113,36 +97,107 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
         selectedOption = null;
       });
     } else {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor: themeModel.isDarkMode ? const Color(0xFF171717) : null,
-            title: Text(
-              'Quiz Finished!',
-              style: TextStyle(color: themeModel.isDarkMode ? Colors.white : Colors.black),
-            ),
-            content: Text(
-              'Congratulations! You completed the quiz. Your score is $score.',
-              style: TextStyle(color: themeModel.isDarkMode ? Colors.white : Colors.black),
-            ),
-            actions: [
-              TextButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: themeModel.isDarkMode ? Colors.white : Colors.black,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Back to Home'),
-              ),
-            ],
-          );
-        },
-      );
+      setState(() {
+        currentQuestionIndex++;
+      });
     }
   }
+
+  Widget _buildFinalScoreCard(bool isDark) {
+    final double maxCardWidth = min(MediaQuery.of(context).size.width * 0.9, 600);
+    final double maxCardHeight = min(MediaQuery.of(context).size.height * 0.9, 650);
+    final bool isPerfectScore = score == (_questions.length * 5);
+
+    return Center(
+      child: Container(
+        width: maxCardWidth,
+        height: maxCardHeight,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Card(
+          elevation: 8.0,
+          color: isDark ? const Color(0xFF171717) : Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  isPerfectScore
+                      ? 'assets/images/full-marks.gif'
+                      : 'assets/images/party-pop.gif',
+                  height: isPerfectScore ? 100 : 200,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(height: 20.0),
+                Text(
+                  'Quiz Completed!',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20.0),
+                Text(
+                  'Your Score: $score/${_questions.length * 5}',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 32.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          score = 0;
+                          currentQuestionIndex = 0;
+                          selectedOption = null;
+                          attemptsLeft = 2;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _getThemeColor(isDark),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                      ),
+                      child: const Text(
+                        'Restart Quiz',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                    ),
+                    const SizedBox(width: 16.0),
+                    ElevatedButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                      ),
+                      child: const Text(
+                        'Exit',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +206,6 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
       builder: (context, _) {
         bool isDark = themeModel.isDarkMode;
         final Color themeColor = _getThemeColor(isDark);
-        final currentQuestion = _questions[currentQuestionIndex];
         final media = MediaQuery.of(context);
 
         return Scaffold(
@@ -160,143 +214,202 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
             child: Container(
               color: themeColor,
               child: SafeArea(
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          '${widget.shapeName} Quiz',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
+                child: Container(
+                  height: 67.2,
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.arrow_back, color: Colors.white),
+                            onPressed: () => Navigator.pop(context),
                           ),
-                        ),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Text(
-                            'Score: $score',
+                          Text(
+                            '${widget.shapeName} Quiz',
                             style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0),
+                              color: Colors.white,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            isDark ? Icons.nightlight_round : Icons.wb_sunny,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            themeModel.toggleTheme();
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          body: Container(
-            color: isDark ? const Color(0xFF212121) : Colors.white,
-            width: double.infinity,
-            height: double.infinity,
-            child: Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: 600,
-                  maxHeight: media.size.height * 0.85,
-                ),
-                child: Card(
-                  elevation: 8.0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  color: isDark ? const Color(0xFF171717) : Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        return SingleChildScrollView(
-                          physics: constraints.maxHeight < 600
-                              ? const BouncingScrollPhysics()
-                              : const NeverScrollableScrollPhysics(),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              if (currentQuestion['questionImage'] != '')
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: Image.asset(
-                                    currentQuestion['questionImage'],
-                                    height: constraints.maxHeight * 0.38,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: const [
                               Text(
-                                currentQuestion['question'],
+                                '+5: Correct',
                                 style: TextStyle(
-                                  fontSize: 20.0,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  color: isDark ? Colors.white : themeColor,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 16.0),
-                              ...List<Widget>.from(
-                                (currentQuestion['options'] as List).map(
-                                  (option) => RadioListTile<String>(
-                                    title: Text(
-                                      option,
-                                      style: TextStyle(color: isDark ? Colors.white : themeColor),
-                                    ),
-                                    value: option,
-                                    groupValue: selectedOption,
-                                    onChanged: (String? value) {
-                                      setState(() {
-                                        selectedOption = value;
-                                      });
-                                    },
-                                    activeColor: themeColor,
-                                  ),
+                                  fontSize: 13.0,
                                 ),
                               ),
-                              const SizedBox(height: 10.0),
-                              TextButton(
-                                onPressed: () => showHint(isDark),
-                                child: Text(
-                                  'Hint',
-                                  style: TextStyle(color: isDark ? Colors.white : themeColor),
+                              Text(
+                                '-1: Wrong',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13.0,
                                 ),
-                              ),
-                              const SizedBox(height: 10.0),
-                              ElevatedButton(
-                                onPressed: () => checkAnswer(isDark),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: themeColor,
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                ),
-                                child: const Text('Submit'),
                               ),
                             ],
                           ),
-                        );
-                      },
-                    ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                            width: 1.5,
+                            height: 34.0,
+                            color: Colors.white,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Score: $score',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              isDark ? Icons.nightlight_round : Icons.wb_sunny,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              themeModel.toggleTheme();
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
+          ),
+          body: Stack(
+            children: [
+              Positioned.fill(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  child: Container(
+                    key: ValueKey(isDark),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          isDark
+                              ? 'assets/images/practice-dark.gif'
+                              : 'assets/images/practice.gif',
+                        ),
+                        fit: BoxFit.cover,
+                        alignment: const Alignment(0, 0.3),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              currentQuestionIndex >= _questions.length
+                  ? _buildFinalScoreCard(isDark)
+                  : Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: 600,
+                          maxHeight: media.size.height * 0.85,
+                        ),
+                        child: Card(
+                          elevation: 8.0,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          color: isDark ? const Color(0xFF171717) : Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                final currentQuestion = _questions[currentQuestionIndex];
+                                return SingleChildScrollView(
+                                  physics: constraints.maxHeight < 600
+                                      ? const BouncingScrollPhysics()
+                                      : const NeverScrollableScrollPhysics(),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      if (currentQuestion['questionImage'] != '')
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 16.0),
+                                          child: Image.asset(
+                                            currentQuestion['questionImage'],
+                                            height: constraints.maxHeight * 0.38,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      Text(
+                                        currentQuestion['question'],
+                                        style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: isDark ? Colors.white : themeColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 16.0),
+                                      ...List<Widget>.from(
+                                        (currentQuestion['options'] as List).map(
+                                          (option) => RadioListTile<String>(
+                                            title: Text(
+                                              option,
+                                              style: TextStyle(color: isDark ? Colors.white : themeColor),
+                                            ),
+                                            value: option,
+                                            groupValue: selectedOption,
+                                            onChanged: (String? value) {
+                                              setState(() {
+                                                selectedOption = value;
+                                              });
+                                            },
+                                            activeColor: themeColor,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10.0),
+                                      TextButton(
+                                        onPressed: () => showHint(isDark),
+                                        child: Text(
+                                          'Hint',
+                                          style: TextStyle(color: isDark ? Colors.white : themeColor),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10.0),
+                                      ElevatedButton(
+                                        onPressed: () => checkAnswer(isDark),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: themeColor,
+                                          foregroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(12),
+                                          ),
+                                        ),
+                                        child: const Text('Submit'),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+            ],
           ),
         );
       },
