@@ -1,6 +1,4 @@
 ---
-
-```markdown
 # Explora Geometry
 
 Explora Geometry is a bilingual (English & Spanish) interactive web application designed to help learners understand basic geometry concepts in an engaging and visual way. The app is built using **Flutter** and supports dynamic theme switching (light/dark mode), interactive practice, and quiz modules.
