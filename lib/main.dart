@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'firebase_options.dart';
 import 'sections.dart';
 import 'shapes_data.dart';
 import 'theme_state.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(BilingualMathGeo());
 }
 
 class BilingualMathGeo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Wrap MaterialApp in AnimatedBuilder so that any change in themeModel rebuilds it immediately.
     return AnimatedBuilder(
       animation: themeModel,
       builder: (context, _) {
@@ -31,6 +37,8 @@ class BilingualMathGeoHomePage extends StatefulWidget {
 }
 
 class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = themeModel.isDarkMode;
@@ -58,6 +66,7 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
               ),
             ),
           ),
+
           // Scrollable content with padding.
           Positioned.fill(
             top: 160,
@@ -88,7 +97,6 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
                       ),
                       itemBuilder: (context, index) {
                         final shape = shapes[index];
-                        // Choose darkcolor if dark mode is enabled.
                         Color tileColor = isDarkMode
                             ? shape['darkcolor'] as Color
                             : shape['color'] as Color;
@@ -106,6 +114,7 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
               ),
             ),
           ),
+
           // Top Wave with Title and Toggle Button.
           Positioned(
             top: 0,
@@ -140,6 +149,12 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
                         onTap: () {
+                          analytics.logEvent(
+                            name: 'mode_change_button_main_screen',
+                            parameters: {
+                              'new_mode': isDarkMode ? 'light' : 'dark',
+                            },
+                          );
                           themeModel.toggleTheme();
                         },
                         child: AnimatedContainer(
@@ -202,6 +217,10 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: () {
+          analytics.logEvent(
+            name: 'click_${title.toLowerCase()}_button',
+          );
+
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -219,7 +238,8 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
           color: color,
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20)),
+              borderRadius: BorderRadius.circular(20),
+            ),
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Stack(
               clipBehavior: Clip.none,
@@ -262,7 +282,7 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
 class _WaveBackgroundPainter extends CustomPainter {
   final bool isDarkMode;
   _WaveBackgroundPainter({required this.isDarkMode});
-  
+
   @override
   void paint(Canvas canvas, Size size) {
     final secondaryPaint = Paint()
@@ -275,6 +295,7 @@ class _WaveBackgroundPainter extends CustomPainter {
       ..lineTo(size.width, 0)
       ..close();
     canvas.drawPath(secondaryPath, secondaryPaint);
+
     final primaryPaint = Paint()
       ..color = isDarkMode ? const Color(0xFF1C2C4C) : const Color(0xFF4A90E2);
     final primaryPath = Path()
@@ -286,7 +307,7 @@ class _WaveBackgroundPainter extends CustomPainter {
       ..close();
     canvas.drawPath(primaryPath, primaryPaint);
   }
-  
+
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
