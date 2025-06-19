@@ -150,7 +150,7 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
                       child: GestureDetector(
                         onTap: () {
                           analytics.logEvent(
-                            name: 'mode_change_button_main_screen',
+                            name: 'TC Main',
                             parameters: {
                               'new_mode': isDarkMode ? 'light' : 'dark',
                             },
@@ -218,7 +218,7 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
       child: GestureDetector(
         onTap: () {
           analytics.logEvent(
-            name: 'click_${title.toLowerCase()}_button',
+            name: '$title Main',
           );
 
           Navigator.push(

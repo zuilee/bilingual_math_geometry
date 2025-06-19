@@ -5,6 +5,7 @@ import 'genericPracticePage.dart';
 import 'genericQuizPage.dart';
 import 'theme_state.dart';
 import 'shapes_data.dart'; // To lookup shape data for colors.
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 class SectionsPage extends StatefulWidget {
   final String title; // e.g. "Angles", "Planes", etc.
@@ -21,8 +22,11 @@ class SectionsPage extends StatefulWidget {
 }
 
 class _SectionsPageState extends State<SectionsPage> {
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = themeModel.isDarkMode;
     return AnimatedBuilder(
       animation: themeModel,
       builder: (context, _) {
@@ -159,7 +163,12 @@ class _SectionsPageState extends State<SectionsPage> {
                         child: MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () {analytics.logEvent(
+                                name: 'TC ${widget.title} Section',
+                                parameters: {
+                                  'new_mode': isDarkMode ? 'light' : 'dark',
+                                },
+                              );
                               themeModel.toggleTheme();
                             },
                             child: AnimatedContainer(
@@ -244,12 +253,21 @@ class _SectionsPageState extends State<SectionsPage> {
           Widget destination;
           switch (pageType.toLowerCase()) {
             case 'learn':
+              analytics.logEvent(
+                name: '${widget.title} Learn',
+              );
               destination = GenericIntroductionPage(shapeName: widget.title);
               break;
             case 'practice':
+              analytics.logEvent(
+                name: '${widget.title} Practice',
+              );
               destination = GenericPracticePage(shapeName: widget.title);
               break;
             case 'quiz':
+              analytics.logEvent(
+                name: '${widget.title} Quiz',
+              );
               destination = GenericQuizPage(shapeName: widget.title);
               break;
             default:
