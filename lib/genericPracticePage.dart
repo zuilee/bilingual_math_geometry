@@ -3,6 +3,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:math';
 import 'shapes_data.dart';
 import 'theme_state.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 class GenericPracticePage extends StatefulWidget {
   final String shapeName;
@@ -14,6 +15,7 @@ class GenericPracticePage extends StatefulWidget {
 
 class _GenericPracticePageState extends State<GenericPracticePage>
     with TickerProviderStateMixin {
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   int _score = 0;
   int _questionIndex = 0;
   late List<Map<String, dynamic>> _questions;
@@ -97,6 +99,7 @@ class _GenericPracticePageState extends State<GenericPracticePage>
   }
 
   void _resetQuiz() {
+    analytics.logEvent(name: '${widget.shapeName} Practice Restart');
     setState(() {
       _score = 0;
       _questionIndex = 0;
@@ -439,12 +442,14 @@ class _GenericPracticePageState extends State<GenericPracticePage>
                             color: Colors.white,
                           ),
                           onPressed: () {
+                            analytics.logEvent(name: 'TC ${widget.shapeName} Practice');
                             themeModel.toggleTheme();
                           },
                         ),
 
                         IconButton(
                           onPressed: () async {
+                            analytics.logEvent(name: '${widget.shapeName} Practice Sound');
                             if (_isSpeaking) {
                               await flutterTts.stop();
                               setState(() {

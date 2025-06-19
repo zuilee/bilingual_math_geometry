@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'shapes_data.dart';
 import 'theme_state.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+
 
 class GenericIntroductionPage extends StatefulWidget {
   final String shapeName;
@@ -12,6 +14,7 @@ class GenericIntroductionPage extends StatefulWidget {
 }
 
 class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   bool _isEnglish = true;
   FlutterTts flutterTts = FlutterTts();
   bool _isSpeaking = false;
@@ -295,7 +298,10 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.translate, color: Colors.white),
-                          onPressed: _toggleLanguage,
+                          onPressed:(){
+                            analytics.logEvent(name: '${widget.shapeName} Learn Translate');
+                            _toggleLanguage;
+                          }
                         ),
                         IconButton(
                           icon: Icon(
@@ -303,6 +309,7 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
                             color: _isSpeaking ? Colors.blue : Colors.white,
                           ),
                           onPressed: () {
+                            analytics.logEvent(name: '${widget.shapeName} Learn Sound');
                             setState(() {
                               _voiceButtonClickCount++;
                             });
@@ -321,6 +328,7 @@ class _GenericIntroductionPageState extends State<GenericIntroductionPage> {
                             color: Colors.white,
                           ),
                           onPressed: () {
+                            analytics.logEvent(name: 'TC ${widget.shapeName} Learn');
                             themeModel.toggleTheme();
                           },
                         ),

@@ -74,10 +74,10 @@ class _BilingualMathGeoHomePageState extends State<BilingualMathGeoHomePage> {
               clipBehavior: Clip.none,
               child: Padding(
                 padding: EdgeInsets.only(
-                  top: screenHeight * 0.10,
+                  top: screenHeight * 0.15,
                   bottom: 24.0,
-                  left: 24.0,
-                  right: 24.0,
+                  left: 150.0,
+                  right: 150.0,
                 ),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
