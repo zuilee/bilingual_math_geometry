@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:math';
 import 'shapes_data.dart';
 import 'theme_state.dart';
@@ -19,6 +20,9 @@ class _GenericPracticePageState extends State<GenericPracticePage>
   late AnimationController _controller;
   late Animation<double> _animation;
   bool _isFlipped = false;
+
+  final FlutterTts flutterTts = FlutterTts();
+  bool _isSpeaking = false;
 
   // Retrieve shape data so we can use shape['color'] and shape['darkcolor'].
   Map<String, dynamic> get shapeData =>
@@ -42,11 +46,41 @@ class _GenericPracticePageState extends State<GenericPracticePage>
       vsync: this,
     );
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _setupTTS();
+  }
+
+  Future<void> _setupTTS() async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setPitch(1.0);
+  }
+
+  Future<void> _speakCurrentQuestion() async {
+    await flutterTts.stop();
+    final question = _questions[_questionIndex];
+    String toSpeak = question['question'];
+    for (var answer in question['answers']) {
+      toSpeak += ". ${answer['text']}";
+    }
+    setState(() {
+    _isSpeaking = true;
+    
+  });
+
+    await flutterTts.setLanguage('en-US');
+    await flutterTts.speak(toSpeak);
+
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        _isSpeaking = false;
+      });
+    });
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    flutterTts.stop();
     super.dispose();
   }
 
@@ -408,6 +442,23 @@ class _GenericPracticePageState extends State<GenericPracticePage>
                             themeModel.toggleTheme();
                           },
                         ),
+
+                        IconButton(
+                          onPressed: () async {
+                            if (_isSpeaking) {
+                              await flutterTts.stop();
+                              setState(() {
+                                _isSpeaking = false;
+                            });
+                          } else {
+                            await _speakCurrentQuestion();
+                          }
+                        },
+                        icon: Icon(
+                          Icons.volume_up,
+                          color: _isSpeaking ? Colors.blue : Colors.white,
+                        ),
+                      ),
                       ],
                     ),
                   ],

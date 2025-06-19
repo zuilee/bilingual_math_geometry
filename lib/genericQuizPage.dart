@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:math';
 import 'shapes_data.dart';
 import 'theme_state.dart';
@@ -18,6 +19,9 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
   String? selectedOption;
   int score = 0;
 
+  final FlutterTts flutterTts = FlutterTts();
+  bool _isSpeaking = false;
+
   Map<String, dynamic> get shapeData =>
       shapes.firstWhere((element) => element['name'] == widget.shapeName);
 
@@ -29,6 +33,42 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
   void initState() {
     super.initState();
     _questions = List<Map<String, dynamic>>.from(shapeData['quiz']['questions']);
+    _setupTTS();
+  }
+
+  Future<void> _setupTTS() async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setPitch(1.0);
+  }
+
+  Future<void> _speakCurrentQuestion() async {
+    await flutterTts.stop();
+    final question = _questions[currentQuestionIndex];
+    String toSpeak = question['question'];
+    for (var option in question['options']) {
+      toSpeak += ". $option";
+    }
+
+    setState(() {
+    _isSpeaking = true;
+    
+  });
+
+    await flutterTts.setLanguage('en-US');
+    await flutterTts.speak(toSpeak);
+
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        _isSpeaking = false;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop(); // Ensures narration stops on leaving the page
+    super.dispose();
   }
 
   void showHint(bool isDark) {
@@ -313,7 +353,24 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
                               themeModel.toggleTheme();
                             },
                           ),
-                        ],
+
+                          IconButton(
+                          onPressed: () async {
+                            if (_isSpeaking) {
+                              await flutterTts.stop();
+                              setState(() {
+                                _isSpeaking = false;
+                            });
+                          } else {
+                            await _speakCurrentQuestion();
+                          }
+                        },
+                        icon: Icon(
+                          Icons.volume_up,
+                          color: _isSpeaking ? Colors.blue : Colors.white,
+                        ),
+                      ),
+                      ],
                       ),
                     ],
                   ),
