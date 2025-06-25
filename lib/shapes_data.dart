@@ -87,92 +87,106 @@ final List<Map<String, dynamic>> shapes = [
     'practice': {
       'questions': [
         {
-          'question': 'What is a line?',
+          'question': 
+          {'en': 'What is a line?', 'es': '¿Qué es una línea?'},
           'answers': [
-            {'text': 'A curve', 'correct': false},
-            {'text': 'A straight path', 'correct': true},
-            {'text': 'A circle', 'correct': false},
+            {'text': {'en': 'A curve', 'es': 'Una curva'}, 'correct': false},
+            {'text': {'en': 'A straight path', 'es': 'Un camino recto'}, 'correct': true},
+            {'text': {'en': 'A circle', 'es': 'Un círculo'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is a ray?',
+          'question': 
+          {'en': 'What is a ray?', 'es': '¿Qué es un rayo?'},
           'answers': [
-            {'text': 'Part of a line with two endpoints', 'correct': false},
-            {'text': 'Part of a line with one endpoint', 'correct': true},
-            {'text': 'A straight path', 'correct': false},
+            {'text': {'en': 'Part of a line with two endpoints', 'es': 'Parte de una línea con dos puntos finales'}, 'correct': false},
+            {'text': {'en': 'Part of a line with one endpoint', 'es': 'Parte de una línea con un punto final'}, 'correct': true},
+            {'text': {'en': 'A straight path', 'es': 'Un camino recto'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is a line segment?',
+          'question': 
+          {'en': 'What is a line segment?', 'es': '¿Qué es un segmento de línea?'},
           'answers': [
-            {'text': 'Part of a line with one endpoint', 'correct': false},
-            {'text': 'Part of a line with two endpoints', 'correct': true},
-            {'text': 'A straight path', 'correct': false},
+            {'text': {'en': 'Part of a line with one endpoint', 'es': 'Parte de una línea con un punto final'}, 'correct': false},
+            {'text': {'en': 'Part of a line with two endpoints', 'es': 'Parte de una línea con dos puntos finales'}, 'correct': true},
+            {'text': {'en': 'A straight path', 'es': 'Un camino recto'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which of the following statements is true?',
+          'question': 
+          {'en': 'Which of the following statements is true?', 'es': '¿Cuál de las siguientes afirmaciones es correcta?'},
           'answers': [
-            {'text': 'A ray has two endpoints.', 'correct': false},
-            {'text': 'A line segment has one endpoint.', 'correct': false},
-            {'text': 'A line has no endpoints.', 'correct': true},
+            {'text': {'en': 'A ray has two endpoints.', 'es': 'Un rayo tiene dos puntos finales.'}, 'correct': false},
+            {'text': {'en': 'A line segment has one endpoint.', 'es': 'Un segmento de línea tiene un punto final.'}, 'correct': false},
+            {'text': {'en': 'A line has no endpoints.', 'es': 'Una línea no tiene puntos finales.'}, 'correct': true},
           ],
           'questionImage': '',
         },
         {
-          'question': 'If two lines never meet and are always the same distance apart, what is their relationship?',
+          'question': 
+          {'en': 'If two lines never meet and are always the same distance apart, what is their relationship?',
+          'es': 'Si dos líneas nunca se encuentran y siempre están a la misma distancia, ¿cuál es su relación?'},
           'answers': [
-            {'text': 'The lines are parallel', 'correct': true},
-            {'text': 'The lines are perpendicular', 'correct': false},
-            {'text': 'The lines are horizontal', 'correct': false},
+            {'text': {'en': 'The lines are parallel', 'es': 'Las lineas son paralelas'}, 'correct': true},
+            {'text': {'en': 'The lines are perpendicular', 'es': 'Las lineas son perpendiculares'}, 'correct': false},
+            {'text': {'en': 'The lines are horizontal', 'es': 'Las líneas son horizontales'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'If two lines cross each other at a 90-degree angle, what type of lines are they?',
+          'question': 
+          {'en': 'If two lines cross each other at a 90-degree angle, what type of lines are they?',
+          'es': 'Si dos líneas se cruzan en un ángulo de 90 grados, ¿qué tipo de líneas son?'},
           'answers': [
-            {'text': 'The lines are parallel', 'correct': false},
-            {'text': 'The lines are perpendicular', 'correct': true},
-            {'text': 'The lines are horizontal', 'correct': false},
+            {'text': {'en': 'The lines are parallel', 'es': 'Las lineas son paralelas'}, 'correct': false},
+            {'text': {'en': 'The lines are perpendicular', 'es': 'Las lineas son perpendiculares'}, 'correct': true},
+            {'text': {'en': 'The lines are horizontal', 'es': 'Las líneas son horizontales'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Identify the line in this image.',
+          'question': 
+          {'en': 'Identify the line in this image.', 'es': 'Identifica la línea en esta imagen.'},
           'answers': [
-            {'text': 'AB', 'correct': true},
-            {'text': 'AC', 'correct': false},
-            {'text': 'BC', 'correct': false},
+            {'text': {'en': 'AB', 'es': 'AB'}, 'correct': true},
+            {'text': {'en': 'AC', 'es': 'AC'}, 'correct': false},
+            {'text': {'en': 'BC', 'es': 'BC'}, 'correct': false},
           ],
           'questionImage': 'assets/images/lines/P7.png',
         },
         {
-          'question': 'Which parts of this image represent rays?',
+          'question': 
+          {'en': 'Which parts of this image represent rays?', 'es': '¿Qué partes de esta imagen representan rayos?'},
           'answers': [
-            {'text': 'CB and CA', 'correct': true},
-            {'text': 'AB and AC', 'correct': false},
-            {'text': 'CB and AB', 'correct': true},
+            {'text': {'en': 'CB and CA', 'es': 'CB y CA'}, 'correct': true},
+            {'text': {'en': 'AB and AC', 'es': 'AB y AC'}, 'correct': false},
+            {'text': {'en': 'CB and AB', 'es': 'CB y AB'}, 'correct': true},
           ],
           'questionImage': 'assets/images/lines/P8.png',
         },
         {
-          'question': 'Which parts of this image represent a line segment?',
+          'question': 
+          {'en': 'Which parts of this image represent a line segment?', 
+          'es': '¿Qué partes de esta imagen representan un segmento de línea?'},
           'answers': [
-            {'text': 'AB', 'correct': false},
-            {'text': 'DC', 'correct': true},
-            {'text': 'BC', 'correct': false},
+            {'text': {'en': 'AB', 'es': 'AB'}, 'correct': false},
+            {'text': {'en': 'DC', 'es': 'DC'}, 'correct': true},
+            {'text': {'en': 'BC', 'es': 'BC'}, 'correct': false},
           ],
           'questionImage': 'assets/images/lines/P7.png',
         },
         {
-          'question': 'Which point is the endpoint of the ray, and in which direction does it extend?',
+          'question': 
+          {'en': 'Which point is the endpoint of the ray, and in which direction does it extend?', 
+          'es': '¿Cuál es el punto final del rayo y en qué dirección se extiende?'},
           'answers': [
-            {'text': 'Endpoint A, extends right', 'correct': false},
-            {'text': 'Endpoint B, extends right', 'correct': false},
-            {'text': 'Endpoint A, extends left', 'correct': true},
+            {'text': {'en': 'Endpoint A, extends right', 'es': 'Punto final A, se extiende hacia la derecha'}, 'correct': false},
+            {'text': {'en': 'Endpoint B, extends right', 'es': 'Punto final B, se extiende hacia la derecha'}, 'correct': false},
+            {'text': {'en': 'Endpoint A, extends left', 'es': 'Punto final A, se extiende hacia la izquierda'}, 'correct': true},
           ],
           'questionImage': 'assets/images/lines/P10.png',
         },
@@ -182,92 +196,117 @@ final List<Map<String, dynamic>> shapes = [
       'questions': [
         {
           'question':
-              'You are standing at the edge of a straight road that extends as far as you can see. What is the best geometric representation of this road?',
-          'options': ['Line', 'Ray', 'Segment'],
-          'correctAnswer': 'Line',
-          'hint': 'A road extends infinitely on both sides.',
+              {'en': 'You are standing at the edge of a straight road that extends as far as you can see. What is the best geometric representation of this road?',
+              'es': 'Estás parado al borde de una carretera recta que se extiende hasta donde alcanza la vista. ¿Cuál es la mejor representación geométrica de esta carretera?'},
+          'options': {'en': ['Line', 'Ray', 'Segment'], 'es': ['Línea', 'Rayo', 'Segmento']},
+          'correctAnswer': {'en': 'Line', 'es': 'Línea'},
+          'hint':  {'en': 'A road extends infinitely on both sides.', 'es': 'Un camino se extiende infinitamente por ambos lados.'},
           'questionImage': 'assets/images/lines/quiz/lq1.webp',
         },
         {
           'question':
-              'A flashlight is turned on in a dark room, emitting light in one direction. How can the path of light from the flashlight be represented?',
-          'options': ['Line', 'Ray', 'Segment'],
-          'correctAnswer': 'Ray',
+              {'en': 'A flashlight is turned on in a dark room, emitting light in one direction. How can the path of light from the flashlight be represented?', 
+              'es': 'Se enciende una linterna en una habitación oscura, emitiendo luz en una dirección. ¿Cómo se puede representar la trayectoria de la luz de la linterna?'},
+          'options': {'en': ['Line', 'Ray', 'Segment'], 'es': ['Línea', 'Rayo', 'Segmento']},
+          'correctAnswer': {'en': 'Ray', 'es': 'Rayo'}, 
           'hint':
-              'The flashlight itself is one endpoint and the light extends infinitely in the direction it is pointed.',
+              {'en': 'The flashlight itself is one endpoint and the light extends infinitely in the direction it is pointed.',
+              'es': 'La linterna en sí es un punto final y la luz se extiende infinitamente en la dirección en la que se apunta.'}, 
           'questionImage': 'assets/images/lines/quiz/lq2.jpg',
         },
         {
           'question':
-              'You are measuring the length of a wooden stick with a ruler. What geometric concept does the stick represent?',
-          'options': ['Line', 'Ray', 'Segment'],
-          'correctAnswer': 'Segment',
-          'hint': 'The wooden stick has two endpoints.',
+              {'en': 'You are measuring the length of a wooden stick with a ruler. What geometric concept does the stick represent?', 
+              'es': 'Estás midiendo la longitud de un palo de madera con una regla. ¿Qué concepto geométrico representa el palo?'},
+          'options': {'en': ['Line', 'Ray', 'Segment'], 'es': ['Línea', 'Rayo', 'Segmento']},
+          'correctAnswer': {'en': 'Segment', 'es': 'Segmento'},
+          'hint': {'en': 'The wooden stick has two endpoints.', 'es': 'El palo de madera tiene dos extremos.'},
           'questionImage': 'assets/images/lines/quiz/lq3.jpg',
         },
         {
           'question':
-              'Two railroad tracks run side by side and never meet, no matter how far they extend. How are these tracks geometrically classified?',
-          'options': ['Perpendicular lines', 'Intersecting lines', 'Parallel line'],
-          'correctAnswer': 'Parallel line',
-          'hint': 'The railroads never meet.',
+              {'en': 'Two railroad tracks run side by side and never meet, no matter how far they extend. How are these tracks geometrically classified?', 
+              'es': 'Dos vías de ferrocarril discurren una junto a la otra y nunca se encuentran, por mucho que se extiendan. ¿Cómo se clasifican geométricamente estas vías?'},
+          'options': {'en': ['Perpendicular lines', 'Intersecting lines', 'Parallel line'], 'es': ['Líneas perpendiculares', 'Líneas que se intersecan', 'Líneas paralelas']},
+          'correctAnswer': {'en': 'Parallel line', 'es': 'Línea paralela'},
+          'hint': {'en': 'The railroads never meet.', 'es': 'Los ferrocarriles nunca se encuentran.'},
           'questionImage': 'assets/images/lines/quiz/lq4.jpg',
         },
         {
           'question':
-              'A flagpole stands upright on flat ground. The pole and the ground meet at a right angle. How can this arrangement be described geometrically?',
-          'options': ['Parallel lines', 'Intersecting lines', 'Perpendicular lines'],
-          'correctAnswer': 'Perpendicular lines',
-          'hint': 'Angle formed between pole and ground is exactly 90 degrees.',
+              {'en': 'A flagpole stands upright on flat ground. The pole and the ground meet at a right angle. How can this arrangement be described geometrically?', 
+              'es': 'Un asta de bandera se yergue sobre un terreno plano. El asta y el suelo se encuentran en ángulo recto. ¿Cómo se puede describir geométricamente esta disposición?'},
+          'options': {'en': ['Parallel lines', 'Intersecting lines', 'Perpendicular lines'], 'es': ['Líneas paralelas', 'Líneas que se intersecan', 'Líneas perpendiculares']},
+          'correctAnswer': {'en': 'Perpendicular lines', 'es': 'Líneas perpendiculares'},
+          'hint': {'en': 'Angle formed between pole and ground is exactly 90 degrees.', 'es': 'El ángulo formado entre el poste y el suelo es exactamente 90 grados.'},
           'questionImage': 'assets/images/lines/quiz/lq5.jpg',
         },
         {
           'question':
-              'Two roads cross each other at an intersection but do not form right angles. What is the geometric relationship between these roads?',
-          'options': ['Parallel lines', 'Perpendicular lines', 'Intersecting lines'],
-          'correctAnswer': 'Intersecting lines',
-          'hint': 'Angle between the two roads is not 90 degrees.',
+              {'en': 'Two roads cross each other at an intersection but do not form right angles. What is the geometric relationship between these roads?', 
+              'es': 'Dos caminos se cruzan en una intersección, pero no forman ángulos rectos. ¿Cuál es la relación geométrica entre estos caminos?'},
+          'options': {'en': ['Parallel lines', 'Perpendicular lines', 'Intersecting lines'], 'es': ['Líneas paralelas', 'Líneas perpendiculares', 'Líneas que se intersecan']},
+          'correctAnswer': {'en': 'Intersecting lines', 'es': 'Líneas que se cruzan'},
+          'hint': {'en': 'Angle between the two roads is not 90 degrees.', 'es': 'El ángulo entre los dos caminos no es de 90 grados.'},
           'questionImage': 'assets/images/lines/quiz/lq6.jpg',
         },
         {
           'question':
-              'A basketball court has markings for the free throw lane. The sidelines of the court never touch, while the baseline and the sideline meet at a right angle. Which types of lines are the two sidelines and the sidelines and the baseline?',
-          'options': [
+              {'en': 'A basketball court has markings for the free throw lane. The sidelines of the court never touch, while the baseline and the sideline meet at a right angle. Which types of lines are the two sidelines and the sidelines and the baseline?', 
+              'es': 'Una cancha de baloncesto tiene marcas para la línea de tiros libres. Las líneas laterales de la cancha nunca se tocan, mientras que la línea de fondo y la línea lateral se encuentran en ángulo recto. ¿Qué tipos de líneas son las dos líneas laterales y las líneas laterales y la línea de fondo?'},
+          'options': {'en': 
+          [
             'Parallel and Intersecting',
             'Parallel and Perpendicular',
             'Perpendicular and Intersecting'
-          ],
-          'correctAnswer': 'Parallel and Perpendicular',
+          ], 
+          'es': 
+          [
+            'Paralelas e intersecantes',
+            'Paralelas y perpendiculares',
+            'Perpendiculares e intersecantes'
+          ]},
+          'correctAnswer': {'en': 'Parallel and Perpendicular', 'es': 'Paralelas y perpendiculares'},
           'hint':
-              'The sidelines never meet. The baseline and sideline meet at a 90 degree angle.',
+              {'en': 'The sidelines never meet. The baseline and sideline meet at a 90 degree angle.', 'es': 'Las líneas laterales nunca se tocan. La línea de fondo y la línea lateral se encuentran en un ángulo de 90 grados.'},
           'questionImage': 'assets/images/lines/quiz/lq7.webp',
         },
         {
           'question':
-              'A ladder leans against a wall. The wall is vertical, and the ground is horizontal. The ladder forms a triangle with the wall and the ground. Which two lines are perpendicular in this scenario?',
-          'options': [
+              {'en': 'A ladder leans against a wall. The wall is vertical, and the ground is horizontal. The ladder forms a triangle with the wall and the ground. Which two lines are perpendicular in this scenario?', 
+              'es': 'Una escalera se apoya contra una pared. La pared es vertical y el suelo horizontal. La escalera forma un triángulo con la pared y el suelo. ¿Cuáles dos líneas son perpendiculares en este caso?'},
+          'options': {'en': 
+          [
             'The ladder and the wall',
             'The ladder and the ground',
             'The wall and the ground'
-          ],
-          'correctAnswer': 'The wall and the ground',
-          'hint': 'The wall and the ground meet at a 90 degree angle.',
+          ], 
+          'es': 
+          [
+            'La escalera y el muro',
+            'La escalera y el suelo',
+            'El muro y el suelo'
+          ]},
+          'correctAnswer': {'en': 'The wall and the ground', 'es': 'El muro y el suelo'},
+          'hint': {'en': 'The wall and the ground meet at a 90 degree angle.', 'es': 'La pared y el suelo se encuentran en un ángulo de 90 grados.'},
           'questionImage': 'assets/images/lines/quiz/lq8.jpg',
         },
         {
           'question':
-              'In a city grid system, the main street runs north-south, and cross streets run east-west. What is the relationship between the main street and any one of the cross streets?',
-          'options': ['Parallel lines', 'Perpendicular lines', 'Rays'],
-          'correctAnswer': 'Perpendicular lines',
-          'hint': 'The main street and cross streets meet at a 90 degree angle.',
+              {'en': 'In a city grid system, the main street runs north-south, and cross streets run east-west. What is the relationship between the main street and any one of the cross streets?', 
+              'es': 'En un sistema de cuadrícula urbana, la calle principal corre de norte a sur y las calles transversales de este a oeste. ¿Cuál es la relación entre la calle principal y cualquiera de las calles transversales?'},
+          'options': {'en': ['Parallel lines', 'Perpendicular lines', 'Rays'], 'es': ['Líneas paralelas', 'Líneas perpendiculares', 'Rayos']},
+          'correctAnswer': {'en': 'Perpendicular lines', 'es': 'Líneas perpendiculares'},
+          'hint': {'en': 'The main street and cross streets meet at a 90 degree angle.', 'es': 'La calle principal y las calles transversales se encuentran en un ángulo de 90 grados.'},
           'questionImage': 'assets/images/lines/quiz/lq9.jpg',
         },
         {
           'question':
-              'You are driving on a highway with two lanes going in the same direction. These lanes run side by side without ever meeting. How can the geometric relationship between these lanes be described?',
-          'options': ['Parallel lines', 'Perpendicular lines', 'Rays'],
-          'correctAnswer': 'Parallel lines',
-          'hint': 'The lanes never intersect.',
+              {'en': 'You are driving on a highway with two lanes going in the same direction. These lanes run side by side without ever meeting. How can the geometric relationship between these lanes be described?', 
+              'es': 'Conduces por una autopista con dos carriles en la misma dirección. Estos carriles discurren uno junto al otro sin cruzarse. ¿Cómo se puede describir la relación geométrica entre estos carriles?'},
+          'options': {'en': ['Parallel lines', 'Perpendicular lines', 'Rays'], 'es': ['Líneas paralelas', 'Líneas perpendiculares', 'Rayos']},
+          'correctAnswer': {'en': 'Parallel lines', 'es': 'Líneas paralelas'},
+          'hint': {'en': 'The lanes never intersect.', 'es': 'Los carriles nunca se cruzan.'},
           'questionImage': 'assets/images/lines/quiz/lq10.jpg',
         },
       ],
@@ -349,91 +388,111 @@ final List<Map<String, dynamic>> shapes = [
     'practice': {
       'questions': [
         {
-          'question': 'What is a plane?',
+          'question':
+          {'en': 'What is a plane?', 
+          'es': '¿Qué es un avión?'},
           'answers': [
-            {'text': 'A flat, two-dimensional surface', 'correct': true},
-            {'text': 'A three-dimensional shape', 'correct': false},
-            {'text': 'A curved surface', 'correct': false},
+            {'text': {'en': 'A flat, two-dimensional surface', 'es': 'Una superficie plana y bidimensional'}, 'correct': true},
+            {'text': {'en': 'A three-dimensional shape', 'es': 'Una forma tridimensional'}, 'correct': false},
+            {'text': {'en': 'A curved surface', 'es': 'Una superficie curva'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is a horizontal plane?',
+          'question': 
+          {'en': 'What is a horizontal plane?', 
+          'es': '¿Qué es un plano horizontal?'},
           'answers': [
-            {'text': 'A plane parallel to the horizon', 'correct': true},
-            {'text': 'A plane perpendicular to the horizon', 'correct': false},
-            {'text': 'A slanted plane', 'correct': false},
+            {'text': {'en': 'A plane parallel to the horizon', 'es': 'Un plano paralelo al horizonte'}, 'correct': true},
+            {'text': {'en': 'A plane perpendicular to the horizon', 'es': 'Un plano perpendicular al horizonte'}, 'correct': false},
+            {'text': {'en': 'A slanted plane', 'es': 'Un plano inclinado'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is a vertical plane?',
+          'question': 
+          {'en': 'What is a vertical plane?', 
+          'es': '¿Qué es un plano vertical?'},
           'answers': [
-            {'text': 'A plane parallel to the horizon', 'correct': false},
-            {'text': 'A plane perpendicular to the horizon', 'correct': true},
-            {'text': 'A slanted plane', 'correct': false},
+            {'text': {'en': 'A plane parallel to the horizon', 'es': 'Un plano paralelo al horizonte'}, 'correct': false},
+            {'text': {'en': 'A plane perpendicular to the horizon', 'es': 'Un plano perpendicular al horizonte'}, 'correct': true},
+            {'text': {'en': 'A slanted plane', 'es': 'Un plano inclinado'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which of the following best describes an inclined plane?',
+          'question': 
+          {'en': 'Which of the following best describes an inclined plane?', 
+          'es': '¿Cuál de las siguientes opciones describe mejor un plano inclinado?'},
           'answers': [
-            {'text': 'A plane that curves upward', 'correct': false},
-            {'text': 'A flat surface at an angle to the ground', 'correct': true},
-            {'text': 'A flat surface parallel to the ground', 'correct': false},
+            {'text': {'en': 'A plane that curves upward', 'es': 'Un avión que se curva hacia arriba'}, 'correct': false},
+            {'text': {'en': 'A flat surface at an angle to the ground', 'es': 'Una superficie plana en ángulo con respecto al suelo.'}, 'correct': true},
+            {'text': {'en': 'A flat surface parallel to the ground', 'es': 'Una superficie plana paralela al suelo.'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which of these is an example of a horizontal plane in real life?',
+          'question': 
+          {'en': 'Which of these is an example of a horizontal plane in real life?', 
+          'es': '¿Cuál de estos es un ejemplo de un plano horizontal en la vida real?'},
           'answers': [
-            {'text': 'A wall', 'correct': false},
-            {'text': 'The surface of a table', 'correct': true},
-            {'text': 'A ramp', 'correct': false},
+            {'text': {'en': 'A wall', 'es': 'Una pared'}, 'correct': false},
+            {'text': {'en': 'The surface of a table', 'es': 'La superficie de una mesa'}, 'correct': true},
+            {'text': {'en': 'A ramp', 'es': 'Una rampa'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'True or False: A vertical plane is always parallel to the ground.',
+          'question': 
+          {'en': 'True or False: A vertical plane is always parallel to the ground.', 
+          'es': 'Verdadero o falso: Un plano vertical siempre es paralelo al suelo.'},
           'answers': [
-            {'text': 'True', 'correct': false},
-            {'text': 'False', 'correct': true},
+            {'text': {'en': 'True', 'es': 'Verdadero'}, 'correct': false},
+            {'text': {'en': 'False', 'es': 'Falso'}, 'correct': true},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What are the types of planes?',
+          'question': 
+          {'en': 'What are the types of planes?', 
+          'es': '¿Cuales son los tipos de aviones?'},
           'answers': [
-            {'text': 'Horizontal, vertical, inclined', 'correct': true},
-            {'text': 'Acute, obtuse, right', 'correct': false},
-            {'text': 'None of the above', 'correct': false},
+            {'text': {'en': 'Horizontal, vertical, inclined', 'es': 'Horizontal, vertical, inclinada'}, 'correct': true},
+            {'text': {'en': 'Acute, obtuse, right', 'es': 'Agudo, obtuso, recto'}, 'correct': false},
+            {'text': {'en': 'None of the above', 'es': 'Ninguna de las anteriores'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What angle does a vertical plane typically make with the ground?',
+          'question': 
+          {'en': 'What angle does a vertical plane typically make with the ground?', 
+          'es': '¿Qué ángulo forma típicamente un plano vertical con el suelo?'},
           'answers': [
-            {'text': '45 degrees', 'correct': false},
-            {'text': '90 degrees', 'correct': true},
-            {'text': '180 degrees', 'correct': false},
+            {'text': {'en': '45 degrees', 'es': '45 grados'}, 'correct': false},
+            {'text': {'en': '90 degrees', 'es': '90 grados'}, 'correct': true},
+            {'text': {'en': '180 degrees', 'es': '180 grados'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which of the following angles would an inclined plane make with the ground?',
+          'question': 
+          {'en': 'Which of the following angles would an inclined plane make with the ground?', 
+          'es': '¿Cuál de los siguientes ángulos formaría un plano inclinado con el suelo?'},
           'answers': [
-            {'text': '45 degrees', 'correct': true},
-            {'text': '90 degrees', 'correct': false},
-            {'text': '0 degrees', 'correct': false},
+            {'text': {'en': '45 degrees', 'es': '45 grados'}, 'correct': true},
+            {'text': {'en': '90 degrees', 'es': '90 grados'}, 'correct': false},
+            {'text': {'en': '0 degrees', 'es': '0 grados'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What angle does a horizontal plane typically make with the ground?',
+          'question': 
+          {'en': 'What angle does a horizontal plane typically make with the ground?', 
+          'es': '¿Qué ángulo forma típicamente un plano horizontal con el suelo?'},
           'answers': [
-            {'text': '45 degrees', 'correct': false},
-            {'text': '90 degrees', 'correct': false},
-            {'text': '0 degrees', 'correct': true},
+            {'text': {'en': '45 degrees', 'es': '45 grados'}, 'correct': false},
+            {'text': {'en': '90 degrees', 'es': '90 grados'}, 'correct': false},
+            {'text': {'en': '0 degrees', 'es': '0 grados'}, 'correct': true},
           ],
           'questionImage': '',
         },
@@ -443,82 +502,92 @@ final List<Map<String, dynamic>> shapes = [
       'questions': [
         {
           'question':
-              'A construction worker is building a ramp for a wheelchair. The ramp is inclined at a 12° angle with the ground. What type of plane does the ramp represent?',
-          'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
-          'correctAnswer': 'Inclined plane',
-          'hint': 'This type of plane is sloped and helps objects move up or down gradually.',
+              {'en': 'A construction worker is building a ramp for a wheelchair. The ramp is inclined at a 12° angle with the ground. What type of plane does the ramp represent?', 
+              'es': 'Un obrero construye una rampa para una silla de ruedas. La rampa tiene una inclinación de 12° con respecto al suelo. ¿Qué tipo de plano representa la rampa?'},
+          'options': {'en': ['Horizontal plane', 'Vertical plane', 'Inclined plane'], 'es': ['Plano horizontal', 'Plano vertical', 'Plano inclinado']},
+          'correctAnswer': {'en': 'Inclined plane', 'es': 'Plano inclinado'},
+          'hint': {'en': 'This type of plane is sloped and helps objects move up or down gradually.', 'es': 'Este tipo de plano está inclinado y ayuda a que los objetos se muevan hacia arriba o hacia abajo gradualmente.'},
           'questionImage': 'assets/images/plane/quiz/pq1.jpg',
         },
         {
           'question':
-              'When an airplane takes off, it travels along a runway that is essentially a large flat surface. What type of plane is the runway considered to be?',
-          'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
-          'correctAnswer': 'Horizontal plane',
-          'hint': 'This type of plane is flat and level with the ground.',
+              {'en': 'When an airplane takes off, it travels along a runway that is essentially a large flat surface. What type of plane is the runway considered to be?', 
+              'es': 'Cuando un avión despega, recorre una pista que es esencialmente una gran superficie plana. ¿Qué tipo de avión se considera una pista?'},
+          'options': {'en': ['Horizontal plane', 'Vertical plane', 'Inclined plane'], 'es': ['Plano horizontal', 'Plano vertical', 'Plano inclinado']},
+          'correctAnswer': {'en': 'Horizontal plane', 'es': 'Plano horizontal'},
+          'hint': {'en': 'This type of plane is flat and level with the ground.', 'es': 'Este tipo de avión es plano y nivelado con el suelo.'},
           'questionImage': 'assets/images/plane/quiz/pq2.jpg',
         },
         {
           'question':
-              'A large sliding door in a building is mounted vertically and opens by sliding along the wall. What type of plane is the sliding door mounted on?',
-          'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
-          'correctAnswer': 'Vertical plane',
-          'hint': 'This type of plane stands upright, like a wall.',
+              {'en': 'A large sliding door in a building is mounted vertically and opens by sliding along the wall. What type of plane is the sliding door mounted on?', 
+              'es': 'Una puerta corredera grande en un edificio está montada verticalmente y se abre deslizándose por la pared. ¿Sobre qué tipo de plano está montada la puerta corredera?'},
+          'options': {'en': ['Horizontal plane', 'Vertical plane', 'Inclined plane'], 'es': ['Plano horizontal', 'Plano vertical', 'Plano inclinado']},
+          'correctAnswer': {'en': 'Vertical plane', 'es': 'Plano vertical'},
+          'hint': {'en': 'This type of plane stands upright, like a wall.', 'es': 'Este tipo de avión se mantiene en posición vertical, como una pared.'},
           'questionImage': 'assets/images/plane/quiz/pq3.jpg',
         },
         {
           'question':
-              'A skier is descending a snow-covered slope. The slope forms an angle of 30° with the horizontal. What type of plane is the slope of the hill considered to be?',
-          'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
-          'correctAnswer': 'Inclined plane',
-          'hint': 'Skiers typically go down this slanted type of surface.',
+              {'en': 'A skier is descending a snow-covered slope. The slope forms an angle of 30° with the horizontal. What type of plane is the slope of the hill considered to be?', 
+              'es': 'Un esquiador desciende por una pendiente nevada. La pendiente forma un ángulo de 30° con la horizontal. ¿Qué tipo de plano se considera la pendiente de la colina?'},
+          'options': {'en': ['Horizontal plane', 'Vertical plane', 'Inclined plane'], 'es': ['Plano horizontal', 'Plano vertical', 'Plano inclinado']},
+          'correctAnswer': {'en': 'Inclined plane', 'es': 'Plano inclinado'},
+          'hint': {'en': 'Skiers typically go down this slanted type of surface.', 'es': 'Los esquiadores normalmente bajan por este tipo de superficie inclinada.'},
           'questionImage': 'assets/images/plane/quiz/pq4.jpg',
         },
         {
           'question':
-              'A shelf in your house is mounted on the wall. The surface of the shelf is parallel to the ground. What type of plane is the shelf considered to be?',
-          'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
-          'correctAnswer': 'Horizontal plane',
-          'hint': 'Think about a level surface where items rest without rolling.',
+              {'en': 'A shelf in your house is mounted on the wall. The surface of the shelf is parallel to the ground. What type of plane is the shelf considered to be?', 
+              'es': 'En tu casa hay una estantería montada en la pared. Su superficie es paralela al suelo. ¿Qué tipo de plano se considera la estantería?'},
+          'options': {'en': ['Horizontal plane', 'Vertical plane', 'Inclined plane'], 'es': ['Plano horizontal', 'Plano vertical', 'Plano inclinado']},
+          'correctAnswer': {'en': 'Horizontal plane', 'es': 'Plano horizontal'},
+          'hint': {'en': 'Think about a level surface where items rest without rolling.', 'es': 'Piense en una superficie nivelada donde los objetos descansen sin rodar.'},
           'questionImage': 'assets/images/plane/quiz/pq5.jpg',
         },
         {
           'question':
-              'In a science experiment, a student places a book on an inclined surface that forms a 15° angle with the floor. What type of plane does the inclined surface represent?',
-          'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
-          'correctAnswer': 'Inclined plane',
-          'hint': 'An angled plane that causes items to slide or roll.',
+              {'en': 'In a science experiment, a student places a book on an inclined surface that forms a 15° angle with the floor. What type of plane does the inclined surface represent?', 
+              'es': 'En un experimento científico, un estudiante coloca un libro sobre una superficie inclinada que forma un ángulo de 15° con el suelo. ¿Qué tipo de plano representa la superficie inclinada?'},
+          'options': {'en': ['Horizontal plane', 'Vertical plane', 'Inclined plane'], 'es': ['Plano horizontal', 'Plano vertical', 'Plano inclinado']},
+          'correctAnswer': {'en': 'Inclined plane', 'es': 'Plano inclinado'},
+          'hint': {'en': 'An angled plane that causes items to slide or roll.', 'es': 'Un plano en ángulo que hace que los objetos se deslicen o rueden.'},
           'questionImage': 'assets/images/plane/quiz/pq6.jpg',
         },
         {
           'question':
-              'A photographer uses a vertical backdrop for a photo shoot, ensuring it is perfectly upright. What type of plane is the backdrop placed on?',
-          'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
-          'correctAnswer': 'Vertical plane',
-          'hint': 'This plane goes straight up and down, like a standing wall.',
+              {'en': 'A photographer uses a vertical backdrop for a photo shoot, ensuring it is perfectly upright. What type of plane is the backdrop placed on?', 
+              'es': 'Un fotógrafo utiliza un fondo vertical para una sesión de fotos, asegurándose de que esté perfectamente vertical. ¿Sobre qué tipo de plano se coloca el fondo?'},
+          'options': {'en': ['Horizontal plane', 'Vertical plane', 'Inclined plane'], 'es': ['Plano horizontal', 'Plano vertical', 'Plano inclinado']},
+          'correctAnswer': {'en': 'Vertical plane', 'es': 'Plano vertical'},
+          'hint': {'en': 'This plane goes straight up and down, like a standing wall.', 'es': 'Este avión sube y baja en línea recta, como una pared en posición vertical.'},
           'questionImage': 'assets/images/plane/quiz/pq7.jpg',
         },
         {
           'question':
-              'A diver jumps from a diving board that extends horizontally over a pool. Which type of plane does the diving board represent?',
-          'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
-          'correctAnswer': 'Horizontal plane',
-          'hint': 'A flat, level surface that’s parallel to the water below.',
+              {'en': 'A diver jumps from a diving board that extends horizontally over a pool. Which type of plane does the diving board represent?', 
+              'es': 'Un saltador salta desde un trampolín que se extiende horizontalmente sobre una piscina. ¿Qué tipo de plano representa el trampolín?'},
+          'options': {'en': ['Horizontal plane', 'Vertical plane', 'Inclined plane'], 'es': ['Plano horizontal', 'Plano vertical', 'Plano inclinado']},
+          'correctAnswer': {'en': 'Horizontal plane', 'es': 'Plano horizontal'},
+          'hint': {'en': 'A flat, level surface that’s parallel to the water below.', 'es': 'Una superficie plana y nivelada que es paralela al agua que se encuentra debajo.'},
           'questionImage': 'assets/images/plane/quiz/pq8.jpg',
         },
         {
           'question':
-              'A car is parked on a road that is tilted to help rainwater drain. The slope of the road is at a 5° incline. What type of plane is the surface of the road considered to be?',
-          'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
-          'correctAnswer': 'Inclined plane',
-          'hint': 'Even a slight slope counts as this kind of angled plane.',
+              {'en': 'A car is parked on a road that is tilted to help rainwater drain. The slope of the road is at a 5° incline. What type of plane is the surface of the road considered to be?', 
+              'es': 'Un coche está aparcado en una carretera inclinada para facilitar el drenaje del agua de lluvia. La pendiente de la carretera es de 5°. ¿Qué tipo de superficie plana se considera la carretera?'},
+          'options': {'en': ['Horizontal plane', 'Vertical plane', 'Inclined plane'], 'es': ['Plano horizontal', 'Plano vertical', 'Plano inclinado']},
+          'correctAnswer': {'en': 'Inclined plane', 'es': 'Plano inclinado'},
+          'hint': {'en': 'Even a slight slope counts as this kind of angled plane.', 'es': 'Incluso una ligera pendiente se considera este tipo de plano en ángulo.'},
           'questionImage': 'assets/images/plane/quiz/pq9.webp',
         },
         {
           'question':
-              'In a factory, workers assemble parts on a conveyor belt. The conveyor belt is tilted slightly to move items. What type of plane does the surface of the conveyor belt represent?',
-          'options': ['Horizontal plane', 'Vertical plane', 'Inclined plane'],
-          'correctAnswer': 'Inclined plane',
-          'hint': 'This type of plane helps items move from one height to another.',
+              {'en': 'In a factory, workers assemble parts on a conveyor belt. The conveyor belt is tilted slightly to move items. What type of plane does the surface of the conveyor belt represent?', 
+              'es': 'En una fábrica, los trabajadores ensamblan piezas en una cinta transportadora. Esta se inclina ligeramente para mover los artículos. ¿Qué tipo de plano representa la superficie de la cinta transportadora?'},
+          'options': {'en': ['Horizontal plane', 'Vertical plane', 'Inclined plane'], 'es': ['Plano horizontal', 'Plano vertical', 'Plano inclinado']},
+          'correctAnswer': {'en': 'Inclined plane', 'es': 'Plano inclinado'},
+          'hint': {'en': 'This type of plane helps items move from one height to another.', 'es': 'Este tipo de avión ayuda a mover objetos de una altura a otra.'},
           'questionImage': 'assets/images/plane/quiz/pq10.jpg',
         },
       ],
@@ -633,92 +702,112 @@ final List<Map<String, dynamic>> shapes = [
     'practice': {
       'questions': [
         {
-          'question': 'What is the measure of a right angle?',
+          'question': 
+          {'en': 'What is the measure of a right angle?', 
+          'es': '¿Cuál es la medida de un ángulo recto?'},
           'answers': [
-            {'text': '90 degrees', 'correct': true},
-            {'text': '45 degrees', 'correct': false},
-            {'text': '120 degrees', 'correct': false},
+            {'text': {'en': '90 degrees', 'es': '90 grados'}, 'correct': true},
+            {'text': {'en': '45 degrees', 'es': '45 grados'}, 'correct': false},
+            {'text': {'en': '120 degrees', 'es': '120 grados'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is the measure of an acute angle?',
+          'question': 
+          {'en': 'What is the measure of an acute angle?', 
+          'es': '¿Cuál es la medida de un ángulo agudo?'},
           'answers': [
-            {'text': 'Less than 90 degrees', 'correct': true},
-            {'text': 'Exactly 90 degrees', 'correct': false},
-            {'text': 'More than 90 degrees', 'correct': false},
+            {'text': {'en': 'Less than 90 degrees', 'es': 'Menos de 90 grados'}, 'correct': true},
+            {'text': {'en': 'Exactly 90 degrees', 'es': 'Exactamente 90 grados'}, 'correct': false},
+            {'text': {'en': 'More than 90 degrees', 'es': 'Más de 90 grados'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What type of angle is this?',
+          'question': 
+          {'en': 'What type of angle is this?', 
+          'es': '¿Qué tipo de ángulo es este?'},
           'answers': [
-            {'text': 'Reflex Angle', 'correct': true},
-            {'text': 'Acute Angle', 'correct': false},
-            {'text': 'Straight Angle', 'correct': false},
+            {'text': {'en': 'Reflex Angle', 'es': 'Ángulo reflejo'}, 'correct': true},
+            {'text': {'en': 'Acute Angle', 'es': 'Ángulo agudo'}, 'correct': false},
+            {'text': {'en': 'Straight Angle', 'es': 'Ángulo recto'}, 'correct': false},
           ],
           'questionImage': 'assets/images/angles/Reflex_Angle.png',
         },
         {
-          'question': 'What is the measure of an obtuse angle?',
+          'question': 
+          {'en': 'What is the measure of an obtuse angle?', 
+          'es': '¿Cuál es la medida de un ángulo obtuso?'},
           'answers': [
-            {'text': 'More than 90 degrees', 'correct': true},
-            {'text': 'Exactly 90 degrees', 'correct': false},
-            {'text': 'Less than 90 degrees', 'correct': false},
+            {'text': {'en': 'More than 90 degrees', 'es': 'More than 90 degrees'}, 'correct': true},
+            {'text': {'en': 'Exactly 90 degrees', 'es': 'Exactly 90 degrees'}, 'correct': false},
+            {'text': {'en': 'Less than 90 degrees', 'es': 'Menos de 90 grados'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which of the following lists correctly classifies the angles in order?',
+          'question': 
+          {'en': 'Which of the following lists correctly classifies the angles in order?', 
+          'es': '¿Cuál de las siguientes listas clasifica correctamente los ángulos en orden?'},
           'answers': [
-            {'text': 'Acute, Right, Reflex, Obtuse', 'correct': true},
-            {'text': 'Acute, Right, Obtuse, Reflex', 'correct': false},
-            {'text': 'Right, Acute, Obtuse, Reflex', 'correct': false},
+            {'text': {'en': 'Acute, Right, Reflex, Obtuse', 'es': 'Agudo, Derecho, Reflejo, Obtuso'}, 'correct': true},
+            {'text': {'en': 'Acute, Right, Obtuse, Reflex', 'es': 'Agudo, Derecho, Obtuso, Reflejo'}, 'correct': false},
+            {'text': {'en': 'Right, Acute, Obtuse, Reflex', 'es': 'Derecha, Aguda, Obtusa, Refleja'}, 'correct': false},
           ],
           'questionImage': 'assets/images/angles/4.png',
         },
         {
-          'question': 'Identify Obtuse Angle',
+          'question': 
+          {'en': 'Identify Obtuse Angle', 
+          'es': 'Identificar el ángulo obtuso'},
           'answers': [
-            {'text': 'A', 'correct': false},
-            {'text': 'B', 'correct': false},
-            {'text': 'C', 'correct': true},
+            {'text': {'en': 'A', 'es': 'A'}, 'correct': false},
+            {'text': {'en': 'B', 'es': 'B'}, 'correct': false},
+            {'text': {'en': 'C', 'es': 'C'}, 'correct': true},
           ],
           'questionImage': 'assets/images/angles/3.png',
         },
         {
-          'question': 'Identify Reflex Angle',
+          'question': 
+          {'en': 'Identify Reflex Angle', 
+          'es': 'Identificar el ángulo reflejo'},
           'answers': [
-            {'text': 'A', 'correct': false},
-            {'text': 'B', 'correct': true},
-            {'text': 'C', 'correct': false},
+            {'text': {'en': 'A', 'es': 'A'}, 'correct': false},
+            {'text': {'en': 'B', 'es': 'B'}, 'correct': true},
+            {'text': {'en': 'C', 'es': 'C'}, 'correct': false},
           ],
           'questionImage': 'assets/images/angles/3.png',
         },
         {
-          'question': 'Which of the following could be the measure of a reflex angle?',
+          'question': 
+          {'en': 'Which of the following could be the measure of a reflex angle?', 
+          'es': '¿Cuál de las siguientes podría ser la medida de un ángulo reflejo?'},
           'answers': [
-            {'text': '90 degrees', 'correct': false},
-            {'text': '45 degrees', 'correct': false},
-            {'text': '220 degrees', 'correct': true},
+            {'text': {'en': '90 degrees', 'es': '90 grados'}, 'correct': false},
+            {'text': {'en': '45 degrees', 'es': '45 grados'}, 'correct': false},
+            {'text': {'en': '220 degrees', 'es': '220 grados'}, 'correct': true},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is the measure of a straight angle?',
+          'question': 
+          {'en': 'What is the measure of a straight angle?', 
+          'es': '¿Cual es la medida de un ángulo recto?'},
           'answers': [
-            {'text': '90 degrees', 'correct': false},
-            {'text': '180 degrees', 'correct': true},
-            {'text': '360 degrees', 'correct': false},
+            {'text': {'en': '90 degrees', 'es': '90 grados'}, 'correct': false},
+            {'text': {'en': '180 degrees', 'es': '180 grados'}, 'correct': true},
+            {'text': {'en': '360 degrees', 'es': '360 grados'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is the measure of a full rotation angle?',
+          'question': 
+          {'en': 'What is the measure of a full rotation angle?', 
+          'es': '¿Cuál es la medida de un ángulo de rotación completo?'},
           'answers': [
-            {'text': '90 degrees', 'correct': false},
-            {'text': '45 degrees', 'correct': false},
-            {'text': '360 degrees', 'correct': true},
+            {'text': {'en': '90 degrees', 'es': '90 grados'}, 'correct': false},
+            {'text': {'en': '45 degrees', 'es': '45 grados'}, 'correct': false},
+            {'text': {'en': '360 degrees', 'es': '360 grados'}, 'correct': true},
           ],
           'questionImage': '',
         },
@@ -728,82 +817,92 @@ final List<Map<String, dynamic>> shapes = [
       'questions': [
         {
           'question':
-              'A ladder is leaning against a wall, forming an angle of 60° with the ground. What type of angle is formed between the ladder and ground?',
-          'options': ['Acute Angle', 'Right Angle', 'Obtuse Angle'],
-          'correctAnswer': 'Acute Angle',
-          'hint': 'The angle is less than 90 degrees.',
+              {'en': 'A ladder is leaning against a wall, forming an angle of 60° with the ground. What type of angle is formed between the ladder and ground?', 
+              'es': 'Una escalera está apoyada contra una pared, formando un ángulo de 60° con el suelo. ¿Qué tipo de ángulo se forma entre la escalera y el suelo?'},
+          'options': {'en': ['Acute Angle', 'Right Angle', 'Obtuse Angle'], 'es': ['Ángulo agudo', 'Ángulo recto', 'Ángulo obtuso']},
+          'correctAnswer': {'en': 'Acute Angle', 'es': 'Ángulo agudo'},
+          'hint': {'en': 'The angle is less than 90 degrees.', 'es': 'El ángulo es menor de 90 grados.'},
           'questionImage': 'assets/images/angles/quiz/aq1.jpg',
         },
         {
           'question':
-              'The hands of a clock show 10:10, forming an angle of approximately 150° between them. What type of angle is this?',
-          'options': ['Right Angle', 'Obtuse Angle', 'Reflex Angle'],
-          'correctAnswer': 'Obtuse Angle',
-          'hint': 'Angle formed is greater than 90 degrees but less than 180 degrees.',
+              {'en': 'The hands of a clock show 10:10, forming an angle of approximately 150° between them. What type of angle is this?', 
+              'es': 'Las manecillas de un reloj marcan las 10:10 y forman un ángulo de aproximadamente 150°. ¿Qué tipo de ángulo es este?'},
+          'options': {'en': ['Right Angle', 'Obtuse Angle', 'Reflex Angle'], 'es': ['Ángulo recto', 'Ángulo obtuso', 'Ángulo reflejo']},
+          'correctAnswer': {'en': 'Obtuse Angle', 'es': 'Ángulo obtuso'},
+          'hint': {'en': 'Angle formed is greater than 90 degrees but less than 180 degrees.', 'es': 'El ángulo formado es mayor de 90 grados pero menor de 180 grados.'},
           'questionImage': 'assets/images/angles/quiz/aq2.png',
         },
         {
           'question':
-              'A road sign shows a bend where the road turns sharply, forming a 90 degree angle. What type of angle does this represent?',
-          'options': ['Right Angle', 'Straight Angle', 'Acute Angle'],
-          'correctAnswer': 'Right Angle',
-          'hint': 'Angle formed is exactly 90 degrees.',
+              {'en': 'A road sign shows a bend where the road turns sharply, forming a 90 degree angle. What type of angle does this represent?', 
+              'es': 'Una señal de tráfico muestra una curva donde la carretera gira bruscamente, formando un ángulo de 90 grados. ¿Qué tipo de ángulo representa esto?'},
+          'options': {'en': ['Right Angle', 'Straight Angle', 'Acute Angle'], 'es': ['Ángulo recto', 'Ángulo recto', 'Ángulo agudo']},
+          'correctAnswer': {'en': 'Right Angle', 'es': 'Ángulo recto'},
+          'hint': {'en': 'Angle formed is exactly 90 degrees.', 'es': 'El ángulo formado es exactamente 90 grados.'},
           'questionImage': 'assets/images/angles/quiz/aq3.jpg',
         },
         {
           'question':
-              'A seesaw is perfectly horizontal in its resting position. What angle is formed between the two sides?',
-          'options': ['Straight Angle', 'Right Angle', 'Full Rotation Angle'],
-          'correctAnswer': 'Straight Angle',
-          'hint': 'Angle formed is exactly 180 degrees.',
+              {'en': 'A seesaw is perfectly horizontal in its resting position. What angle is formed between the two sides?', 
+              'es': 'Un balancín está perfectamente horizontal en posición de reposo. ¿Qué ángulo se forma entre sus dos lados?'},
+          'options': {'en': ['Straight Angle', 'Right Angle', 'Full Rotation Angle'], 'es': ['Ángulo recto', 'Ángulo recto', 'Ángulo de rotación completa']},
+          'correctAnswer': {'en': 'Straight Angle', 'es': 'Ángulo recto'},
+          'hint': {'en': 'Angle formed is exactly 180 degrees.', 'es': 'El ángulo formado es exactamente 180 grados.'},
           'questionImage': 'assets/images/angles/quiz/aq4.jpeg',
         },
         {
           'question':
-              'A ferris wheel completes one full rotation (360°). What type of angle does this represent?',
-          'options': ['Reflex Angle', 'Full Rotation Angle', 'Straight Angle'],
-          'correctAnswer': 'Full Rotation Angle',
-          'hint': 'Angle formed is exactly 360 degrees.',
+              {'en': 'A ferris wheel completes one full rotation (360°). What type of angle does this represent?', 
+              'es': 'Una noria da una vuelta completa (360°). ¿Qué tipo de ángulo representa esto?'},
+          'options': {'en': ['Reflex Angle', 'Full Rotation Angle', 'Straight Angle'], 'es': ['Ángulo reflejo', 'Ángulo de rotación completa', 'Ángulo recto']},
+          'correctAnswer': {'en': 'Full Rotation Angle', 'es': 'Ángulo de rotación completo'},
+          'hint': {'en': 'Angle formed is exactly 360 degrees.', 'es': 'El ángulo formado es exactamente 360 ​​grados.'},
           'questionImage': 'assets/images/angles/quiz/aq5.webp',
         },
         {
           'question':
-              'A car ramp is inclined at an angle of 120° with the ground. What type of angle does this represent?',
-          'options': ['Obtuse Angle', 'Acute Angle', 'Reflex Angle'],
-          'correctAnswer': 'Obtuse Angle',
-          'hint': 'Angle is greater than 90 degrees but less than 180 degrees.',
+              {'en': 'A car ramp is inclined at an angle of 120° with the ground. What type of angle does this represent?', 
+              'es': 'Una rampa para vehículos está inclinada 120° con respecto al suelo. ¿Qué tipo de ángulo representa esto?'},
+          'options': {'en': ['Obtuse Angle', 'Acute Angle', 'Reflex Angle'], 'es': ['Ángulo obtuso', 'Ángulo agudo', 'Ángulo reflejo']},
+          'correctAnswer': {'en': 'Obtuse Angle', 'es': 'Ángulo obtuso'},
+          'hint': {'en': 'Angle is greater than 90 degrees but less than 180 degrees.', 'es': 'El ángulo es mayor de 90 grados pero menor de 180 grados.'},
           'questionImage': 'assets/images/angles/quiz/aq6.jpg',
         },
         {
           'question':
-              'The sails of a windmill form angles as they rotate. If two adjacent sails form an angle of exactly 90°, what type of angle is this?',
-          'options': ['Acute Angle', 'Right Angle ', 'Straight Angle'],
-          'correctAnswer': 'Right Angle ',
-          'hint': 'Angle formed is exactly 90 degrees.',
+              {'en': 'The sails of a windmill form angles as they rotate. If two adjacent sails form an angle of exactly 90°, what type of angle is this?', 
+              'es': 'Las aspas de un molino de viento forman ángulos al girar. Si dos aspas adyacentes forman un ángulo de exactamente 90°, ¿qué tipo de ángulo es este?'},
+          'options': {'en': ['Acute Angle', 'Right Angle ', 'Straight Angle'], 'es': ['Ángulo agudo', 'Ángulo recto', 'Ángulo llano']},
+          'correctAnswer': {'en': 'Right Angle ', 'es': 'Ángulo recto'},
+          'hint': {'en': 'Angle formed is exactly 90 degrees.', 'es': 'El ángulo formado es exactamente 90 grados.'},
           'questionImage': 'assets/images/angles/quiz/aq7.jpg',
         },
         {
           'question':
-              'A pizza slice has a pointed tip forming an angle of approximately 30°. What type of angle is at the tip?',
-          'options': ['Acute Angle', 'Right Angle', 'Obtuse Angle'],
-          'correctAnswer': 'Acute Angle',
-          'hint': 'Angle formed is less than 90 degrees.',
+              {'en': 'A pizza slice has a pointed tip forming an angle of approximately 30°. What type of angle is at the tip?', 
+              'es': 'Una rebanada de pizza tiene una punta puntiaguda que forma un ángulo de aproximadamente 30°. ¿Qué tipo de ángulo tiene la punta?'},
+          'options': {'en': ['Acute Angle', 'Right Angle', 'Obtuse Angle'], 'es': ['Ángulo agudo', 'Ángulo recto', 'Ángulo obtuso']},
+          'correctAnswer': {'en': 'Acute Angle', 'es': 'Ángulo agudo'},
+          'hint': {'en': 'Angle formed is less than 90 degrees.', 'es': 'El ángulo formado es menor a 90 grados.'},
           'questionImage': 'assets/images/angles/quiz/aq8.jpg',
         },
         {
           'question':
-              'The pages of an open book form an angle of about 180° when laid flat on a table. What type of angle is formed at the spine of the book?',
-          'options': ['Straight Angle', 'Reflex Angle', 'Right Angle'],
-          'correctAnswer': 'Straight Angle',
-          'hint': 'Angle formed is exactly 180 degrees.',
+              {'en': 'The pages of an open book form an angle of about 180° when laid flat on a table. What type of angle is formed at the spine of the book?', 
+              'es': 'Las páginas de un libro abierto forman un ángulo de aproximadamente 180° al colocarse sobre una mesa. ¿Qué tipo de ángulo se forma en el lomo del libro?'},
+          'options': {'en': ['Straight Angle', 'Reflex Angle', 'Right Angle'], 'es': ['Ángulo recto', 'Ángulo reflejo', 'Ángulo recto']},
+          'correctAnswer': {'en': 'Straight Angle', 'es': 'Ángulo recto'},
+          'hint': {'en': 'Angle formed is exactly 180 degrees.', 'es': 'El ángulo formado es exactamente 180 grados.'},
           'questionImage': 'assets/images/angles/quiz/aq9.jpg',
         },
         {
           'question':
-              'A slice of a circular pie has an angle of 45° at its tip. What type of angle is represented at the tip of the slice?',
-          'options': ['Acute Angle', 'Obtuse Angle', 'Right Angle'],
-          'correctAnswer': 'Acute Angle',
-          'hint': 'Angle formed is less than 90 degrees.',
+              {'en': 'A slice of a circular pie has an angle of 45° at its tip. What type of angle is represented at the tip of the slice?', 
+              'es': 'Una rebanada de pastel circular tiene un ángulo de 45° en la punta. ¿Qué tipo de ángulo representa la punta de la rebanada?'},
+          'options': {'en': ['Acute Angle', 'Obtuse Angle', 'Right Angle'], 'es': ['Ángulo agudo', 'Ángulo obtuso', 'Ángulo recto']},
+          'correctAnswer': {'en': 'Acute Angle', 'es': 'Ángulo agudo'},
+          'hint': {'en': 'Angle formed is less than 90 degrees.', 'es': 'El ángulo formado es menor a 90 grados.'},
           'questionImage': 'assets/images/angles/quiz/aq10.webp',
         },
       ],
@@ -918,91 +1017,111 @@ final List<Map<String, dynamic>> shapes = [
     'practice': {
       'questions': [
         {
-          'question': 'What is the sum of angles in a triangle?',
+          'question': 
+          {'en': 'What is the sum of angles in a triangle?', 
+          'es': '¿Cuál es la suma de los ángulos de un triángulo?'},
           'answers': [
-            {'text': '180 degrees', 'correct': true},
-            {'text': '90 degrees', 'correct': false},
-            {'text': '360 degrees', 'correct': false},
+            {'text': {'en': '180 degrees', 'es': '180 grados'}, 'correct': true},
+            {'text': {'en': '90 degrees', 'es': '90 grados'}, 'correct': false},
+            {'text': {'en': '360 degrees', 'es': '360 grados'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is a triangle with all sides of equal length called?',
+          'question': 
+          {'en': 'What is a triangle with all sides of equal length called?', 
+          'es': '¿Cómo se llama un triángulo que tiene todos los lados de igual longitud?'},
           'answers': [
-            {'text': 'Equilateral triangle', 'correct': true},
-            {'text': 'Isosceles triangle', 'correct': false},
-            {'text': 'Scalene triangle', 'correct': false},
+            {'text': {'en': 'Equilateral triangle', 'es': 'Triángulo equilátero'}, 'correct': true},
+            {'text': {'en': 'Isosceles triangle', 'es': 'Triángulo isósceles'}, 'correct': false},
+            {'text': {'en': 'Scalene triangle', 'es': 'Triángulo escaleno'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What defines a right-angled triangle?',
+          'question': 
+          {'en': 'What defines a right-angled triangle?', 
+          'es': '¿Qué define a un triángulo rectángulo?'},
           'answers': [
-            {'text': 'A triangle with one angle less than 90°', 'correct': false},
-            {'text': 'A triangle with one angle equal to 90°', 'correct': true},
-            {'text': 'A triangle with all sides equal', 'correct': false}, 
+            {'text': {'en': 'A triangle with one angle less than 90°', 'es': 'A triangle with one angle less than 90°'}, 'correct': false},
+            {'text': {'en': 'A triangle with one angle equal to 90°', 'es': 'A triangle with one angle equal to 90°'}, 'correct': true},
+            {'text': {'en': 'A triangle with all sides equal', 'es': 'Un triángulo con todos los lados iguales'}, 'correct': false}, 
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which type of triangle has all angles less than 90°?',
+          'question': 
+          {'en': 'Which type of triangle has all angles less than 90°?', 
+          'es': '¿Qué tipo de triángulo tiene todos los ángulos menores a 90°?'},
           'answers': [
-            {'text': 'Right triangle', 'correct': false},
-            {'text': 'Obtuse triangle', 'correct': false}, 
-            {'text': 'Acute triangle', 'correct': true},
+            {'text': {'en': 'Right triangle', 'es': 'Triángulo rectángulo'}, 'correct': false},
+            {'text': {'en': 'Obtuse triangle', 'es': 'Triángulo obtuso'}, 'correct': false}, 
+            {'text': {'en': 'Acute triangle', 'es': 'Triángulo agudo'}, 'correct': true},
           ],
           'questionImage': '',
         },
         {
-          'question': 'How many equal sides does an isosceles triangle have?',
+          'question': 
+          {'en': 'How many equal sides does an isosceles triangle have?', 
+          'es': '¿Cuántos lados iguales tiene un triángulo isósceles?'},
           'answers': [
-            {'text': 'None', 'correct': false},
-            {'text': 'Three', 'correct': false},
-            {'text': 'Two', 'correct': true},
+            {'text': {'en': 'None', 'es': 'Ninguna'}, 'correct': false},
+            {'text': {'en': 'Three', 'es': 'Tres'}, 'correct': false},
+            {'text': {'en': 'Two', 'es': 'Dos'}, 'correct': true},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which triangle has no equal sides?',
+          'question': 
+          {'en': 'Which triangle has no equal sides?', 
+          'es': '¿Qué triángulo no tiene lados iguales?'},
           'answers': [
-            {'text': 'Scalene triangle', 'correct': true},
-            {'text': 'Isosceles triangle', 'correct': false},
-            {'text': 'Equilateral triangle', 'correct': false},
+            {'text': {'en': 'Scalene triangle', 'es': 'Triángulo escaleno'}, 'correct': true},
+            {'text': {'en': 'Isosceles triangle', 'es': 'Triángulo isósceles'}, 'correct': false},
+            {'text': {'en': 'Equilateral triangle', 'es': 'Triángulo equilátero'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'True or False: In an equilateral triangle, all angles are 60°.',
+          'question': 
+          {'en': 'True or False: In an equilateral triangle, all angles are 60°.', 
+          'es': 'Verdadero o falso: En un triángulo equilátero, todos los ángulos miden 60°.'},
           'answers': [
-            {'text': 'True', 'correct': true},
-            {'text': 'False', 'correct': false},
+            {'text': {'en': 'True', 'es': 'Verdadero'}, 'correct': true},
+            {'text': {'en': 'False', 'es': 'Falso'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Identify the type of triangle formed by sides of 3 cm, 4 cm, and 5 cm.',
+          'question': 
+          {'en': 'Identify the type of triangle formed by sides of 3 cm, 4 cm, and 5 cm.', 
+          'es': 'Identifica el tipo de triángulo formado por lados de 3 cm, 4 cm y 5 cm.'},
           'answers': [
-            {'text': 'Scalene triangle', 'correct': true},
-            {'text': 'Isosceles triangle', 'correct': false},
-            {'text': 'Acute triangle', 'correct': false},
+            {'text': {'en': 'Scalene triangle', 'es': 'Triángulo escaleno'}, 'correct': true},
+            {'text': {'en': 'Isosceles triangle', 'es': 'Triángulo isósceles'}, 'correct': false},
+            {'text': {'en': 'Acute triangle', 'es': 'Triángulo agudo'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is a triangle with one angle greater than 90 degrees called?',
+          'question': 
+          {'en': 'What is a triangle with one angle greater than 90 degrees called?', 
+          'es': '¿Cómo se llama un triángulo con un ángulo mayor a 90 grados?'},
           'answers': [
-            {'text': 'Acute triangle', 'correct': false},
-            {'text': 'Obtuse triangle', 'correct': true},
-            {'text': 'Right triangle', 'correct': false},
+            {'text': {'en': 'Acute triangle', 'es': 'Triángulo agudo'}, 'correct': false},
+            {'text': {'en': 'Obtuse triangle', 'es': 'Triángulo obtuso'}, 'correct': true},
+            {'text': {'en': 'Right triangle', 'es': 'Triángulo rectángulo'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which triangle has two equal angles and two equal sides?',
+          'question': 
+          {'en': 'Which triangle has two equal angles and two equal sides?', 
+          'es': '¿Qué triángulo tiene dos ángulos iguales y dos lados iguales?'},
           'answers': [
-            {'text': 'Isosceles triangle', 'correct': true},
-            {'text': 'Right triangle', 'correct': false},
-            {'text': 'Scalene triangle', 'correct': false},
+            {'text': {'en': 'Isosceles triangle', 'es': 'Triángulo isósceles'}, 'correct': true},
+            {'text': {'en': 'Right triangle', 'es': 'Triángulo rectángulo'}, 'correct': false},
+            {'text': {'en': 'Scalene triangle', 'es': 'Triángulo escaleno'}, 'correct': false},
           ],
           'questionImage': '',
         },
@@ -1012,82 +1131,92 @@ final List<Map<String, dynamic>> shapes = [
       'questions': [
         {
           'question':
-              'You see a road sign shaped like a triangle. It has all sides of equal length. What type of triangle is the sign?',
-          'options': ['Equilateral', 'Isosceles', 'Scalene'],
-          'correctAnswer': 'Equilateral',
-          'hint': 'All three sides are of equal length.',
+              {'en': 'You see a road sign shaped like a triangle. It has all sides of equal length. What type of triangle is the sign?',
+              'es': 'Ves una señal de tráfico con forma de triángulo. Tiene todos los lados iguales. ¿Qué tipo de triángulo es la señal?'},
+          'options': {'en': ['Equilateral', 'Isosceles', 'Scalene'], 'es': ['Equilátero', 'Isósceles', 'Escaleno']},
+          'correctAnswer': {'en': 'Equilateral', 'es': 'Equilátero'},
+          'hint': {'en': 'All three sides are of equal length.', 'es': 'Los tres lados tienen la misma longitud.'},
           'questionImage': 'assets/images/triangle/quiz/tq1.webp',
         },
         {
           'question':
-              'The roof of a house has a triangular structure. The two sloping sides are equal in length, and the base is shorter. What type of triangle is the roof?',
-          'options': ['Equilateral', 'Isosceles', 'Scalene'],
-          'correctAnswer': 'Isosceles',
-          'hint': 'Two sides are of equal length.',
+              {'en': 'The roof of a house has a triangular structure. The two sloping sides are equal in length, and the base is shorter. What type of triangle is the roof?',
+              'es': 'El techo de una casa tiene una estructura triangular. Los dos lados inclinados tienen la misma longitud y la base es más corta. ¿Qué tipo de triángulo es el techo?'},
+          'options': {'en': ['Equilateral', 'Isosceles', 'Scalene'], 'es': ['Equilátero', 'Isósceles', 'Escaleno']},
+          'correctAnswer': {'en': 'Isosceles', 'es': 'Isósceles'},
+          'hint': {'en': 'Two sides are of equal length.', 'es': 'Dos lados tienen la misma longitud.'},
           'questionImage': 'assets/images/triangle/quiz/tq2.webp',
         },
         {
           'question':
-              'A slice of watermelon is cut into a triangular shape where all three sides are of same lengths. What type of triangle is it?',
-          'options': ['Equilateral', 'Isosceles', 'Scalene'],
-          'correctAnswer': 'Equilateral',
-          'hint': 'All three sides are of equal length.',
+              {'en': 'A slice of watermelon is cut into a triangular shape where all three sides are of same lengths. What type of triangle is it?',
+              'es': 'Una rebanada de sandía se corta en forma triangular, con los tres lados de la misma longitud. ¿Qué tipo de triángulo es?'},
+          'options': {'en': ['Equilateral', 'Isosceles', 'Scalene'], 'es': ['Equilátero', 'Isósceles', 'Escaleno']},
+          'correctAnswer': {'en': 'Equilateral', 'es': 'Equilátero'},
+          'hint': {'en': 'All three sides are of equal length.', 'es': 'Los tres lados tienen la misma longitud.'},
           'questionImage': 'assets/images/triangle/quiz/tq3.jpg',
         },
         {
           'question':
-              'A handkerchief is folded into a triangular shape where all the angles are smaller than 90 degrees. What type of triangle does it represent?',
-          'options': ['Obtuse-angled', 'Right-angled', 'Acute-angled'],
-          'correctAnswer': 'Acute-angled',
-          'hint': 'All three angles are less than 90 degrees.',
+              {'en': 'A handkerchief is folded into a triangular shape where all the angles are smaller than 90 degrees. What type of triangle does it represent?',
+              'es': 'Un pañuelo está doblado en forma triangular, donde todos los ángulos son menores de 90 grados. ¿Qué tipo de triángulo representa?'},
+          'options': {'en': ['Obtuse-angled', 'Right-angled', 'Acute-angled'], 'es': ['De ángulo obtuso', 'De ángulo recto', 'De ángulo agudo']},
+          'correctAnswer': {'en': 'Acute-angled', 'es': 'De ángulo agudo'},
+          'hint': {'en': 'All three angles are less than 90 degrees.', 'es': 'Los tres ángulos son menores a 90 grados.'},
           'questionImage': 'assets/images/triangle/quiz/tq4.jpg',
         },
         {
           'question':
-              'A ladder placed against a wall forms a triangle with the ground. The angle between the ladder and the ground is 90 degrees. What type of triangle is formed?',
-          'options': ['Acute-angled', 'Right-angled', 'Obtuse-angled'],
-          'correctAnswer': 'Right-angled',
-          'hint': 'One angle is exactly 90 degrees.',
+              {'en': 'A ladder placed against a wall forms a triangle with the ground. The angle between the ladder and the ground is 90 degrees. What type of triangle is formed?',
+              'es': 'Una escalera apoyada contra una pared forma un triángulo con el suelo. El ángulo entre la escalera y el suelo es de 90 grados. ¿Qué tipo de triángulo se forma?'},
+          'options': {'en': ['Acute-angled', 'Right-angled', 'Obtuse-angled'], 'es': ['Agudo', 'Rectángulo', 'Obtuso']},
+          'correctAnswer': {'en': 'Right-angled', 'es': 'En ángulo recto'},
+          'hint': {'en': 'One angle is exactly 90 degrees.', 'es': 'Un ángulo mide exactamente 90 grados.'},
           'questionImage': 'assets/images/triangle/quiz/q5.png',
         },
         {
           'question':
-              'A wooden stand is shaped like a triangle, and one of its angles is more than 90 degrees. What kind of triangle is it?',
-          'options': ['Right-angled', 'Scalene', 'Obtuse-angled'],
-          'correctAnswer': 'Obtuse-angled',
-          'hint': 'One angle is greater than 90 degrees.',
+              {'en': 'A wooden stand is shaped like a triangle, and one of its angles is more than 90 degrees. What kind of triangle is it?',
+              'es': 'Un soporte de madera tiene forma de triángulo y uno de sus ángulos mide más de 90 grados. ¿Qué tipo de triángulo es?'},
+          'options': {'en': ['Right-angled', 'Scalene', 'Obtuse-angled'], 'es': ['De ángulo recto', 'Escaleno', 'De ángulo obtuso']},
+          'correctAnswer': {'en': 'Obtuse-angled', 'es': 'De ángulo obtuso'},
+          'hint': {'en': 'One angle is greater than 90 degrees.', 'es': 'Un ángulo es mayor de 90 grados.'},
           'questionImage': 'assets/images/triangle/quiz/q7.png',
         },
         {
           'question':
-              'You cut a piece of cardboard into a triangle with all sides of different lengths. What type of triangle is it?',
-          'options': ['Equilateral', 'Scalene', 'Isosceles'],
-          'correctAnswer': 'Scalene',
-          'hint': 'All sides have different lengths.',
+              {'en': 'You cut a piece of cardboard into a triangle with all sides of different lengths. What type of triangle is it?',
+              'es': 'Cortas un trozo de cartón en un triángulo con lados de diferente longitud. ¿Qué tipo de triángulo es?'},
+          'options': {'en': ['Equilateral', 'Scalene', 'Isosceles'], 'es': ['Equilátero', 'Escaleno', 'Isósceles']},
+          'correctAnswer': {'en': 'Scalene', 'es': 'Escaleno'},
+          'hint': {'en': 'All sides have different lengths.', 'es': 'Todos los lados tienen longitudes diferentes.'},
           'questionImage': 'assets/images/triangle/quiz/q7.png',
         },
         {
           'question':
-              'A flag is made in a triangle shape where two angles are equal and one is different. What triangle does it represent?',
-          'options': ['Isosceles', 'Scalene', 'Equilateral'],
-          'correctAnswer': 'Isosceles',
-          'hint': 'Two angles (and sides) are the same.',
+              {'en': 'A flag is made in a triangle shape where two angles are equal and one is different. What triangle does it represent?',
+              'es': 'Una bandera tiene forma de triángulo, con dos ángulos iguales y uno distinto. ¿Qué triángulo representa?'},
+          'options': {'en': ['Isosceles', 'Scalene', 'Equilateral'], 'es': ['Isósceles', 'Escaleno', 'Equilátero']},
+          'correctAnswer': {'en': 'Isosceles', 'es': 'Isósceles'},
+          'hint': {'en': 'Two angles (and sides) are the same.', 'es': 'Dos ángulos (y lados) son iguales.'},
           'questionImage': 'assets/images/triangle/quiz/q8.png',
         },
         {
           'question':
-              'A bridge has triangular trusses with all angles measuring 60°. What type of triangle are the trusses shaped in?',
-          'options': ['Isosceles', 'Equilateral', 'Acute-angled'],
-          'correctAnswer': 'Equilateral',
-          'hint': 'Each angle is 60°, and all sides are equal.',
+              {'en': 'A bridge has triangular trusses with all angles measuring 60°. What type of triangle are the trusses shaped in?',
+              'es': 'Un puente tiene cerchas triangulares cuyos ángulos miden 60°. ¿Qué tipo de triángulo tienen las cerchas?'},
+          'options': {'en': ['Isosceles', 'Equilateral', 'Acute-angled'], 'es': ['Isósceles', 'Equilátero', 'Agudo-angulado']},
+          'correctAnswer': {'en': 'Equilateral', 'es': 'Equilátero'},
+          'hint': {'en': 'Each angle is 60°, and all sides are equal.', 'es': 'Cada ángulo mide 60° y todos los lados son iguales.'},
           'questionImage': 'assets/images/triangle/quiz/q9.png',
         },
         {
           'question':
-              'A pizza slice forms a triangle with two equal sides and a sharp tip. What kind of triangle is it likely to be?',
-          'options': ['Scalene', 'Equilateral', 'Isosceles'],
-          'correctAnswer': 'Isosceles',
-          'hint': 'Two equal edges from the crust to the tip.',
+              {'en': 'A pizza slice forms a triangle with two equal sides and a sharp tip. What kind of triangle is it likely to be?',
+              'es': 'Una rebanada de pizza forma un triángulo con dos lados iguales y una punta afilada. ¿Qué tipo de triángulo es probable que sea?'},
+          'options': {'en': ['Scalene', 'Equilateral', 'Isosceles'], 'es': ['Escaleno', 'Equilátero', 'Isósceles']},
+          'correctAnswer': {'en': 'Isosceles', 'es': 'Isósceles'},
+          'hint': {'en': 'Two equal edges from the crust to the tip.', 'es': 'Dos bordes iguales desde la corteza hasta la punta.'},
           'questionImage': 'assets/images/triangle/quiz/q10.png',
         },
       ],
@@ -1202,91 +1331,111 @@ final List<Map<String, dynamic>> shapes = [
     'practice': {
       'questions': [
         {
-          'question': 'Define a square',
+          'question': 
+          {'en': 'Define a square',
+          'es': 'Definir un cuadrado'},
           'answers': [
-            {'text': 'A quadrilateral with two right angles', 'correct': false},
-            {'text': 'A quadrilateral with all sides of equal length', 'correct': true},
-            {'text': 'A quadrilateral with no right angles', 'correct': false},
+            {'text': {'en': 'A quadrilateral with two right angles', 'es': 'Un cuadrilátero con dos ángulos rectos'}, 'correct': false},
+            {'text': {'en': 'A quadrilateral with all sides of equal length', 'es': 'Un cuadrilátero con todos los lados de igual longitud'}, 'correct': true},
+            {'text': {'en': 'A quadrilateral with no right angles', 'es': 'Un cuadrilátero sin ángulos rectos'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Define a rectangle',
+          'question': 
+          {'en': 'Define a rectangle',
+          'es': 'Definir un rectángulo'},
           'answers': [
-            {'text': 'A quadrilateral with four right angles', 'correct': true},
-            {'text': 'A quadrilateral with all sides of equal length', 'correct': false},
-            {'text': 'A quadrilateral with no right angles', 'correct': false},
+            {'text': {'en': 'A quadrilateral with four right angles', 'es': 'Un cuadrilátero con cuatro ángulos rectos'}, 'correct': true},
+            {'text': {'en': 'A quadrilateral with all sides of equal length', 'es': 'Un cuadrilátero con todos los lados de igual longitud'}, 'correct': false},
+            {'text': {'en': 'A quadrilateral with no right angles', 'es': 'Un cuadrilátero sin ángulos rectos'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Define a parallelogram',
+          'question': 
+          {'en': 'Define a parallelogram',
+          'es': 'Definir un paralelogramo'},
           'answers': [
-            {'text': 'A quadrilateral with four right angles', 'correct': false},
-            {'text': 'A quadrilateral with all sides of equal length', 'correct': false},
-            {'text': 'A quadrilateral with opposite sides parallel', 'correct': true},
+            {'text': {'en': 'A quadrilateral with four right angles', 'es': 'Un cuadrilátero con cuatro ángulos rectos'}, 'correct': false},
+            {'text': {'en': 'A quadrilateral with all sides of equal length', 'es': 'Un cuadrilátero con todos los lados de igual longitud'}, 'correct': false},
+            {'text': {'en': 'A quadrilateral with opposite sides parallel', 'es': 'Un cuadrilátero con lados opuestos paralelos'}, 'correct': true},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Define a Kite',
+          'question': 
+          {'en': 'Define a Kite',
+          'es': 'Definir una cometa'},
           'answers': [
-            {'text': 'A quadrilateral with two distinct pairs of adjacent sides that are equal in length.', 'correct': true},
-            {'text': 'A quadrilateral with all sides equal and opposite angles equal.', 'correct': false},
-            {'text': 'A quadrilateral with only one pair of parallel sides.', 'correct': true},
+            {'text': {'en': 'A quadrilateral with two distinct pairs of adjacent sides that are equal in length.', 'es': 'Un cuadrilátero con dos pares distintos de lados adyacentes que tienen la misma longitud.'}, 'correct': true},
+            {'text': {'en': 'A quadrilateral with all sides equal and opposite angles equal.', 'es': 'Un cuadrilátero con todos los lados iguales y ángulos opuestos iguales.'}, 'correct': false},
+            {'text': {'en': 'A quadrilateral with only one pair of parallel sides.', 'es': 'Un cuadrilátero con sólo un par de lados paralelos.'}, 'correct': true},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Define a Rhombus',
+          'question': 
+          {'en': 'Define a Rhombus',
+          'es': 'Definir un rombo'},
           'answers': [
-            {'text': 'A quadrilateral with all sides of equal length', 'correct': false},
-            {'text': 'A quadrilateral with all four sides of equal length and opposite angles equal.', 'correct': true},
-            {'text': 'A quadrilateral with four right angles', 'correct': false},
+            {'text': {'en': 'A quadrilateral with all sides of equal length', 'es': 'Un cuadrilátero con todos los lados de igual longitud'}, 'correct': false},
+            {'text': {'en': 'A quadrilateral with all four sides of equal length and opposite angles equal.', 'es': 'Un cuadrilátero con los cuatro lados de igual longitud y ángulos opuestos iguales.'}, 'correct': true},
+            {'text': {'en': 'A quadrilateral with four right angles', 'es': 'Un cuadrilátero con cuatro ángulos rectos'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Define a Trapezoid',
+          'question': 
+          {'en': 'Define a Trapezoid',
+          'es': 'Definir un trapezoide'},
           'answers': [
-            {'text': 'A quadrilateral with one pair of parallel sides.', 'correct': true},
-            {'text': 'A quadrilateral with two pairs of opposite sides equal and all angles 90°.', 'correct': false},
-            {'text': 'A quadrilateral with four right angles', 'correct': false},
+            {'text': {'en': 'A quadrilateral with one pair of parallel sides.', 'es': 'Un cuadrilátero con un par de lados paralelos.'}, 'correct': true},
+            {'text': {'en': 'A quadrilateral with two pairs of opposite sides equal and all angles 90°.', 'es': 'Un cuadrilátero con dos pares de lados opuestos iguales y todos los ángulos de 90°.'}, 'correct': false},
+            {'text': {'en': 'A quadrilateral with four right angles', 'es': 'Un cuadrilátero con cuatro ángulos rectos'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which of the following quadrilaterals has only one pair of parallel sides?',
+          'question': 
+          {'en': 'Which of the following quadrilaterals has only one pair of parallel sides?',
+          'es': '¿Cuál de los siguientes cuadriláteros tiene solo un par de lados paralelos?'},
           'answers': [
-            {'text': 'Rectangle', 'correct': false},
-            {'text': 'Trapezoid', 'correct': true},
-            {'text': 'Kite', 'correct': false},
+            {'text': {'en': 'Rectangle', 'es': 'Rectángulo'}, 'correct': false},
+            {'text': {'en': 'Trapezoid', 'es': 'Trapecio'}, 'correct': true},
+            {'text': {'en': 'Kite', 'es': 'Cometa'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is a kite’s defining property?',
+          'question': 
+          {'en': 'What is a kite’s defining property?',
+          'es': '¿Cuál es la propiedad que define a una cometa?'},
           'answers': [
-            {'text': 'Two pairs of adjacent sides are equal', 'correct': true},
-            {'text': 'All sides are equal', 'correct': false},
-            {'text': 'It has no right angles', 'correct': false},
+            {'text': {'en': 'Two pairs of adjacent sides are equal', 'es': 'Dos pares de lados adyacentes son iguales'}, 'correct': true},
+            {'text': {'en': 'All sides are equal', 'es': 'Todos los lados son iguales'}, 'correct': false},
+            {'text': {'en': 'It has no right angles', 'es': 'No tiene ángulos rectos'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'True or False: A rhombus is a parallelogram with all sides equal.',
+          'question': 
+          {'en': 'True or False: A rhombus is a parallelogram with all sides equal.',
+          'es': 'Verdadero o falso: Un rombo es un paralelogramo con todos los lados iguales.'},
           'answers': [
-            {'text': 'True', 'correct': true},
-            {'text': 'False', 'correct': false},
+            {'text': {'en': 'True', 'es': 'Verdadero'}, 'correct': true},
+            {'text': {'en': 'False', 'es': 'Falso'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'How many sides does a quadrilateral have?',
+          'question': 
+          {'en': 'How many sides does a quadrilateral have?',
+          'es': '¿Cuántos lados tiene un cuadrilátero?'},
           'answers': [
-            {'text': '3', 'correct': false},
-            {'text': '5', 'correct': false},
-            {'text': '4', 'correct': true},
+            {'text': {'en': '3', 'es': '3'}, 'correct': false},
+            {'text': {'en': '5', 'es': '5'}, 'correct': false},
+            {'text': {'en': '4', 'es': '4'}, 'correct': true},
           ],
           'questionImage': '',
         },
@@ -1296,82 +1445,92 @@ final List<Map<String, dynamic>> shapes = [
       'questions': [
         {
           'question':
-              'Which of these is commonly used for a standard window pane, where all four sides are equal and every angle forms a perfect right angle?',
-          'options': ['Square', 'Rhombus', 'Trapezoid'],
-          'correctAnswer': 'Square',
-          'hint': 'All sides are of equal length and all angles are 90 degrees.',
+              {'en': 'Which of these is commonly used for a standard window pane, where all four sides are equal and every angle forms a perfect right angle?',
+              'es': '¿Cuál de estos se usa comúnmente para un panel de ventana estándar, donde los cuatro lados son iguales y cada ángulo forma un ángulo recto perfecto?'},
+          'options': {'en': ['Square', 'Rhombus', 'Trapezoid'], 'es': ['Cuadrado', 'Rombo', 'Trapecio']},
+          'correctAnswer': {'en': 'Square', 'es': 'Cuadrado'},
+          'hint': {'en': 'All sides are of equal length and all angles are 90 degrees.', 'es': 'Todos los lados tienen la misma longitud y todos los ángulos miden 90 grados.'},
           'questionImage': 'assets/images/quadrilateral/quiz/qq1.jpg',
         },
         {
           'question':
-              'You are designing a table, and you want it to have opposite sides parallel and unequal in length, but with no right angles. What shape would best describe the tabletop?',
-          'options': ['Parallelogram', 'Rectangle', 'Trapezoid'],
-          'correctAnswer': 'Trapezoid',
-          'hint': 'Two sides are parallel and opposite sides are of equal length.',
+              {'en': 'You are designing a table, and you want it to have opposite sides parallel and unequal in length, but with no right angles. What shape would best describe the tabletop?',
+              'es': 'Estás diseñando una mesa y quieres que tenga lados opuestos paralelos y de longitud desigual, pero sin ángulos rectos. ¿Qué forma describiría mejor el tablero?'},
+          'options': {'en': ['Parallelogram', 'Rectangle', 'Trapezoid'], 'es': ['Paralelogramo', 'Rectángulo', 'Trapecio']},
+          'correctAnswer': {'en': 'Trapezoid', 'es': 'Trapecio'},
+          'hint': {'en': 'Two sides are parallel and opposite sides are of equal length.', 'es': 'Dos lados son paralelos y los lados opuestos tienen la misma longitud.'},
           'questionImage': 'assets/images/quadrilateral/quiz/qq2.jpg',
         },
         {
           'question':
-              'The wings of a traditional kite often form a shape where two pairs of adjacent sides are equal. What shape does the kite resemble?',
-          'options': ['Parallelogram', 'Kite', 'Trapezoid'],
-          'correctAnswer': 'Kite',
-          'hint': 'Length of two adjacent sides is the same.',
+              {'en': 'The wings of a traditional kite often form a shape where two pairs of adjacent sides are equal. What shape does the kite resemble?',
+              'es': 'Las alas de una cometa tradicional suelen tener dos pares de lados adyacentes iguales. ¿A qué forma se asemeja la cometa?'},
+          'options': {'en': ['Parallelogram', 'Kite', 'Trapezoid'], 'es': ['Paralelogramo', 'Cometa', 'Trapecio']},
+          'correctAnswer': {'en': 'Kite', 'es': 'Cometa'},
+          'hint': {'en': 'Length of two adjacent sides is the same.', 'es': 'La longitud de dos lados adyacentes es la misma.'},
           'questionImage': 'assets/images/quadrilateral/quiz/qq3.jpg',
         },
         {
           'question':
-              'Which quadrilateral would be most appropriate for the screen of a modern TV or smartphone, where opposite sides are equal and each angle forms a right angle?',
-          'options': ['Parallelogram', 'Rectangle', 'Trapezoid'],
-          'correctAnswer': 'Rectangle',
-          'hint': 'Opposite sides are of equal lengths and all angles are 90 degrees.',
+              {'en': 'Which quadrilateral would be most appropriate for the screen of a modern TV or smartphone, where opposite sides are equal and each angle forms a right angle?',
+              'es': '¿Qué cuadrilátero sería el más apropiado para la pantalla de un televisor o teléfono inteligente moderno, donde los lados opuestos son iguales y cada ángulo forma un ángulo recto?'},
+          'options': {'en': ['Parallelogram', 'Rectangle', 'Trapezoid'], 'es': ['Paralelogramo', 'Rectángulo', 'Trapecio']},
+          'correctAnswer': {'en': 'Rectangle', 'es': 'Rectángulo'},
+          'hint': {'en': 'Opposite sides are of equal lengths and all angles are 90 degrees.', 'es': 'Los lados opuestos tienen la misma longitud y todos los ángulos miden 90 grados.'},
           'questionImage': 'assets/images/quadrilateral/quiz/qq4.webp',
         },
         {
           'question':
-              'In designing a fancy picture frame, you want all four sides to be of equal length and each angle to be a right angle. What shape best describes this frame?',
-          'options': ['Square', 'Rectangle', 'Kite'],
-          'correctAnswer': 'Square',
-          'hint': 'All sides are of equal length and all angles are 90 degrees.',
+              {'en': 'In designing a fancy picture frame, you want all four sides to be of equal length and each angle to be a right angle. What shape best describes this frame?',
+              'es': 'Al diseñar un marco elegante, se busca que los cuatro lados tengan la misma longitud y que cada ángulo sea recto. ¿Qué forma describe mejor este marco?'},
+          'options': {'en': ['Square', 'Rectangle', 'Kite'], 'es': ['Cuadrado', 'Rectángulo', 'Cometa']},
+          'correctAnswer': {'en': 'Square', 'es': 'Cuadrado'},
+          'hint': {'en': 'All sides are of equal length and all angles are 90 degrees.', 'es': 'Todos los lados tienen la misma longitud y todos los ángulos miden 90 grados.'},
           'questionImage': 'assets/images/quadrilateral/quiz/qq5.jpg',
         },
         {
           'question':
-              'A book cover has a simple and practical design where opposite sides are parallel and equal, and all angles are right angles. What quadrilateral shape describes the book cover?',
-          'options': ['Kite', 'Rectangle', 'Rhombus'],
-          'correctAnswer': 'Rectangle',
-          'hint': 'Design with opposite sides parallel and equal, and all angles are right angles.',
+              {'en': 'A book cover has a simple and practical design where opposite sides are parallel and equal, and all angles are right angles. What quadrilateral shape describes the book cover?',
+              'es': 'La portada de un libro tiene un diseño sencillo y práctico, donde los lados opuestos son paralelos e iguales, y todos los ángulos son rectos. ¿Qué figura cuadrilátera describe la portada?'},
+          'options': {'en': ['Kite', 'Rectangle', 'Rhombus'], 'es': ['Cometa', 'Rectángulo', 'Rombo']},
+          'correctAnswer': {'en': 'Rectangle', 'es': 'Rectángulo'},
+          'hint': {'en': 'Design with opposite sides parallel and equal, and all angles are right angles.', 'es': 'Diseño con lados opuestos paralelos e iguales, y todos los ángulos son rectos.'},
           'questionImage': 'assets/images/quadrilateral/quiz/qq6.jpg',
         },
         {
           'question':
-              'A diamond-shaped wall clock has all sides of equal length, but the angles are not 90 degrees. What shape does it represent?',
-          'options': ['Rectangle', 'Rhombus', 'Square'],
-          'correctAnswer': 'Rhombus',
-          'hint': 'All sides are equal, but no right angles.',
+              {'en': 'A diamond-shaped wall clock has all sides of equal length, but the angles are not 90 degrees. What shape does it represent?',
+              'es': 'Un reloj de pared con forma de diamante tiene todos los lados de igual longitud, pero los ángulos no miden 90 grados. ¿Qué figura representa?'},
+          'options': {'en': ['Rectangle', 'Rhombus', 'Square'], 'es': ['Rectángulo', 'Rombo', 'Cuadrado']},
+          'correctAnswer': {'en': 'Rhombus', 'es': 'Rombo'},
+          'hint': {'en': 'All sides are equal, but no right angles.', 'es': 'Todos los lados son iguales, pero ningún ángulo recto.'},
           'questionImage': 'assets/images/quadrilateral/quiz/qq7.png',
         },
         {
           'question':
-              'A trapeze artist’s safety net is stretched in a shape where only one pair of sides is parallel. What quadrilateral does this represent?',
-          'options': ['Kite', 'Trapezoid', 'Rhombus'],
-          'correctAnswer': 'Trapezoid',
-          'hint': 'Only one pair of opposite sides are parallel.',
+              {'en': 'A trapeze artist’s safety net is stretched in a shape where only one pair of sides is parallel. What quadrilateral does this represent?',
+              'es': 'La red de seguridad de un trapecista está estirada de forma que solo un par de lados son paralelos. ¿Qué cuadrilátero representa esto?'},
+          'options': {'en': ['Kite', 'Trapezoid', 'Rhombus'], 'es': ['Cometa', 'Trapecio', 'Rombo']},
+          'correctAnswer': {'en': 'Trapezoid', 'es': 'Trapecio'},
+          'hint': {'en': 'Only one pair of opposite sides are parallel.', 'es': 'Sólo un par de lados opuestos son paralelos.'},
           'questionImage': 'assets/images/quadrilateral/quiz/qq8.png',
         },
         {
           'question':
-              'A drawing board is designed with two pairs of equal-length adjacent sides, but the opposite sides are not equal or parallel. What shape is it?',
-          'options': ['Kite', 'Parallelogram', 'Rectangle'],
-          'correctAnswer': 'Kite',
-          'hint': 'Two adjacent sides are of equal length.',
+              {'en': 'A drawing board is designed with two pairs of equal-length adjacent sides, but the opposite sides are not equal or parallel. What shape is it?',
+              'es': 'Un tablero de dibujo está diseñado con dos pares de lados adyacentes de igual longitud, pero los lados opuestos no son iguales ni paralelos. ¿Qué forma tiene?'},
+          'options': {'en': ['Kite', 'Parallelogram', 'Rectangle'], 'es': ['Cometa', 'Paralelogramo', 'Rectángulo']},
+          'correctAnswer': {'en': 'Kite', 'es': 'Cometa'},
+          'hint': {'en': 'Two adjacent sides are of equal length.', 'es': 'Dos lados adyacentes tienen la misma longitud.'},
           'questionImage': 'assets/images/quadrilateral/quiz/qq9.png',
         },
         {
           'question':
-              'You are tiling a floor with a pattern made of slanted quadrilaterals where opposite sides are equal and parallel, but angles are not 90 degrees. What shape are the tiles?',
-          'options': ['Rhombus', 'Rectangle', 'Kite'],
-          'correctAnswer': 'Rhombus',
-          'hint': 'Opposite sides are equal and angles are slanted.',
+              {'en': 'You are tiling a floor with a pattern made of slanted quadrilaterals where opposite sides are equal and parallel, but angles are not 90 degrees. What shape are the tiles?',
+              'es': 'Estás recubriendo un suelo con un patrón de cuadriláteros inclinados, donde los lados opuestos son iguales y paralelos, pero los ángulos no miden 90 grados. ¿Qué forma tienen las baldosas?'},
+          'options': {'en': ['Rhombus', 'Rectangle', 'Kite'], 'es': ['Rombo', 'Rectángulo', 'Cometa']},
+          'correctAnswer': {'en': 'Rhombus', 'es': 'Rombo'},
+          'hint': {'en': 'Opposite sides are equal and angles are slanted.', 'es': 'Los lados opuestos son iguales y los ángulos están inclinados.'},
           'questionImage': 'assets/images/quadrilateral/quiz/qq10.png',
         },
       ],
@@ -1486,91 +1645,111 @@ final List<Map<String, dynamic>> shapes = [
     'practice': {
       'questions': [
         {
-          'question': 'What is a circle?',
+          'question': 
+          {'en': 'What is a circle?',
+          'es': '¿Qué es un círculo?'},
           'answers': [
-            {'text': 'A closed shape with straight sides', 'correct': false},
-            {'text': 'A closed shape where all points on the boundary are the same distance from the center', 'correct': true},
-            {'text': 'A shape with four right angles', 'correct': false},
+            {'text': {'en': 'A closed shape with straight sides', 'es': 'Una forma cerrada con lados rectos'}, 'correct': false},
+            {'text': {'en': 'A closed shape where all points on the boundary are the same distance from the center', 'es': 'Una forma cerrada donde todos los puntos del límite están a la misma distancia del centro'}, 'correct': true},
+            {'text': {'en': 'A shape with four right angles', 'es': 'Una figura con cuatro ángulos rectos'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Define the radius of a circle',
+          'question': 
+          {'en': 'Define the radius of a circle',
+          'es': 'Define el radio de un círculo'},
           'answers': [
-            {'text': 'A line that touches the circle at only one point', 'correct': false},
-            {'text': 'The distance from the center of the circle to any point on the circle', 'correct': true},
-            {'text': 'A part of the circle between two points on the boundary', 'correct': false},
+            {'text': {'en': 'A line that touches the circle at only one point', 'es': 'Una línea que toca el círculo en un solo punto'}, 'correct': false},
+            {'text': {'en': 'The distance from the center of the circle to any point on the circle', 'es': 'La distancia desde el centro del círculo hasta cualquier punto del círculo'}, 'correct': true},
+            {'text': {'en': 'A part of the circle between two points on the boundary', 'es': 'Una parte del círculo entre dos puntos en el límite'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is the diameter of a circle?',
+          'question': 
+          {'en': 'What is the diameter of a circle?',
+          'es': '¿Cuál es el diámetro de un círculo?'},
           'answers': [
-            {'text': 'A line segment connecting the center to a point on the boundary', 'correct': false},
-            {'text': 'A line segment passing through the center with endpoints on the circle', 'correct': true},
-            {'text': 'The outer boundary of the circle', 'correct': false},
+            {'text': {'en': 'A line segment connecting the center to a point on the boundary', 'es': 'Un segmento de línea que conecta el centro con un punto en el límite'}, 'correct': false},
+            {'text': {'en': 'A line segment passing through the center with endpoints on the circle', 'es': 'Un segmento de línea que pasa por el centro con puntos finales en el círculo'}, 'correct': true},
+            {'text': {'en': 'The outer boundary of the circle', 'es': 'El límite exterior del círculo'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is the circumference of a circle?',
+          'question': 
+          {'en': 'What is the circumference of a circle?',
+          'es': '¿Qué es la circunferencia de un círculo?'},
           'answers': [
-            {'text': 'The distance from the center to a point on the circle', 'correct': false},
-            {'text': 'The total distance around the circle', 'correct': true},
-            {'text': 'A line segment that connects any two points on the circle and passes through the center', 'correct': false},
+            {'text': {'en': 'The distance from the center to a point on the circle', 'es': 'La distancia desde el centro hasta un punto del círculo'}, 'correct': false},
+            {'text': {'en': 'The total distance around the circle', 'es': 'La distancia total alrededor del círculo'}, 'correct': true},
+            {'text': {'en': 'A line segment that connects any two points on the circle and passes through the center', 'es': 'Un segmento de línea que conecta dos puntos cualesquiera en el círculo y pasa por el centro'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which part of the circle connects two points on the boundary?',
+          'question': 
+          {'en': 'Which part of the circle connects two points on the boundary?',
+          'es': '¿Qué parte del círculo conecta dos puntos en el límite?'},
           'answers': [
-            {'text': 'Tangent', 'correct': false},
-            {'text': 'Chord', 'correct': true},
-            {'text': 'Radius', 'correct': false},
+            {'text': {'en': 'Tangent', 'es': 'Tangente'}, 'correct': false},
+            {'text': {'en': 'Chord', 'es': 'Acorde'}, 'correct': true},
+            {'text': {'en': 'Radius', 'es': 'Radio'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is an arc in a circle?',
+          'question': 
+          {'en': 'What is an arc in a circle?',
+          'es': '¿Qué es un arco en un círculo?'},
           'answers': [
-            {'text': 'A portion of the circumference between two points', 'correct': true},
-            {'text': 'A line that touches the circle at one point only', 'correct': false},
-            {'text': 'A segment passing through the center of the circle from one side to another', 'correct': false},
+            {'text': {'en': 'A portion of the circumference between two points', 'es': 'Una porción de la circunferencia entre dos puntos'}, 'correct': true},
+            {'text': {'en': 'A line that touches the circle at one point only', 'es': 'Una línea que toca el círculo en un solo punto'}, 'correct': false},
+            {'text': {'en': 'A segment passing through the center of the circle from one side to another', 'es': 'Un segmento que pasa por el centro del círculo de un lado a otro'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'What is a tangent?',
+          'question': 
+          {'en': 'What is a tangent?',
+          'es': '¿Qué es una tangente?'},
           'answers': [
-            {'text': 'A straight line that touches the circle at exactly one point and does not cross it', 'correct': true},
-            {'text': 'A curved line that lies entirely inside the circle boundary', 'correct': false},
-            {'text': 'A line that connects two points inside the circle', 'correct': false},
+            {'text': {'en': 'A straight line that touches the circle at exactly one point and does not cross it', 'es': 'Una línea recta que toca el círculo exactamente en un punto y no lo cruza'}, 'correct': true},
+            {'text': {'en': 'A curved line that lies entirely inside the circle boundary', 'es': 'Una línea curva que se encuentra completamente dentro del límite del círculo'}, 'correct': false},
+            {'text': {'en': 'A line that connects two points inside the circle', 'es': 'Una línea que conecta dos puntos dentro del círculo'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'True or False: A diameter is twice the radius of a circle.',
+          'question': 
+          {'en': 'True or False: A diameter is twice the radius of a circle.',
+          'es': 'Verdadero o falso: Un diámetro es el doble del radio de un círculo.'},
           'answers': [
-            {'text': 'True', 'correct': true},
-            {'text': 'False', 'correct': false},
+            {'text': {'en': 'True', 'es': 'Verdadero'}, 'correct': true},
+            {'text': {'en': 'False', 'es': 'Falso'}, 'correct': false},
           ],
           'questionImage': '',
         },
         {
-          'question': 'Which part of the circle refers to the straight distance around its boundary?',
+          'question': 
+          {'en': 'Which part of the circle refers to the straight distance around its boundary?',
+          'es': '¿Qué parte del círculo se refiere a la distancia recta alrededor de su límite?'},
           'answers': [
-            {'text': 'Chord', 'correct': false},
-            {'text': 'Arc', 'correct': false},
-            {'text': 'Circumference', 'correct': true},
+            {'text': {'en': 'Chord', 'es': 'Acorde'}, 'correct': false},
+            {'text': {'en': 'Arc', 'es': 'Arco'}, 'correct': false},
+            {'text': {'en': 'Circumference', 'es': 'Circunferencia'}, 'correct': true},
           ],
           'questionImage': '',
         },
         {
-          'question': 'How many endpoints does a diameter have?',
+          'question': 
+          {'en': 'How many endpoints does a diameter have?',
+          'es': '¿Cuántos puntos finales tiene un diámetro?'},
           'answers': [
-            {'text': '1', 'correct': false},
-            {'text': '2', 'correct': true},
-            {'text': '3', 'correct': false},
+            {'text': {'en': '1', 'es': '1'}, 'correct': false},
+            {'text': {'en': '2', 'es': '2'}, 'correct': true},
+            {'text': {'en': '3', 'es': '3'}, 'correct': false},
           ],
           'questionImage': '',
         },
@@ -1580,82 +1759,92 @@ final List<Map<String, dynamic>> shapes = [
       'questions': [
         {
           'question':
-              'You are designing a round wall clock. Which part of circle do the long hand of clock represents?',
-          'options': ['Radius', 'Arc', 'Chord'],
-          'correctAnswer': 'Radius',
-          'hint': 'It goes from the center to the edge of the circle.',
+              {'en': 'You are designing a round wall clock. Which part of circle do the long hand of clock represents?',
+              'es': 'Estás diseñando un reloj de pared redondo. ¿Qué parte del círculo representa la manecilla larga del reloj?'},
+          'options': {'en': ['Radius', 'Arc', 'Chord'], 'es': ['Radio', 'Arco', 'Acorde']},
+          'correctAnswer': {'en': 'Radius', 'es': 'Radio'},
+          'hint': {'en': 'It goes from the center to the edge of the circle.', 'es': 'Va desde el centro hasta el borde del círculo.'},
           'questionImage': 'assets/images/circle/q1.png',
         },
         {
           'question':
-              'A pizza is cut exactly in half from edge to edge through the center. What is the name of the line that makes this cut?',
-          'options': ['Chord', 'Radius', 'Diameter'],
-          'correctAnswer': 'Diameter',
-          'hint': 'It’s the longest line that passes through the center.',
+              {'en': 'A pizza is cut exactly in half from edge to edge through the center. What is the name of the line that makes this cut?',
+              'es': 'Una pizza se corta exactamente por la mitad, de borde a borde, pasando por el centro. ¿Cómo se llama la línea que realiza este corte?'},
+          'options': {'en': ['Chord', 'Radius', 'Diameter'], 'es': ['Acorde', 'Radio', 'Diámetro']},
+          'correctAnswer': {'en': 'Diameter', 'es': 'Diámetro'},
+          'hint': {'en': 'It’s the longest line that passes through the center.', 'es': 'Es la línea más larga que pasa por el centro.'},
           'questionImage': 'assets/images/circle/q2.png',
         },
         {
           'question':
-              'You tie a rope around a circular garden to fence it. What measurement are you calculating?',
-          'options': ['Diameter', 'Circumference', 'Radius'],
-          'correctAnswer': 'Circumference',
-          'hint': 'It’s the total distance around the circle.',
+              {'en': 'You tie a rope around a circular garden to fence it. What measurement are you calculating?',
+              'es': 'Atas una cuerda alrededor de un jardín circular para cercarlo. ¿Qué medida estás calculando?'},
+          'options': {'en': ['Diameter', 'Circumference', 'Radius'], 'es': ['Diámetro', 'Circunferencia', 'Radio']},
+          'correctAnswer': {'en': 'Circumference', 'es': 'Circunferencia'},
+          'hint': {'en': 'It’s the total distance around the circle.', 'es': 'Es la distancia total alrededor del círculo.'},
           'questionImage': 'assets/images/circle/q3.png',
         },
         {
           'question':
-              'You mark two points on a bicycle wheel and stretch a line straight between them — it doesn’t go through the center. What part of the circle is this?',
-          'options': ['Chord', 'Radius', 'Diameter'],
-          'correctAnswer': 'Chord',
-          'hint': 'A straight line between two points that doesn’t pass through the center.',
+              {'en': 'You mark two points on a bicycle wheel and stretch a line straight between them — it doesn’t go through the center. What part of the circle is this?',
+              'es': 'Marcas dos puntos en una rueda de bicicleta y trazas una línea recta entre ellos; no pasa por el centro. ¿Qué parte del círculo es esta?'},
+          'options': {'en': ['Chord', 'Radius', 'Diameter'], 'es': ['Acorde', 'Radio', 'Diámetro']},
+          'correctAnswer': {'en': 'Chord', 'es': 'Acorde'},
+          'hint': {'en': 'A straight line between two points that doesn’t pass through the center.', 'es': 'Una línea recta entre dos puntos que no pasa por el centro.'},
           'questionImage': 'assets/images/circle/q4.png',
         },
         {
           'question':
-              'You see a curved rainbow. What is this curved part called?',
-          'options': ['Arc', 'Tangent', 'Radius'],
-          'correctAnswer': 'Arc',
-          'hint': 'It’s a portion of the circle’s curved boundary.',
+              {'en': 'You see a curved rainbow. What is this curved part called?',
+              'es': 'Ves un arcoíris curvo. ¿Cómo se llama esta parte curva?'},
+          'options': {'en': ['Arc', 'Tangent', 'Radius'], 'es': ['Arco', 'Tangente', 'Radio']},
+          'correctAnswer': {'en': 'Arc', 'es': 'Arco'},
+          'hint': {'en': 'It’s a portion of the circle’s curved boundary.', 'es': 'Es una porción del límite curvo del círculo.'},
           'questionImage': 'assets/images/circle/q5.png',
         },
         {
           'question':
-              'A car tire touches the road at only one point while moving. What do we call the line that just touches the circle at one point?',
-          'options': ['Chord', 'Diameter', 'Tangent'],
-          'correctAnswer': 'Tangent',
-          'hint': 'It touches the circle at one point and never goes inside.',
+              {'en': 'A car tire touches the road at only one point while moving. What do we call the line that just touches the circle at one point?',
+              'es': 'Un neumático de coche toca la carretera en un solo punto mientras está en movimiento. ¿Cómo se llama la línea que solo toca el círculo en un punto?'},
+          'options': {'en': ['Chord', 'Diameter', 'Tangent'], 'es': ['Acorde', 'Diámetro', 'Tangente']},
+          'correctAnswer': {'en': 'Tangent', 'es': 'Tangente'},
+          'hint': {'en': 'It touches the circle at one point and never goes inside.', 'es': 'Toca el círculo en un punto y nunca entra.'},
           'questionImage': 'assets/images/circle/q6.png',
         },
         {
           'question':
-              'A dartboard has lines from the center to the edges dividing it into sections. What are those lines called?',
-          'options': ['Radius', 'Chord', 'Tangent'],
-          'correctAnswer': 'Radius',
-          'hint': 'Each line starts from the center and ends on the boundary.',
+              {'en': 'A dartboard has lines from the center to the edges dividing it into sections. What are those lines called?',
+              'es': 'Una diana tiene líneas que van del centro a los bordes y la dividen en secciones. ¿Cómo se llaman esas líneas?'},
+          'options': {'en': ['Radius', 'Chord', 'Tangent'], 'es': ['Radio', 'Acorde', 'Tangente']},
+          'correctAnswer': {'en': 'Radius', 'es': 'Radio'},
+          'hint': {'en': 'Each line starts from the center and ends on the boundary.', 'es': 'Cada línea comienza en el centro y termina en el límite.'},
           'questionImage': 'assets/images/circle/q7.png',
         },
         {
           'question':
-              'You place a stick through the center of a round lollipop from one side to the other. What is the stick representing?',
-          'options': ['Radius', 'Diameter', 'Chord'],
-          'correctAnswer': 'Diameter',
-          'hint': 'It passes through the center, connecting two opposite points.',
+              {'en': 'You place a stick through the center of a round lollipop from one side to the other. What is the stick representing?',
+              'es': 'Se introduce un palito por el centro de una piruleta redonda, de un lado a otro. ¿Qué representa el palito?'},
+          'options': {'en': ['Radius', 'Diameter', 'Chord'], 'es': ['Radio', 'Diámetro', 'Cuerda']},
+          'correctAnswer': {'en': 'Diameter', 'es': 'Diámetro'},
+          'hint': {'en': 'It passes through the center, connecting two opposite points.', 'es': 'Pasa por el centro, conectando dos puntos opuestos.'},
           'questionImage': 'assets/images/circle/q8.png',
         },
         {
           'question':
-              'In a circular racetrack, a runner completes one full round. What distance did they cover?',
-          'options': ['Diameter', 'Radius', 'Circumference'],
-          'correctAnswer': 'Circumference',
-          'hint': 'It’s the total path along the outer edge of the circle.',
+              {'en': 'In a circular racetrack, a runner completes one full round. What distance did they cover?',
+              'es': 'En una pista circular, un corredor completa una vuelta. ¿Qué distancia recorrió?'},
+          'options': {'en': ['Diameter', 'Radius', 'Circumference'], 'es': ['Diámetro', 'Radio', 'Circunferencia']},
+          'correctAnswer': {'en': 'Circumference', 'es': 'Circunferencia'},
+          'hint': {'en': 'It’s the total path along the outer edge of the circle.', 'es': 'Es el recorrido total a lo largo del borde exterior del círculo.'},
           'questionImage': 'assets/images/circle/q9.png',
         },
         {
           'question':
-              'You draw a triangle inside a circle such that each vertex touches the circle. What is the circle called in this case?',
-          'options': ['Circumcircle', 'Arc', 'Tangent'],
-          'correctAnswer': 'Circumcircle',
-          'hint': 'It’s a circle that passes through all the triangle’s corners.',
+              {'en': 'You draw a triangle inside a circle such that each vertex touches the circle. What is the circle called in this case?',
+              'es': 'Se dibuja un triángulo dentro de un círculo de modo que cada vértice toque el círculo. ¿Cómo se llama el círculo en este caso?'},
+          'options': {'en': ['Circumcircle', 'Arc', 'Tangent'], 'es': ['Circunferencia', 'Arco', 'Tangente']},
+          'correctAnswer': {'en': 'Circumcircle', 'es': 'Circuncín'},
+          'hint': {'en': 'It’s a circle that passes through all the triangle’s corners.', 'es': 'Es un círculo que pasa por todos los vértices del triángulo.'},
           'questionImage': 'assets/images/circle/q10.png',
         },
       ],
