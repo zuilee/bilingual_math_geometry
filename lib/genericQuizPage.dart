@@ -79,6 +79,18 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
         _isSpeaking = false;
       });
     });
+
+    flutterTts.setCancelHandler(() {
+      setState(() {
+        _isSpeaking = false;
+      });
+    });
+
+    flutterTts.setErrorHandler((msg) {
+      setState(() {
+        _isSpeaking = false;
+      });
+    });
   }
 
   @override
@@ -169,7 +181,13 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
     }
   }
 
-  void nextQuestion() {
+  //void nextQuestion() {
+  Future<void> nextQuestion() async {
+  await flutterTts.stop(); // Stop any ongoing speech
+  setState(() {
+    _isSpeaking = false; // Reset the speaking flag
+  });
+
     if (currentQuestionIndex < _questions.length - 1) {
       setState(() {
         currentQuestionIndex++;

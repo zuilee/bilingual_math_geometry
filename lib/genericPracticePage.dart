@@ -88,6 +88,18 @@ class _GenericPracticePageState extends State<GenericPracticePage>
         _isSpeaking = false;
       });
     });
+
+    flutterTts.setCancelHandler(() {
+      setState(() {
+        _isSpeaking = false;
+      });
+    });
+
+    flutterTts.setErrorHandler((msg) {
+      setState(() {
+        _isSpeaking = false;
+      });
+    });
   }
 
   @override
@@ -97,7 +109,12 @@ class _GenericPracticePageState extends State<GenericPracticePage>
     super.dispose();
   }
 
-  void _answerQuestion(bool isCorrect) {
+  Future<void> _answerQuestion(bool isCorrect) async {
+    await flutterTts.stop();
+    setState(() {
+      _isSpeaking = false;
+    });
+
     if (isCorrect) {
       setState(() {
         _score++;
