@@ -24,6 +24,8 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
   final FlutterTts flutterTts = FlutterTts();
   bool _isSpeaking = false;
 
+  bool _isEnglish = true;
+
   Map<String, dynamic> get shapeData =>
       shapes.firstWhere((element) => element['name'] == widget.shapeName);
 
@@ -38,8 +40,16 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
     _setupTTS();
   }
 
+  void _toggleLanguage() {
+    setState(() {
+      _isEnglish = !_isEnglish;
+    });
+    _setupTTS();
+    //_updatePageContent();
+  }
+
   Future<void> _setupTTS() async {
-    await flutterTts.setLanguage("en-US");
+    await flutterTts.setLanguage(_isEnglish ? 'en-US' : 'es-ES');
     await flutterTts.setSpeechRate(0.5);
     await flutterTts.setPitch(1.0);
   }
@@ -47,8 +57,14 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
   Future<void> _speakCurrentQuestion() async {
     await flutterTts.stop();
     final question = _questions[currentQuestionIndex];
-    String toSpeak = question['question'];
-    for (var option in question['options']) {
+    String toSpeak = _isEnglish
+      ? question['question']['en']
+      : question['question']['es'];
+
+    List<String> options = List<String>.from(
+      question['options'][_isEnglish ? 'en' : 'es']);
+
+    for (var option in options) {
       toSpeak += ". $option";
     }
 
@@ -57,10 +73,22 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
     
   });
 
-    await flutterTts.setLanguage('en-US');
+    await flutterTts.setLanguage(_isEnglish ? 'en-US' : 'es-ES');
     await flutterTts.speak(toSpeak);
 
     flutterTts.setCompletionHandler(() {
+      setState(() {
+        _isSpeaking = false;
+      });
+    });
+
+    flutterTts.setCancelHandler(() {
+      setState(() {
+        _isSpeaking = false;
+      });
+    });
+
+    flutterTts.setErrorHandler((msg) {
       setState(() {
         _isSpeaking = false;
       });
@@ -74,14 +102,14 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
   }
 
   void showHint(bool isDark) {
-    final hint = _questions[currentQuestionIndex]['hint'] ?? '';
+    final hint = _questions[currentQuestionIndex]['hint'][_isEnglish ? 'en' : 'es'] ?? '';
     if (hint.isNotEmpty) {
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             backgroundColor: isDark ? const Color(0xFF171717) : null,
-            title: Text('Hint', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
+            title: Text(_isEnglish ? 'Hint' : 'Pista', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
             content: Text(hint, style: TextStyle(color: isDark ? Colors.white : Colors.black)),
             actions: [
               TextButton(
@@ -98,7 +126,7 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
 
   void checkAnswer(bool isDark) {
     if (selectedOption != null &&
-        selectedOption == _questions[currentQuestionIndex]['correctAnswer']) {
+        selectedOption == _questions[currentQuestionIndex]['correctAnswer'][_isEnglish ? 'en' : 'es']) {
       setState(() {
         score += 5;
       });
@@ -110,7 +138,7 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
       });
 
       if (attemptsLeft <= 0) {
-        final correctAnswer = _questions[currentQuestionIndex]['correctAnswer'];
+        final correctAnswer = _questions[currentQuestionIndex]['correctAnswer'][_isEnglish ? 'en' : 'es'];
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -155,7 +183,13 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
     }
   }
 
-  void nextQuestion() {
+  //void nextQuestion() {
+  Future<void> nextQuestion() async {
+  await flutterTts.stop(); // Stop any ongoing speech
+  setState(() {
+    _isSpeaking = false; // Reset the speaking flag
+  });
+
     if (currentQuestionIndex < _questions.length - 1) {
       setState(() {
         currentQuestionIndex++;
@@ -347,17 +381,12 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
                               ),
                             ],
                           ),
-                          IconButton(
-                            icon: Icon(
-                              isDark ? Icons.nightlight_round : Icons.wb_sunny,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              analytics.logEvent(name: 'TC ${widget.shapeName} Quiz');
-                              themeModel.toggleTheme();
-                            },
-                          ),
 
+                          IconButton(
+                          icon: const Icon(Icons.translate, color: Colors.white),
+                          onPressed: _toggleLanguage,
+                          ),
+                          
                           IconButton(
                           onPressed: () async {
                             analytics.logEvent(name: '${widget.shapeName} Quiz Sound');
@@ -375,6 +404,17 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
                           color: _isSpeaking ? Colors.blue : Colors.white,
                         ),
                       ),
+
+                      IconButton(
+                            icon: Icon(
+                              isDark ? Icons.nightlight_round : Icons.wb_sunny,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              themeModel.toggleTheme();
+                            },
+                          ),
+
                       ],
                       ),
                     ],
@@ -438,7 +478,7 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
                                           ),
                                         ),
                                       Text(
-                                        currentQuestion['question'],
+                                        currentQuestion['question'][_isEnglish ? 'en' : 'es'],
                                         style: TextStyle(
                                           fontSize: 20.0,
                                           fontWeight: FontWeight.bold,
@@ -448,7 +488,7 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
                                       ),
                                       const SizedBox(height: 16.0),
                                       ...List<Widget>.from(
-                                        (currentQuestion['options'] as List).map(
+                                        (currentQuestion['options'][_isEnglish ? 'en' : 'es'] as List).map(
                                           (option) => RadioListTile<String>(
                                             title: Text(
                                               option,
@@ -469,7 +509,7 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
                                       TextButton(
                                         onPressed: () => showHint(isDark),
                                         child: Text(
-                                          'Hint',
+                                          _isEnglish ? 'Hint' : 'Pista',
                                           style: TextStyle(color: isDark ? Colors.white : themeColor),
                                         ),
                                       ),
@@ -483,7 +523,7 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
                                             borderRadius: BorderRadius.circular(12),
                                           ),
                                         ),
-                                        child: const Text('Submit'),
+                                        child: Text(_isEnglish? 'Submit': 'Entregar'),
                                       ),
                                     ],
                                   ),

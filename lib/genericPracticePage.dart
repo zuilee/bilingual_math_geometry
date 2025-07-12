@@ -26,6 +26,8 @@ class _GenericPracticePageState extends State<GenericPracticePage>
   final FlutterTts flutterTts = FlutterTts();
   bool _isSpeaking = false;
 
+  bool _isEnglish = true;
+
   // Retrieve shape data so we can use shape['color'] and shape['darkcolor'].
   Map<String, dynamic> get shapeData =>
       shapes.firstWhere((element) => element['name'] == widget.shapeName);
@@ -51,8 +53,15 @@ class _GenericPracticePageState extends State<GenericPracticePage>
     _setupTTS();
   }
 
+    void _toggleLanguage() {
+    setState(() {
+      _isEnglish = !_isEnglish;
+    });
+    //_updatePageContent();
+  }
+
   Future<void> _setupTTS() async {
-    await flutterTts.setLanguage("en-US");
+    await flutterTts.setLanguage(_isEnglish ? 'en-US' : 'es-ES');
     await flutterTts.setSpeechRate(0.5);
     await flutterTts.setPitch(1.0);
   }
@@ -60,19 +69,35 @@ class _GenericPracticePageState extends State<GenericPracticePage>
   Future<void> _speakCurrentQuestion() async {
     await flutterTts.stop();
     final question = _questions[_questionIndex];
-    String toSpeak = question['question'];
+    String toSpeak = _isEnglish
+      ? question['question']['en']
+      : question['question']['es'];
+    
     for (var answer in question['answers']) {
-      toSpeak += ". ${answer['text']}";
+      final text = _isEnglish ? answer['text']['en'] : answer['text']['es'];
+      toSpeak += ". $text";
     }
     setState(() {
     _isSpeaking = true;
     
   });
 
-    await flutterTts.setLanguage('en-US');
+    await flutterTts.setLanguage(_isEnglish ? 'en-US' : 'es-ES');
     await flutterTts.speak(toSpeak);
 
     flutterTts.setCompletionHandler(() {
+      setState(() {
+        _isSpeaking = false;
+      });
+    });
+
+    flutterTts.setCancelHandler(() {
+      setState(() {
+        _isSpeaking = false;
+      });
+    });
+
+    flutterTts.setErrorHandler((msg) {
       setState(() {
         _isSpeaking = false;
       });
@@ -86,7 +111,12 @@ class _GenericPracticePageState extends State<GenericPracticePage>
     super.dispose();
   }
 
-  void _answerQuestion(bool isCorrect) {
+  Future<void> _answerQuestion(bool isCorrect) async {
+    await flutterTts.stop();
+    setState(() {
+      _isSpeaking = false;
+    });
+
     if (isCorrect) {
       setState(() {
         _score++;
@@ -183,7 +213,7 @@ class _GenericPracticePageState extends State<GenericPracticePage>
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
-                          currentQuestion['question'],
+                          currentQuestion['question'][_isEnglish ? 'en' : 'es'],
                           style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
@@ -210,7 +240,7 @@ class _GenericPracticePageState extends State<GenericPracticePage>
                               padding: const EdgeInsets.symmetric(vertical: 16.0),
                             ),
                             child: Text(
-                              answer['text'],
+                              answer['text'][_isEnglish ? 'en' : 'es'],
                               style: const TextStyle(fontSize: 18.0),
                               textAlign: TextAlign.center,
                             ),
@@ -246,7 +276,7 @@ class _GenericPracticePageState extends State<GenericPracticePage>
     final currentQuestion = _questions[_questionIndex];
     final answers = currentQuestion['answers'] as List;
     final correctAnswer =
-        answers.firstWhere((answer) => answer['correct'] == true)['text'];
+        answers.firstWhere((answer) => answer['correct'] == true)['text'][_isEnglish ? 'en' : 'es'];
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -276,7 +306,7 @@ class _GenericPracticePageState extends State<GenericPracticePage>
                         ),
                       const SizedBox(height: 20.0),
                       Text(
-                        'Correct Answer:',
+                        _isEnglish ? 'Correct Answer:' : 'Respuesta correcta:',
                         style: TextStyle(
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold,
@@ -435,17 +465,10 @@ class _GenericPracticePageState extends State<GenericPracticePage>
                     Row(
                       children: [
                         IconButton(
-                          icon: Icon(
-                            themeModel.isDarkMode
-                                ? Icons.nightlight_round
-                                : Icons.wb_sunny,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            analytics.logEvent(name: 'TC ${widget.shapeName} Practice');
-                            themeModel.toggleTheme();
-                          },
+                          icon: const Icon(Icons.translate, color: Colors.white),
+                          onPressed: _toggleLanguage,
                         ),
+
 
                         IconButton(
                           onPressed: () async {
@@ -463,6 +486,18 @@ class _GenericPracticePageState extends State<GenericPracticePage>
                           Icons.volume_up,
                           color: _isSpeaking ? Colors.blue : Colors.white,
                         ),
+                      ),
+
+                      IconButton(
+                          icon: Icon(
+                            themeModel.isDarkMode
+                                ? Icons.nightlight_round
+                                : Icons.wb_sunny,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            themeModel.toggleTheme();
+                          },
                       ),
                       ],
                     ),
