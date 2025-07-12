@@ -497,6 +497,7 @@ class _GenericPracticePageState extends State<GenericPracticePage>
                           ),
                           onPressed: () {
                             themeModel.toggleTheme();
+                            analytics.logEvent(name: 'TC ${widget.shapeName} Practice');
                           },
                       ),
                       ],
