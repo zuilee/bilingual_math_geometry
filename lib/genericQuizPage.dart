@@ -141,9 +141,9 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
           context: context,
           builder: (context) => AlertDialog(
             backgroundColor: isDark ? const Color(0xFF171717) : null,
-            title: Text('Incorrect', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
+            title: Text(_isEnglish? 'Incorrect': 'Incorrecto', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
             content: Text(
-              'You have used all attempts.\nThe correct answer is:\n\n$correctAnswer',
+              _isEnglish? 'You have used all attempts.\nThe correct answer is:\n\n$correctAnswer': 'Has utilizado todos los intentos.\nLa respuesta correcta es:\n\n$correctAnswer',
               style: TextStyle(color: isDark ? Colors.white : Colors.black),
             ),
             actions: [
@@ -165,7 +165,8 @@ class _GenericQuizPageState extends State<GenericQuizPage> {
             backgroundColor: isDark ? const Color(0xFF171717) : null,
             title: Text('Incorrect', style: TextStyle(color: isDark ? Colors.white : Colors.black)),
             content: Text(
-              'Try again. You have $attemptsLeft attempt${attemptsLeft == 1 ? '' : 's'} left.',
+              _isEnglish? 'Try again. You have $attemptsLeft attempt${attemptsLeft == 1 ? '' : 's'} left.':
+              'Inténtalo de nuevo. Te queda${attemptsLeft == 1 ? '' : 'n'} $attemptsLeft intento${attemptsLeft == 1 ? '' : 's'}.',
               style: TextStyle(color: isDark ? Colors.white : Colors.black),
             ),
             actions: [
